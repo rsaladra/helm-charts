@@ -134,6 +134,33 @@ entries:
   postgres:
   - apiVersion: v2
     appVersion: "17.6"
+    created: "2025-08-26T15:02:48.98450973Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: The World's Most Advanced Open Source Relational Database
+    digest: 7c763ebf240fb327902ec27fc08f613ce3a9b348eca21d1f98627eab64b8c64b
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/95e7f13e62/postgres-logo.svg
+    keywords:
+    - postgres
+    - postgresql
+    - database
+    - sql
+    - relational
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: postgres
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/postgres
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/postgres-0.2.1/postgres-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: "17.6"
     created: "2025-08-26T14:58:21.834027803Z"
     dependencies:
     - name: common
@@ -288,4 +315,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/valkey-0.1.6/valkey-0.1.6.tgz
     version: 0.1.6
-generated: "2025-08-26T14:58:22.71877205Z"
+generated: "2025-08-26T15:02:48.984522514Z"
