@@ -440,6 +440,34 @@ entries:
   nginx:
   - apiVersion: v2
     appVersion: 1.28.0
+    created: "2025-09-08T08:04:36.220688827Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: Nginx is a high-performance HTTP server and reverse proxy.
+    digest: cf6d26827448da0cf7fe157edcf9f8286faaafec59a0f47ff7d9eb34f843eb60
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/0faa83eb34/nginx-logo.svg
+    keywords:
+    - nginx
+    - web server
+    - http
+    - reverse proxy
+    - load balancer
+    - proxy
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: nginx
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/nginx
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/nginx-0.1.1/nginx-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.28.0
     created: "2025-09-08T06:23:59.704744239Z"
     dependencies:
     - name: common
@@ -1025,4 +1053,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/valkey-0.1.6/valkey-0.1.6.tgz
     version: 0.1.6
-generated: "2025-09-08T07:46:25.634201487Z"
+generated: "2025-09-08T08:04:36.220772754Z"
