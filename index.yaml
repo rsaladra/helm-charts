@@ -306,6 +306,33 @@ entries:
     version: 0.0.1
   minio:
   - apiVersion: v2
+    appVersion: 2025.09.07
+    created: "2025-09-08T14:26:58.614991625Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: High Performance Object Storage compatible with Amazon S3 APIs
+    digest: e8a92d76606c4f3349ed08d4b6aef3c2c4085aa471ad667858522673b1989e2f
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/5d3310f00d/minio-logo.svg
+    keywords:
+    - minio
+    - object-storage
+    - s3
+    - storage
+    - cloud-native
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: minio
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/minio
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/minio-0.2.1/minio-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     appVersion: 2024.8.17
     created: "2025-09-02T15:57:44.20064096Z"
     dependencies:
@@ -1199,4 +1226,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/valkey-0.1.6/valkey-0.1.6.tgz
     version: 0.1.6
-generated: "2025-09-08T14:26:03.080176865Z"
+generated: "2025-09-08T14:26:58.615107908Z"
