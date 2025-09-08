@@ -37,7 +37,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: client
-              containerPort: 2181
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
             - name: quorum
               containerPort: 2888
@@ -47,7 +47,7 @@ spec:
               protocol: TCP
           env:
             - name: ZOO_SERVERS
-              value: "{{- range $i, $e := until (int .Values.replicaCount) }}server.{{ $i }}={{ include "zookeeper.fullname" $ }}-{{ $i }}.{{ include "zookeeper.fullname" $ }}:2888:3888;2181 {{- end }}"
+              value: "{{- range $i, $e := until (int .Values.replicaCount) }}server.{{ $i }}={{ include "zookeeper.fullname" $ }}-{{ $i }}.{{ include "zookeeper.fullname" $ }}:2888:3888;{{ .Values.service.port | default 2181 }} {{- end }}"
             - name: ZOO_MY_ID
               valueFrom:
                 fieldRef:
