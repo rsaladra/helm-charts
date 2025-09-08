@@ -7,6 +7,12 @@ fullnameOverride: ""
 commonLabels: {}
 commonAnnotations: {}
 
+
+zookeeperConfig:
+  tickTime: 2000
+  initLimit: 10
+  syncLimit: 5
+
 image:
   registry: docker.io
   repository: bitnami/zookeeper

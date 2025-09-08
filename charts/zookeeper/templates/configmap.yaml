@@ -7,11 +7,11 @@ metadata:
     {{- include "zookeeper.labels" . | nindent 4 }}
 data:
   zoo.cfg: |
-    tickTime=2000
-    initLimit=10
-    syncLimit=5
+    tickTime={{ .Values.zookeeperConfig.tickTime | default 2000 }}
+    initLimit={{ .Values.zookeeperConfig.initLimit | default 10 }}
+    syncLimit={{ .Values.zookeeperConfig.syncLimit | default 5 }}
     dataDir={{ .Values.persistence.mountPath }}
-    clientPort=2181
+    clientPort={{ .Values.service.port | default 2181 }}
     {{- range $i, $e := until (int .Values.replicaCount) }}
     server.{{ $i }}={{ include "zookeeper.fullname" $ }}-{{ $i }}.{{ include "zookeeper.fullname" $ }}:2888:3888
     {{- end }}

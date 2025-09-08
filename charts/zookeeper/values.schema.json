@@ -18,6 +18,14 @@
     "fullnameOverride": { "type": "string" },
     "commonLabels": { "type": "object", "additionalProperties": { "type": "string" } },
     "commonAnnotations": { "type": "object", "additionalProperties": { "type": "string" } },
+    "zookeeperConfig": {
+      "type": "object",
+      "properties": {
+        "tickTime": { "type": "integer", "default": 2000 },
+        "initLimit": { "type": "integer", "default": 10 },
+        "syncLimit": { "type": "integer", "default": 5 }
+      }
+    },
     "image": {
       "type": "object",
       "properties": {
