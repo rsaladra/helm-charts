@@ -1,0 +1,26 @@
+apiVersion: v2
+name: zookeeper
+description: Apache ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.
+type: application
+version: 0.1.0
+appVersion: "3.9.2"
+keywords:
+  - zookeeper
+  - distributed
+  - coordination
+  - apache
+home: https://zookeeper.apache.org/
+sources:
+  - https://github.com/apache/zookeeper
+  - https://github.com/bitnami/charts/tree/main/bitnami/zookeeper
+annotations:
+  category: Database
+  license: Apache-2.0
+maintainers:
+  - name: CloudPirates GmbH & Co. KG
+    url: https://www.cloudpirates.io
+dependencies:
+  - name: common
+    version: "1.x.x"
+    repository: oci://registry-1.docker.io/cloudpirates
+icon: https://bitnami.com/assets/stacks/zookeeper/img/zookeeper-stack-220x234.png
