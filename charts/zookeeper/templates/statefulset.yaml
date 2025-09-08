@@ -19,6 +19,11 @@ spec:
     metadata:
       labels:
         {{- include "zookeeper.selectorLabels" . | nindent 8 }}
+      annotations:
+        {{- with (include "zookeeper.annotations" .) }}
+        {{- . | nindent 8 }}
+        {{- end }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
 {{- with (include "zookeeper.imagePullSecrets" .) }}
 {{ . | nindent 6 }}
