@@ -81,6 +81,34 @@ entries:
   mariadb:
   - apiVersion: v2
     appVersion: 12.0.2
+    created: "2025-09-08T07:46:25.409751729Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: MariaDB is a high-performance, open-source relational database server
+      that is a drop-in replacement for MySQL
+    digest: 14a2d6f60dcbf27064a022fcc785d3d8b524fd99d72ae5b0739dbd0f247e058b
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/6512dd22ee/mariadb-logo.svg
+    keywords:
+    - mariadb
+    - mysql
+    - database
+    - sql
+    - relational
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: mariadb
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mariadb
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/mariadb-0.2.2/mariadb-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 12.0.2
     created: "2025-09-04T09:36:38.620536536Z"
     dependencies:
     - name: common
@@ -997,4 +1025,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/valkey-0.1.6/valkey-0.1.6.tgz
     version: 0.1.6
-generated: "2025-09-08T06:23:59.704816303Z"
+generated: "2025-09-08T07:46:25.634201487Z"
