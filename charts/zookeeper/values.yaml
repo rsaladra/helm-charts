@@ -46,12 +46,12 @@ tolerations: []
 affinity: {}
 
 containerSecurityContext:
-  runAsUser: 1001
+  runAsUser: 1000
   runAsNonRoot: true
   allowPrivilegeEscalation: false
 
 podSecurityContext:
-  fsGroup: 1001
+  fsGroup: 1000
 
 livenessProbe:
   enabled: true
