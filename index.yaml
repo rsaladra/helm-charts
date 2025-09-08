@@ -923,6 +923,34 @@ entries:
     version: 0.1.5
   timescaledb:
   - apiVersion: v2
+    appVersion: 2.22.0-pg17
+    created: "2025-09-08T14:23:18.990111483Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: TimescaleDB - The Open Source Time-Series Database for PostgreSQL
+    digest: 70db459e016e069e868decc693e458988c69910e9476270cfa5adbbfd52176d5
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/b2e01452ce/timescaledb-logo.svg
+    keywords:
+    - timescaledb
+    - timeseries
+    - postgresql
+    - database
+    - sql
+    - analytics
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: timescaledb
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/timescaledb
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/timescaledb-0.2.1/timescaledb-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     appVersion: 2.21.3-pg17
     created: "2025-09-02T15:57:45.36999102Z"
     dependencies:
@@ -1143,4 +1171,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/valkey-0.1.6/valkey-0.1.6.tgz
     version: 0.1.6
-generated: "2025-09-08T14:21:21.519354183Z"
+generated: "2025-09-08T14:23:18.990201761Z"
