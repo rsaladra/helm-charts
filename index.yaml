@@ -409,6 +409,35 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/mongodb-0.1.5/mongodb-0.1.5.tgz
     version: 0.1.5
+  nginx:
+  - apiVersion: v2
+    appVersion: 1.28.0
+    created: "2025-09-08T06:23:59.704744239Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: Nginx is a high-performance HTTP server and reverse proxy.
+    digest: ba0b3a969f60e610b5dea99c54bcef4d4681921dfcf5a6ab219ce5b3d4488906
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/0faa83eb34/nginx-logo.svg
+    keywords:
+    - nginx
+    - web server
+    - http
+    - reverse proxy
+    - load balancer
+    - proxy
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: nginx
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/nginx
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/nginx-0.1.0/nginx-0.1.0.tgz
+    version: 0.1.0
   postgres:
   - apiVersion: v2
     appVersion: "17.6"
@@ -968,4 +997,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/valkey-0.1.6/valkey-0.1.6.tgz
     version: 0.1.6
-generated: "2025-09-04T09:36:38.620621168Z"
+generated: "2025-09-08T06:23:59.704816303Z"
