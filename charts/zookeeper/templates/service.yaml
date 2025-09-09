@@ -8,19 +8,19 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.service.ports.client | default 2181 }}
       targetPort: client
       protocol: TCP
       name: client
-    - port: 2888
+    - port: {{ .Values.service.ports.quorum | default 2888 }}
       targetPort: quorum
       protocol: TCP
       name: quorum
-    - port: 3888
+    - port: {{ .Values.service.ports.leaderElection | default 3888 }}
       targetPort: leader-election
       protocol: TCP
       name: leader-election
-    - port: 8080
+    - port: {{ .Values.service.ports.admin | default 8080 }}
       targetPort: admin
       protocol: TCP
       name: admin
@@ -39,19 +39,19 @@ spec:
   clusterIP: None
   publishNotReadyAddresses: true
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.service.ports.client | default 2181 }}
       targetPort: client
       protocol: TCP
       name: client
-    - port: 2888
+    - port: {{ .Values.service.ports.quorum | default 2888 }}
       targetPort: quorum
       protocol: TCP
       name: quorum
-    - port: 3888
+    - port: {{ .Values.service.ports.leaderElection | default 3888 }}
       targetPort: leader-election
       protocol: TCP
       name: leader-election
-    - port: 8080
+    - port: {{ .Values.service.ports.admin | default 8080 }}
       targetPort: admin
       protocol: TCP
       name: admin

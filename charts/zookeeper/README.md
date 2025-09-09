@@ -45,7 +45,10 @@ zkCli.sh -server my-zookeeper:2181
 | `image.pullPolicy`          | Image pull policy                           | `IfNotPresent`              |
 | `replicaCount`              | Number of ZooKeeper nodes                   | `3`                         |
 | `service.type`              | Kubernetes service type                     | `ClusterIP`                 |
-| `service.port`              | ZooKeeper client port                       | `2181`                      |
+| `service.ports.client`      | ZooKeeper client port                       | `2181`                      |
+| `service.ports.quorum`      | ZooKeeper quorum port                       | `2888`                      |
+| `service.ports.leaderElection` | ZooKeeper leader election port           | `3888`                      |
+| `service.ports.admin`       | ZooKeeper admin port                        | `8080`                      |
 | `persistence.enabled`       | Enable persistent storage                   | `true`                      |
 | `persistence.size`          | Size of persistent volume                   | `8Gi`                       |
 | `persistence.mountPath`     | Mount path for ZooKeeper data               | `/data/zookeeper`           |

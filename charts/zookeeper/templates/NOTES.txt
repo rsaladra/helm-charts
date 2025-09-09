@@ -6,7 +6,7 @@ ZooKeeper has been deployed!
     --image bitnami/zookeeper:3.9.2-debian-11-r0 -- bash
 
   # Inside the pod:
-  zkCli.sh -server {{ include "zookeeper.fullname" . }}:{{ .Values.service.port }}
+  zkCli.sh -server {{ include "zookeeper.fullname" . }}:{{ .Values.service.ports.client }}
 
 **To upgrade this release:**
 

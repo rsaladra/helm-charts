@@ -10,8 +10,8 @@ data:
     tickTime={{ .Values.zookeeperConfig.tickTime | default 2000 }}
     initLimit={{ .Values.zookeeperConfig.initLimit | default 10 }}
     syncLimit={{ .Values.zookeeperConfig.syncLimit | default 5 }}
-    dataDir={{ .Values.persistence.mountPath }}
-    clientPort={{ .Values.service.port | default 2181 }}
+    dataDir={{ .Values.zookeeperConfig.dataDir | default "/var/lib/zookeeper/data" }}
+    clientPort={{ .Values.service.ports.client | default 2181 }}
     electionPortBindRetry=10
 
     {{- if .Values.metrics.enabled }}
