@@ -773,6 +773,37 @@ entries:
       license: Apache-2.0
     apiVersion: v2
     appVersion: 4.1.4
+    created: "2025-09-09T13:47:27.636821057Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: A messaging broker that implements the Advanced Message Queuing Protocol
+      (AMQP)
+    digest: 5fdb0fd0ef99e31c71d2401f60070a7ed1a4e0b111639770e570f22a143287b4
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/aa1bd68288/rabbitmq-logo.svg
+    keywords:
+    - rabbitmq
+    - message broker
+    - amqp
+    - messaging
+    - queue
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: rabbitmq
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/rabbitmq-0.1.4/rabbitmq-0.1.4.tgz
+    version: 0.1.4
+  - annotations:
+      category: Message Broker
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 4.1.4
     created: "2025-09-09T09:01:36.653541264Z"
     dependencies:
     - name: common
@@ -1397,4 +1428,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/valkey-0.1.6/valkey-0.1.6.tgz
     version: 0.1.6
-generated: "2025-09-09T12:56:03.600999917Z"
+generated: "2025-09-09T13:47:27.6369142Z"
