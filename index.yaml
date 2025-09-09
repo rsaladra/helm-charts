@@ -221,6 +221,34 @@ entries:
     version: 0.1.5
   memcached:
   - apiVersion: v2
+    appVersion: 1.6.39
+    created: "2025-09-09T12:52:21.879670044Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: Memcached is an in-memory key-value store for small chunks of arbitrary
+      data (strings, objects) from results of database calls, API calls, or page rendering.
+    digest: 099ada7e21b0cd0926914c71aa1b6b601b50712e9b0b7a6c8cd1b6c979644bf6
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/0faa83eb34/memcached-logo.svg
+    keywords:
+    - memcached
+    - cache
+    - in-memory
+    - key-value
+    - distributed
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: memcached
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/memcached
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/memcached-0.1.1/memcached-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: 1.6.32
     created: "2025-09-02T15:57:43.950730725Z"
     dependencies:
@@ -1341,4 +1369,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/valkey-0.1.6/valkey-0.1.6.tgz
     version: 0.1.6
-generated: "2025-09-09T12:49:49.739766921Z"
+generated: "2025-09-09T12:52:21.879750394Z"
