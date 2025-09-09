@@ -102,6 +102,18 @@ managementPlugin:
   ## @param managementPlugin.enabled Enable RabbitMQ management plugin
   enabled: true
 
+## @section Init Container configuration
+initContainer:
+  image:
+    ## @param initContainer.image.registry Init container image registry
+    registry: docker.io
+    ## @param initContainer.image.registry Init container image repository
+    repository: busybox
+    ## @param initContainer.image.tag Init container image tag
+    tag: "1.36"
+    ## @param initContainer.image.pullPolicy Init container image pull policy
+    pullPolicy: IfNotPresent
+
 ## @section Metrics configuration
 metrics:
   ## @param metrics.enabled Enable RabbitMQ metrics (via prometheus plugin)
