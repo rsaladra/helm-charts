@@ -12,6 +12,4 @@ data:
     syncLimit={{ .Values.zookeeperConfig.syncLimit | default 5 }}
     dataDir={{ .Values.persistence.mountPath }}
     clientPort={{ .Values.service.port | default 2181 }}
-    {{- range $i, $e := until (int .Values.replicaCount) }}
-    server.{{ $i }}={{ include "zookeeper.fullname" $ }}-{{ $i }}.{{ include "zookeeper.fullname" $ }}:2888:3888
-    {{- end }}
+    electionPortBindRetry=10

@@ -53,3 +53,19 @@ Return the proper Docker Image Registry Secret Names
 {{- define "zookeeper.imagePullSecrets" -}}
 {{ include "common.images.renderPullSecrets" (dict "images" (list .Values.image) "context" .) }}
 {{- end -}}
+
+{{/*
+Create a server list string based on fullname, namespace, # of servers
+in a format like "zkhost1:port:port;zkhost2:port:port"
+*/}}
+{{- define "zookeeper.serverlist" -}}
+{{- $namespace := .Release.Namespace }}
+{{- $name := include "zookeeper.fullname" . -}}
+{{- $peersPort := .Values.service.ports.quorum -}}
+{{- $leaderElectionPort := .Values.service.ports.leaderElection -}}
+{{- $zk := dict "servers" (list) -}}
+{{- range $idx, $v := until (int .Values.replicaCount) }}
+{{- $noop := printf "%s-%d.%s-headless.%s.svc.cluster.local:%d:%d" $name $idx $name $namespace (int $peersPort) (int $leaderElectionPort) | append $zk.servers | set $zk "servers" -}}
+{{- end }}
+{{- printf "%s" (join ";" $zk.servers) | quote -}}
+{{- end -}}

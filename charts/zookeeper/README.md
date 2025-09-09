@@ -20,7 +20,7 @@ helm install my-zookeeper ./charts/zookeeper
 To install with custom values:
 
 ```bash
-helm install my-zookeeper ./charts/zookeeper -f my-values.yaml
+helm install my-zookeeper ./charts/zookeeper -f values.yaml
 ```
 
 ### Getting Started
@@ -29,7 +29,7 @@ helm install my-zookeeper ./charts/zookeeper -f my-values.yaml
 
 ```bash
 kubectl run zk-client --rm --tty -i --restart='Never' \
-    --image bitnami/zookeeper:3.9.2-debian-11-r0 -- bash
+    --image zookeeper:latest -- bash
 
 # Inside the pod:
 zkCli.sh -server my-zookeeper:2181
@@ -40,15 +40,15 @@ zkCli.sh -server my-zookeeper:2181
 | Parameter                   | Description                                 | Default                     |
 |-----------------------------|---------------------------------------------|-----------------------------|
 | `image.registry`            | ZooKeeper image registry                    | `docker.io`                 |
-| `image.repository`          | ZooKeeper image repository                  | `bitnami/zookeeper`         |
-| `image.tag`                 | ZooKeeper image tag                         | `3.9.2-debian-11-r0`        |
+| `image.repository`          | ZooKeeper image repository                  | `zookeeper`                 |
+| `image.tag`                 | ZooKeeper image tag                         | `3.9.3@sha256:9980cafbff742c15b339811ae829faa61c69154606ec504223560da9d31acd43`|
 | `image.pullPolicy`          | Image pull policy                           | `IfNotPresent`              |
 | `replicaCount`              | Number of ZooKeeper nodes                   | `3`                         |
 | `service.type`              | Kubernetes service type                     | `ClusterIP`                 |
 | `service.port`              | ZooKeeper client port                       | `2181`                      |
 | `persistence.enabled`       | Enable persistent storage                   | `true`                      |
 | `persistence.size`          | Size of persistent volume                   | `8Gi`                       |
-| `persistence.mountPath`     | Mount path for ZooKeeper data               | `/bitnami/zookeeper`        |
+| `persistence.mountPath`     | Mount path for ZooKeeper data               | `/data/zookeeper`           |
 | `resources.limits.memory`   | Memory limit                                | `512Mi`                     |
 | `resources.requests.cpu`    | CPU request                                 | `100m`                      |
 | `resources.requests.memory` | Memory request                              | `256Mi`                     |
@@ -73,4 +73,4 @@ helm delete my-zookeeper
 
 ## References
 - [ZooKeeper Documentation](https://zookeeper.apache.org/doc/)
-- [Bitnami ZooKeeper Chart](https://github.com/bitnami/charts/tree/main/bitnami/zookeeper)
+- [Kubernetes Documentation](https://kubernetes.io/docs/)

@@ -24,6 +24,11 @@ replicaCount: 3
 service:
   type: ClusterIP
   port: 2181
+  ports:
+    client: 2181
+    quorum: 2888
+    leaderElection: 3888
+    admin: 8080
 
 persistence:
   enabled: true

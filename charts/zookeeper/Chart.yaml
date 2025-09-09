@@ -12,7 +12,6 @@ keywords:
 home: https://zookeeper.apache.org/
 sources:
   - https://github.com/apache/zookeeper
-  - https://github.com/bitnami/charts/tree/main/bitnami/zookeeper
 annotations:
   category: Database
   license: Apache-2.0

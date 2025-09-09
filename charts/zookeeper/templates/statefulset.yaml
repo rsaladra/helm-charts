@@ -12,6 +12,9 @@ metadata:
 spec:
   serviceName: {{ include "zookeeper.fullname" . }}
   replicas: {{ .Values.replicaCount }}
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
   selector:
     matchLabels:
       {{- include "zookeeper.selectorLabels" . | nindent 6 }}
@@ -35,7 +38,7 @@ spec:
           securityContext: {{- toYaml .Values.containerSecurityContext | nindent 12 }}
           image: {{ include "zookeeper.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["tail", "-f", "/dev/null"]
+          #command: ["tail", "-f", "/dev/null"]
           ports:
             - name: client
               containerPort: {{ .Values.service.port }}
@@ -46,14 +49,17 @@ spec:
             - name: leader-election
               containerPort: 3888
               protocol: TCP
+            - name: admin
+              containerPort: 8080
+              protocol: TCP
           env:
             - name: ZOO_SERVERS
-              #value: "{{- range $i, $e := until (int .Values.replicaCount) }}server.{{ $i }}={{ include "zookeeper.fullname" $ }}-{{ $i }}.{{ include "zookeeper.fullname" $ }}:2888:3888;{{ $.Values.service.port | default 2181 }} {{- end }}"
-              value: "{{- range $i := until (int .Values.replicaCount) }}server.{{ add1 $i }}={{ include "zookeeper.fullname" $ }}-{{ $i }}.{{ include "zookeeper.fullname" $ }}:2888:3888;{{ $.Values.service.port | default 2181 }} {{ end -}}"
+              #value: "{{- range $i := until (int .Values.replicaCount) }}server.{{ add1 $i }}={{ include "zookeeper.fullname" $ }}-{{ $i }}.{{ include "zookeeper.fullname" $ }}-headless:2888:3888;{{ $.Values.service.port | default 2181 }} {{ end -}}"
+              value: {{ include "zookeeper.serverlist" . }}
             - name: ZOO_MY_ID
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.name
+                  fieldPath: metadata.labels['apps.kubernetes.io/pod-index']
             - name: ZOO_CLIENT_PORT
               value: "{{ .Values.service.port | default 2181 }}"
             - name: ZOO_TICK_TIME
