@@ -416,6 +416,31 @@ entries:
   mongodb:
   - apiVersion: v2
     appVersion: 8.0.13
+    created: "2025-09-09T12:49:49.739675972Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: MongoDB a flexible NoSQL database for scalable, real-time data management
+    digest: 73eb64eb17801f98b6d53e0c835cad23a386e04846e78e7a6ac3dd20d7fecc91
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/5d228988dc/mongodb-logo.svg
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: mongodb
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mongodb
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/mongodb-0.1.7/mongodb-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
+    appVersion: 8.0.13
     created: "2025-08-27T12:26:02.850342718Z"
     dependencies:
     - name: common
@@ -1316,4 +1341,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/valkey-0.1.6/valkey-0.1.6.tgz
     version: 0.1.6
-generated: "2025-09-09T12:47:33.856880472Z"
+generated: "2025-09-09T12:49:49.739766921Z"
