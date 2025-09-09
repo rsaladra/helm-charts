@@ -13,3 +13,10 @@ data:
     dataDir={{ .Values.persistence.mountPath }}
     clientPort={{ .Values.service.port | default 2181 }}
     electionPortBindRetry=10
+
+    {{- if .Values.metrics.enabled }}
+    metricsProvider.className=org.apache.zookeeper.metrics.prometheus.PrometheusMetricsProvider
+    metricsProvider.httpHost=0.0.0.0
+    metricsProvider.httpPort={{ .Values.metrics.service.port | default 7000 }}
+    metricsProvider.exportJvmInfo=true
+    {{- end }}

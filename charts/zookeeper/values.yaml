@@ -45,10 +45,7 @@ resources:
     cpu: 100m
     memory: 256Mi
 
-nodeSelector: {}
 priorityClassName: ""
-tolerations: []
-affinity: {}
 
 containerSecurityContext:
   runAsUser: 1000
@@ -57,6 +54,12 @@ containerSecurityContext:
 
 podSecurityContext:
   fsGroup: 1000
+
+metrics:
+  enabled: false
+  service:
+    type: ClusterIP
+    port: 7000
 
 livenessProbe:
   enabled: true
@@ -77,4 +80,13 @@ readinessProbe:
 extraEnv: []
 extraVolumes: []
 extraVolumeMounts: []
+
+## @section Node Selection
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+## @param extraObjects Array of extra objects to deploy with the release
 extraObjects: []
