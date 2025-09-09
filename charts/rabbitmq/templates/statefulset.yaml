@@ -21,15 +21,41 @@ spec:
       labels:
         {{- include "rabbitmq.selectorLabels" . | nindent 8 }}
     spec:
-{{- with (include "rabbitmq.imagePullSecrets" .) }}
-{{ . | nindent 6 }}
-{{- end }}
+      {{- with (include "rabbitmq.imagePullSecrets" .) }}
+      {{ . | nindent 6 }}
+      {{- end }}
       serviceAccountName: {{ include "rabbitmq.serviceAccountName" . }}
+      {{- if .Values.podSecurityContext }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- end }}
+      {{- if .Values.auth.enabled }}
+      initContainers:
+        - name: init-erlang-cookie
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              echo "$RABBITMQ_ERLANG_COOKIE" > /var/lib/rabbitmq/.erlang.cookie
+              chmod 400 /var/lib/rabbitmq/.erlang.cookie
+              chown {{ .Values.securityContext.runAsUser | default 999 }}:{{ .Values.securityContext.runAsGroup | default 999 }} /var/lib/rabbitmq/.erlang.cookie
+          env:
+            - name: RABBITMQ_ERLANG_COOKIE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "rabbitmq.secretName" . }}
+                  key: {{ include "rabbitmq.secretErlangCookieKey" . }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/rabbitmq
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          securityContext: {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- if .Values.securityContext }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- end }}
           image: {{ include "rabbitmq.image" . | quote }}
           imagePullPolicy: {{ include "common.imagePullPolicy" (dict "image" .Values.image) }}
           ports:
@@ -68,7 +94,7 @@ spec:
                   fieldPath: metadata.name
             {{- if .Values.peerDiscoveryK8sPlugin.useLongname }}
             - name: RABBITMQ_NODENAME
-              value: rabbit@$(NODE_NAME).{{ include "rabbitmq.fullname" . }}-headless.{{ .Release.Namespace }}.svc.cluster.local
+              value: rabbit@$(NODE_NAME).{{ include "rabbitmq.fullname" . }}-headless.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}
             {{- else }}
             - name: RABBITMQ_NODENAME
               value: rabbit@$(NODE_NAME)

@@ -1,19 +1,40 @@
 {
   "extends": [
-    "config:recommended",
-    ":dependencyDashboard"
+    "config:recommended"
   ],
-  "labels": [
-    "dependencies"
+  "enabledManagers": [
+    "helm-values"
   ],
-  "branchPrefix": "renovate/",
-  "prHourlyLimit": 10,
-  "prConcurrentLimit": 5,
-  "pinDigests": true,
-  "hostRules": [
+  "helm-values": {
+    "managerFilePatterns": [
+      "/^charts/.*values\\.yaml$/"
+    ],
+    "versioning": "regex:^.+@.+$",
+    "extractVersion": "(?<version>[^@]+)@(?<sha>sha256:[a-f0-9]{64})",
+    "rangeStrategy": "replace"
+  },
+  "packageRules": [
     {
-      "matchHost": "harbor.cloudpirates.io",
-      "enabled": false
+      "matchManagers": [
+        "helm-values"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest"
+      ],
+      "matchPackageNames": [
+        "/.*/"
+      ]
+    },
+    {
+      "matchManagers": [
+        "helm-values"
+      ],
+      "enabled": false,
+      "matchPackageNames": [
+        "/harbor.cloudpirates.io/koperator-internal/services/clusterpirate/"
+      ]
     }
   ]
 }

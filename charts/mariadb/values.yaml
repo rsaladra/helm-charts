@@ -22,7 +22,7 @@ image:
   ## @param image.repository MariaDB image repository
   repository: mariadb
   ## @param image.tag MariaDB image tag (immutable tags are recommended)
-  tag: "12.0.2@sha256:b30cc65b57a11a2e791ad5c06284e599fe9f1bf3fe9081a88d85bcf36389be4a"
+  tag: "12.0.2@sha256:a5af517d52262da1583cebe6b7c970d7bbeaf1f016938c2fc3cf2e95c52d8c08"
   ## @param image.pullPolicy MariaDB image pull policy
   imagePullPolicy: Always
 
@@ -131,6 +131,21 @@ extraVolumes: []
 ##  - name: volume
 ##    mountPath: /mnt/tmp
 ##    pvcName: pvc-001
+
+## @section Initialization scripts
+## @param initdbScriptsConfigMap Name of a ConfigMap with initialization scripts
+## The ConfigMap should contain one or more keys ending in .sql, .sql.gz or .sh
+## Example:
+##   apiVersion: v1
+##   kind: ConfigMap
+##   metadata:
+##     name: mariadb-initdb
+##   data:
+##     01-init.sql: |
+##       CREATE DATABASE mydb;
+##       CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypassword';
+##       GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%';
+initdbScriptsConfigMap: ""
 
 ## @section MariaDB container's liveness probe parameters
 livenessProbe:
