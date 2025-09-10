@@ -10,7 +10,7 @@ metadata:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  serviceName: {{ include "zookeeper.fullname" . }}
+  serviceName: {{ include "zookeeper.fullname" . }}-headless
   replicas: {{ .Values.replicaCount }}
   updateStrategy:
     type: RollingUpdate
@@ -38,7 +38,7 @@ spec:
           securityContext: {{- toYaml .Values.containerSecurityContext | nindent 12 }}
           image: {{ include "zookeeper.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          #command: ["tail", "-f", "/dev/null"]
+          #command: ["tail", "-f", "/dev/null"] # Uncomment to debug the container
           ports:
             - name: client
               containerPort: {{ .Values.service.ports.client | default 2181 }}
@@ -53,24 +53,10 @@ spec:
               containerPort: {{ .Values.service.ports.admin | default 8080 }}
               protocol: TCP
           env:
-            - name: ZOO_SERVERS
-              value: {{ include "zookeeper.serverlist" . }}
-            - name: ZOO_MY_ID
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['apps.kubernetes.io/pod-index']
-            - name: ZOO_CLIENT_PORT
-              value: "{{ .Values.service.port | default 2181 }}"
-            - name: ZOO_TICK_TIME
-              value: "{{ .Values.zookeeperConfig.tickTime | default 2000 }}"
-            - name: ZOO_INIT_LIMIT
-              value: "{{ .Values.zookeeperConfig.initLimit | default 10 }}"
-            - name: ZOO_SYNC_LIMIT
-              value: "{{ .Values.zookeeperConfig.syncLimit | default 5 }}"
-            {{- range .Values.extraEnv }}
+          {{- range .Values.extraEnv }}
             - name: {{ .name }}
               value: {{ .value | quote }}
-            {{- end }}
+          {{- end }}
           livenessProbe:
             tcpSocket:
               port: client

@@ -30,6 +30,7 @@ image:
 replicaCount: 3
 
 ## @section Zookeeper configuration parameters
+## @see https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_configuration
 zookeeperConfig:
   ## @param zookeeperConfig.tickTime Zookeeper tick time
   tickTime: 2000
@@ -39,6 +40,23 @@ zookeeperConfig:
   initLimit: 10
   ## @param zookeeperConfig.syncLimit Zookeeper sync limit
   syncLimit: 5
+  ## @param zookeeperConfig.electionPortBindRetry Zookeeper election port bind retry
+  electionPortBindRetry: 10
+  ## @param zookeeperConfig.maxClientCnxns Zookeeper max client connections
+  maxClientCnxns: 60
+  ## @param zookeeperConfig.standaloneEnabled Enable standalone mode (for single node deployments)
+  standaloneEnabled: "false"
+  ## @param zookeeperConfig.adminServerEnabled Enable admin server
+  adminServerEnabled: "false"
+  ## @param zookeeperConfig.4lwCommandsWhitelist Zookeeper 4-letter word commands whitelist
+  ## possible values are: "srvr,ruok,conf,cons,dump,envi,ruok,mntr,stat" or "*" to allow all commands
+  ## @see https://zookeeper.apache.org/doc/r3.5.9/zookeeperAdmin.html#sc_clusterOptions
+  commandsWhitelist: "srvr"
+  autopurge:
+    ## @param zookeeperConfig.autopurge.purgeInterval Zookeeper autopurge purge interval (in hours)
+    purgeInterval: 24
+    ## @param zookeeperConfig.autopurge.snapRetainCount Zookeeper autopurge snapshot retain count
+    snapRetainCount: 3
 
 ## @section Zookeeper Metrics configuration
 metrics:

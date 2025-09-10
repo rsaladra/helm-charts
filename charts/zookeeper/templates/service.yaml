@@ -12,14 +12,6 @@ spec:
       targetPort: client
       protocol: TCP
       name: client
-    - port: {{ .Values.service.ports.quorum | default 2888 }}
-      targetPort: quorum
-      protocol: TCP
-      name: quorum
-    - port: {{ .Values.service.ports.leaderElection | default 3888 }}
-      targetPort: leader-election
-      protocol: TCP
-      name: leader-election
     - port: {{ .Values.service.ports.admin | default 8080 }}
       targetPort: admin
       protocol: TCP
