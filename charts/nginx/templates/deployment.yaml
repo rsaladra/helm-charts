@@ -34,6 +34,43 @@ spec:
       serviceAccountName: {{ include "nginx.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.cloneStaticSiteFromGit.enabled }}
+      initContainers:
+        - name: git-clone-repository
+          image: "{{ .Values.cloneStaticSiteFromGit.image.registry }}/{{ .Values.cloneStaticSiteFromGit.image.repository }}:{{ .Values.cloneStaticSiteFromGit.image.tag }}"
+          imagePullPolicy: {{ .Values.cloneStaticSiteFromGit.image.pullPolicy }}
+          {{- if .Values.cloneStaticSiteFromGit.gitClone.command }}
+          command: {{- toYaml .Values.cloneStaticSiteFromGit.gitClone.command | nindent 12 }}
+          {{- else }}
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              [[ -f "/opt/bitnami/scripts/git/entrypoint.sh" ]] && source "/opt/bitnami/scripts/git/entrypoint.sh"
+              git clone {{ .Values.cloneStaticSiteFromGit.repository }} --branch {{ .Values.cloneStaticSiteFromGit.branch }} /app
+          {{- end }}
+          {{- if .Values.cloneStaticSiteFromGit.gitClone.args }}
+          args: {{- toYaml .Values.cloneStaticSiteFromGit.gitClone.args | nindent 12 }}
+          {{- end }}
+          {{- if .Values.cloneStaticSiteFromGit.extraEnvVars }}
+          env:
+            {{- toYaml .Values.cloneStaticSiteFromGit.extraEnvVars | nindent 12 }}
+          {{- end }}
+          {{- if .Values.cloneStaticSiteFromGit.extraEnvVarsSecret }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.cloneStaticSiteFromGit.extraEnvVarsSecret }}
+          {{- end }}
+          {{- if .Values.cloneStaticSiteFromGit.gitSync.resources }}
+          resources: {{- toYaml .Values.cloneStaticSiteFromGit.gitSync.resources | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: static-site
+              mountPath: /app
+            {{- if .Values.cloneStaticSiteFromGit.extraVolumeMounts }}
+            {{- toYaml .Values.cloneStaticSiteFromGit.extraVolumeMounts | nindent 12 }}
+            {{- end }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext: {{- toYaml .Values.containerSecurityContext | nindent 12 }}
@@ -93,6 +130,10 @@ spec:
             - name: emptydir
               mountPath: /var/cache/nginx/scgi_temp
               subPath: scgi-temp-dir
+          {{- if .Values.cloneStaticSiteFromGit.enabled }}
+            - name: static-site
+              mountPath: /usr/share/nginx/html
+          {{- end }}
           {{- if .Values.config }}
             - name: nginx-config
               mountPath: /etc/nginx/conf.d
@@ -104,9 +145,52 @@ spec:
           {{- if .Values.extraVolumeMounts }}
             {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
           {{- end }}
+        {{- if .Values.cloneStaticSiteFromGit.enabled }}
+        - name: git-repo-syncer
+          image: "{{ .Values.cloneStaticSiteFromGit.image.registry }}/{{ .Values.cloneStaticSiteFromGit.image.repository }}:{{ .Values.cloneStaticSiteFromGit.image.tag }}"
+          imagePullPolicy: {{ .Values.cloneStaticSiteFromGit.image.pullPolicy }}
+          {{- if .Values.cloneStaticSiteFromGit.gitSync.command }}
+          command: {{- toYaml .Values.cloneStaticSiteFromGit.gitSync.command | nindent 12 }}
+          {{- else }}
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              [[ -f "/opt/bitnami/scripts/git/entrypoint.sh" ]] && source "/opt/bitnami/scripts/git/entrypoint.sh"
+              while true; do
+                cd /app && git pull origin {{ .Values.cloneStaticSiteFromGit.branch }}
+                sleep {{ .Values.cloneStaticSiteFromGit.interval }}
+              done
+          {{- end }}
+          {{- if .Values.cloneStaticSiteFromGit.gitSync.args }}
+          args: {{- toYaml .Values.cloneStaticSiteFromGit.gitSync.args | nindent 12 }}
+          {{- end }}
+          {{- if .Values.cloneStaticSiteFromGit.extraEnvVars }}
+          env:
+            {{- toYaml .Values.cloneStaticSiteFromGit.extraEnvVars | nindent 12 }}
+          {{- end }}
+          {{- if .Values.cloneStaticSiteFromGit.extraEnvVarsSecret }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.cloneStaticSiteFromGit.extraEnvVarsSecret }}
+          {{- end }}
+          {{- if .Values.cloneStaticSiteFromGit.gitSync.resources }}
+          resources: {{- toYaml .Values.cloneStaticSiteFromGit.gitSync.resources | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: static-site
+              mountPath: /app
+            {{- if .Values.cloneStaticSiteFromGit.extraVolumeMounts }}
+            {{- toYaml .Values.cloneStaticSiteFromGit.extraVolumeMounts | nindent 12 }}
+            {{- end }}
+        {{- end }}
       volumes:
         - name: emptydir
           emptyDir: {}
+        {{- if .Values.cloneStaticSiteFromGit.enabled }}
+        - name: static-site
+          emptyDir: {}
+        {{- end }}
       {{- if or .Values.serverConfig .Values.streamServerConfig }}
         - name: nginx-server-config
           configMap:
