@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.1.6 (2025-09-10)
+## 0.1.7 (2025-09-10)
 
-* [rabbitmq] add securityContext spec for the initContainer ([#70](https://github.com/CloudPirates-io/helm-charts/pull/70))
+* [rabbitmq]: add missing @ for sha image reference ([#73](https://github.com/CloudPirates-io/helm-charts/pull/73))
