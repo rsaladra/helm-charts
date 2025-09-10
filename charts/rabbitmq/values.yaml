@@ -113,6 +113,21 @@ initContainer:
     tag: "1.37.0sha256:ab33eacc8251e3807b85bb6dba570e4698c3998eca6f0fc2ccb60575a563ea74"
     ## @param initContainer.image.pullPolicy Init container image pull policy
     pullPolicy: IfNotPresent
+  securityContext:
+    ## @param initContainer.securityContext.allowPrivilegeEscalation Enable container privilege escalation
+    allowPrivilegeEscalation: false
+    ## @param initContainer.securityContext.runAsNonRoot Configure the container to run as a non-root user
+    runAsNonRoot: true
+    ## @param initContainer.securityContext.runAsUser User ID for the RabbitMQ container
+    runAsUser: 999
+    ## @param initContainer.securityContext.runAsGroup Group ID for the RabbitMQ container
+    runAsGroup: 999
+    ## @param initContainer.securityContext.readOnlyRootFilesystem Mount container root filesystem as read-only
+    readOnlyRootFilesystem: true
+    ## @param initContainer.securityContext.capabilities.drop Linux capabilities to be dropped
+    capabilities:
+      drop:
+        - ALL
 
 ## @section Metrics configuration
 metrics:
