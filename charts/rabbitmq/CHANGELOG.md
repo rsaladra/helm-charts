@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.5 (2025-09-09)
+## 0.1.5 (2025-09-10)
 
 * [rabbitmq]: Container Image respect imageRegistry ([#66](https://github.com/CloudPirates-io/helm-charts/pull/66))
 
