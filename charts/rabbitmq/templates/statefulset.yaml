@@ -34,6 +34,10 @@ spec:
         - name: init-erlang-cookie
           image: "{{ .Values.initContainer.image.registry | default .Values.global.imageRegistry }}/{{ .Values.initContainer.image.repository }}:{{ .Values.initContainer.image.tag }}"
           imagePullPolicy: "{{ .Values.initContainer.image.pullPolicy }}"
+          {{- if .Values.initContainer.securityContext }}
+          securityContext:
+            {{- toYaml .Values.initContainer.securityContext | nindent 12 }}
+          {{- end }}
           command:
             - sh
             - -c
