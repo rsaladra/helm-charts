@@ -2,8 +2,6 @@
 
 ## 0.1.4 (2025-09-10)
 
-* [nginx] Implement static website git clone ([#71](https://github.com/CloudPirates-io/helm-charts/pull/71))
-
 ## <small>0.1.3 (2025-09-08)</small>
 
 * add artifacthub-repo id ([ee4f192](https://github.com/CloudPirates-io/helm-charts/commit/ee4f192))

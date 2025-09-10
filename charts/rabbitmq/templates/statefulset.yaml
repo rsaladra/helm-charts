@@ -28,11 +28,16 @@ spec:
       {{- if .Values.podSecurityContext }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-        {{- end }}
+      {{- end }}
       {{- if .Values.auth.enabled }}
       initContainers:
         - name: init-erlang-cookie
-          image: busybox
+          image: "{{ .Values.initContainer.image.registry | default .Values.global.imageRegistry }}/{{ .Values.initContainer.image.repository }}:{{ .Values.initContainer.image.tag }}"
+          imagePullPolicy: "{{ .Values.initContainer.image.pullPolicy }}"
+          {{- if .Values.initContainer.securityContext }}
+          securityContext:
+            {{- toYaml .Values.initContainer.securityContext | nindent 12 }}
+          {{- end }}
           command:
             - sh
             - -c

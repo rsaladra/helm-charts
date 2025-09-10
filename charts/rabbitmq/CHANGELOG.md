@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.1.4 (2025-09-09)
+## 0.1.7 (2025-09-10)
 
-* [rabbitmq]  allow setting a clusterdomain different than the default cluster.local ([#61](https://github.com/CloudPirates-io/helm-charts/pull/61))
+* [rabbitmq]: add missing @ for sha image reference ([#73](https://github.com/CloudPirates-io/helm-charts/pull/73))
