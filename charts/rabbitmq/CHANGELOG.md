@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.1.7 (2025-09-10)
+## 0.2.0 (2025-09-10)
 
-* [rabbitmq]: add missing @ for sha image reference ([#73](https://github.com/CloudPirates-io/helm-charts/pull/73))
+* [rabbitmq]: add support to automatically download and enable 3rd party plugins ([#75](https://github.com/CloudPirates-io/helm-charts/pull/75))
