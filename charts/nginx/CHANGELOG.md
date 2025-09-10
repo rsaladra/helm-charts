@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.1.4 (2025-09-10)
+## 0.1.5 (2025-09-10)
 
-* [nginx] fix artifacthub-repo id ([#72](https://github.com/CloudPirates-io/helm-charts/pull/72))
+* [nginx] Implement static website git clone ([#71](https://github.com/CloudPirates-io/helm-charts/pull/71))
 
 ## <small>0.1.3 (2025-09-08)</small>
 

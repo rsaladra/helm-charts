@@ -71,6 +71,55 @@ autoscaling:
   targetCPUUtilizationPercentage: ""
   targetMemoryUtilizationPercentage: ""
 
+## Get the server static content from a git repository
+cloneStaticSiteFromGit:
+  ## @param cloneStaticSiteFromGit.enabled Get the server static content from a Git repository
+  ##
+  enabled: true
+
+  ## Git image settings
+  ##
+  image:
+    registry: docker.io
+    repository: alpine/git
+    tag: v2.49.1
+    digest: "sha256:9c9c6debba3eac25c9230db4bbd1e17d0c27efffdb93e502a47f6f447ab90ac4"
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+
+  ## @param cloneStaticSiteFromGit.repository Git Repository to clone static content from
+  ##
+  repository: ""
+
+  ## @param cloneStaticSiteFromGit.branch Git branch to checkout
+  ##
+  branch: "main"
+
+  ## @param cloneStaticSiteFromGit.interval Interval (seconds) for sidecar to pull from Git repository
+  ##
+  interval: 60
+
+  ## Additional configuration for git-clone-repository initContainer
+  gitClone:
+    command: []
+    args: []
+
+  ## Additional configuration for git-repo-syncer sidecar container
+  gitSync:
+    command: []
+    args: []
+    resourcesPreset: "nano"
+    resources: {}
+
+  ## @param cloneStaticSiteFromGit.extraEnvVars Additional environment variables for Git containers
+  extraEnvVars: []
+
+  ## @param cloneStaticSiteFromGit.extraEnvVarsSecret Secret with extra environment variables
+  extraEnvVarsSecret: ""
+
+  ## @param cloneStaticSiteFromGit.extraVolumeMounts Add extra volume mounts for Git containers (e.g. SSH keys)
+  extraVolumeMounts: []
+
 ## @param resources Resource limits and requests for Nginx pod
 resources:
   {}
