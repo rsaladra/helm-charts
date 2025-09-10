@@ -139,6 +139,12 @@ The following table lists the configurable parameters of the RabbitMQ chart and 
 | -------------------------- | --------------------------------- | ------- |
 | `managementPlugin.enabled` | Enable RabbitMQ management plugin | `true`  |
 
+## Plugin configuration
+
+| Parameter        | Description                                                                                                                                       | Default |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `installPlugins` | Additional 3rd party RabbitMQ plugins to download and enable | `[]`    |
+
 ### Metrics configuration
 
 | Parameter                              | Description                                                                                                                 | Default |

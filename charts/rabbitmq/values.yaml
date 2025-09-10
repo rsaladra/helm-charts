@@ -149,8 +149,11 @@ metrics:
     ## @param metrics.serviceMonitor.scrapeTimeout Scrape timeout
     scrapeTimeout: 10s
 
-## @param additionalPlugins Additional RabbitMQ plugins to enable (Prometheus Metrics, PeerDiscoveryK8s and Management plugins are automatically added)
+## @param additionalPlugins Additional default RabbitMQ plugins to enable (Prometheus Metrics, PeerDiscoveryK8s and Management plugins are automatically added)
 additionalPlugins: []
+
+## @param installPlugins Additional 3rd party RabbitMQ plugins to download and enable
+installPlugins: []
 
 ## @section Persistence
 persistence:

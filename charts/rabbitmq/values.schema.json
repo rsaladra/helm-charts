@@ -328,6 +328,14 @@
         "type": "string"
       }
     },
+    "installPlugins": {
+      "type": "array",
+      "title": "Install Plugins",
+      "description": "Additional 3rd party RabbitMQ plugins to download and enable",
+      "items": {
+        "type": "string"
+      }
+    },
     "persistence": {
       "type": "object",
       "title": "Persistence Configuration",
