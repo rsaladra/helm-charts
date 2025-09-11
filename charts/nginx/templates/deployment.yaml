@@ -77,9 +77,17 @@ spec:
           image: {{ include "nginx.image" . | quote }}
           imagePullPolicy: {{ include "common.imagePullPolicy" (dict "image" .Values.image) }}
           ports:
+            {{- if .Values.containerPorts }}
+            {{- range .Values.containerPorts }}
+            - name: {{ .name }}
+              containerPort: {{ .containerPort }}
+              protocol: {{ .protocol | default "TCP" }}
+            {{- end }}
+            {{- else }}
             - name: nginx
-              containerPort: 80
+              containerPort: {{ .Values.containerPort }}
               protocol: TCP
+            {{- end }}
           {{- if .Values.extraEnv }}
           env:
             {{- range .Values.extraEnv }}
@@ -89,8 +97,14 @@ spec:
           {{- end }}
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
+            {{- if eq .Values.livenessProbe.type "httpGet" }}
+            httpGet:
+              path: {{ .Values.livenessProbe.path }}
+              port: nginx
+            {{- else }}
             tcpSocket:
               port: nginx
+            {{- end }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
@@ -99,8 +113,14 @@ spec:
           {{- end }}
           {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
+            {{- if eq .Values.readinessProbe.type "httpGet" }}
+            httpGet:
+              path: {{ .Values.readinessProbe.path }}
+              port: nginx
+            {{- else }}
             tcpSocket:
               port: nginx
+            {{- end }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}

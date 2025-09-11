@@ -8,9 +8,18 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
+    {{- if .Values.service.ports }}
+    {{- range .Values.service.ports }}
+    - port: {{ .port }}
+      targetPort: {{ .targetPort }}
+      protocol: {{ .protocol | default "TCP" }}
+      name: {{ .name }}
+    {{- end }}
+    {{- else }}
     - port: {{ .Values.service.port }}
       targetPort: nginx
       protocol: TCP
       name: nginx
+    {{- end }}
   selector:
     {{- include "nginx.selectorLabels" . | nindent 4 }}
