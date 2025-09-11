@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.1.7 (2025-09-09)
+## 0.1.8 (2025-09-11)
 
-* Update docker.io/mongo:8.0.13 Docker digest to c750922 ([#57](https://github.com/CloudPirates-io/helm-charts/pull/57))
+* [mongo] chore(deps): update docker.io/mongo:8.0.13 Docker digest to 7acbcf3 ([#77](https://github.com/CloudPirates-io/helm-charts/pull/77))

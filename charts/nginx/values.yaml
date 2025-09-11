@@ -29,11 +29,40 @@ image:
 ## @param replicaCount Number of Nginx replicas to deploy
 replicaCount: 1
 
+## @section Container port configuration
+## @param containerPorts Array of container ports
+## Example:
+## containerPorts:
+##   - name: http
+##     containerPort: 80
+##     protocol: TCP
+##   - name: https
+##     containerPort: 443
+##     protocol: TCP
+containerPorts:
+  - name: http
+    containerPort: 80
+    protocol: TCP
+
 service:
   ## @param service.type Kubernetes service type
   type: ClusterIP
-  ## @param service.port Nginx service port (use 8080 to avoid permission issues with non-root user)
-  port: 80
+  ## @param service.ports Array of service ports
+  ## Example:
+  ## ports:
+  ##   - port: 80
+  ##     targetPort: http
+  ##     protocol: TCP
+  ##     name: http
+  ##   - port: 443
+  ##     targetPort: https
+  ##     protocol: TCP
+  ##     name: https
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
 
 ## @section Ingress parameters
 ingress:
@@ -70,6 +99,55 @@ autoscaling:
   maxReplicas: ""
   targetCPUUtilizationPercentage: ""
   targetMemoryUtilizationPercentage: ""
+
+## Get the server static content from a git repository
+cloneStaticSiteFromGit:
+  ## @param cloneStaticSiteFromGit.enabled Get the server static content from a Git repository
+  ##
+  enabled: false
+
+  ## Git image settings
+  ##
+  image:
+    registry: docker.io
+    repository: alpine/git
+    tag: v2.49.1
+    digest: "sha256:9c9c6debba3eac25c9230db4bbd1e17d0c27efffdb93e502a47f6f447ab90ac4"
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+
+  ## @param cloneStaticSiteFromGit.repository Git Repository to clone static content from
+  ##
+  repository: ""
+
+  ## @param cloneStaticSiteFromGit.branch Git branch to checkout
+  ##
+  branch: "main"
+
+  ## @param cloneStaticSiteFromGit.interval Interval (seconds) for sidecar to pull from Git repository
+  ##
+  interval: 60
+
+  ## Additional configuration for git-clone-repository initContainer
+  gitClone:
+    command: []
+    args: []
+
+  ## Additional configuration for git-repo-syncer sidecar container
+  gitSync:
+    command: []
+    args: []
+    resourcesPreset: "nano"
+    resources: {}
+
+  ## @param cloneStaticSiteFromGit.extraEnvVars Additional environment variables for Git containers
+  extraEnvVars: []
+
+  ## @param cloneStaticSiteFromGit.extraEnvVarsSecret Secret with extra environment variables
+  extraEnvVarsSecret: ""
+
+  ## @param cloneStaticSiteFromGit.extraVolumeMounts Add extra volume mounts for Git containers (e.g. SSH keys)
+  extraVolumeMounts: []
 
 ## @param resources Resource limits and requests for Nginx pod
 resources:
@@ -109,6 +187,10 @@ podSecurityContext:
 livenessProbe:
   ## @param livenessProbe.enabled Enable liveness probe
   enabled: true
+  ## @param livenessProbe.type Probe type (tcpSocket or httpGet)
+  type: tcpSocket
+  ## @param livenessProbe.path Path for HTTP probe (only used when type is httpGet)
+  path: /
   ## @param livenessProbe.initialDelaySeconds Initial delay before starting probes
   initialDelaySeconds: 30
   ## @param livenessProbe.periodSeconds How often to perform the probe
@@ -123,6 +205,10 @@ livenessProbe:
 readinessProbe:
   ## @param readinessProbe.enabled Enable readiness probe
   enabled: true
+  ## @param readinessProbe.type Probe type (tcpSocket or httpGet)
+  type: tcpSocket
+  ## @param readinessProbe.path Path for HTTP probe (only used when type is httpGet)
+  path: /
   ## @param readinessProbe.initialDelaySeconds Initial delay before starting probes
   initialDelaySeconds: 5
   ## @param readinessProbe.periodSeconds How often to perform the probe

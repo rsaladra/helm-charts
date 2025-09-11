@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.1.1 (2025-09-09)
+## 0.1.2 (2025-09-10)
 
-* Update docker.io/memcached:1.6.39 Docker digest to 4404f32 ([#53](https://github.com/CloudPirates-io/helm-charts/pull/53))
+* [memcached] chore(deps): update docker.io/memcached:1.6.39 Docker digest to 68c1185 ([#69](https://github.com/CloudPirates-io/helm-charts/pull/69))
 
 ## 0.1.0 (2025-09-02)
 

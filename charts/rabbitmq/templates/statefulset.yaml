@@ -28,11 +28,17 @@ spec:
       {{- if .Values.podSecurityContext }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-        {{- end }}
-      {{- if .Values.auth.enabled }}
+      {{- end }}
+      {{- if or .Values.auth.enabled .Values.installPlugins }}
       initContainers:
+        {{- if .Values.auth.enabled }}
         - name: init-erlang-cookie
-          image: busybox
+          image: "{{ .Values.initContainer.image.registry | default .Values.global.imageRegistry }}/{{ .Values.initContainer.image.repository }}:{{ .Values.initContainer.image.tag }}"
+          imagePullPolicy: "{{ .Values.initContainer.image.pullPolicy }}"
+          {{- if .Values.initContainer.securityContext }}
+          securityContext:
+            {{- toYaml .Values.initContainer.securityContext | nindent 12 }}
+          {{- end }}
           command:
             - sh
             - -c
@@ -49,6 +55,34 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /var/lib/rabbitmq
+        {{- end }}
+        {{- if .Values.installPlugins }}
+        - name: download-plugins
+          image: "{{ .Values.initContainer.image.registry | default .Values.global.imageRegistry }}/{{ .Values.initContainer.image.repository }}:{{ .Values.initContainer.image.tag }}"
+          imagePullPolicy: "{{ .Values.initContainer.image.pullPolicy }}"
+          {{- if .Values.initContainer.securityContext }}
+          securityContext:
+            {{- toYaml .Values.initContainer.securityContext | nindent 12 }}
+          {{- end }}
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /var/lib/rabbitmq/plugins /opt/rabbitmq/plugins
+              {{- range .Values.installPlugins }}
+              echo "Downloading plugin from {{ . }}"
+              wget -O /var/lib/rabbitmq/plugins/$(basename {{ . }}) {{ . }}
+              {{- end }}
+              echo "Copying plugins to RabbitMQ plugin directory"
+              cp /var/lib/rabbitmq/plugins/*.ez /opt/rabbitmq/plugins/
+              chown -R {{ .Values.securityContext.runAsUser | default 999 }}:{{ .Values.securityContext.runAsGroup | default 999 }} /var/lib/rabbitmq/plugins /opt/rabbitmq/plugins
+              chmod -R 755 /var/lib/rabbitmq/plugins /opt/rabbitmq/plugins
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/rabbitmq
+            - name: plugins
+              mountPath: /opt/rabbitmq/plugins
+        {{- end }}
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
@@ -140,6 +174,10 @@ spec:
               mountPath: /etc/rabbitmq
             - name: logs
               mountPath: /var/log/rabbitmq
+            {{- if .Values.installPlugins }}
+            - name: plugins
+              mountPath: /opt/rabbitmq/plugins
+            {{- end }}
             {{- if .Values.extraVolumeMounts }}
             {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
             {{- end }}
@@ -148,6 +186,10 @@ spec:
           emptyDir: {}
         {{- if not .Values.persistence.enabled }}
         - name: data
+          emptyDir: {}
+        {{- end }}
+        {{- if .Values.installPlugins }}
+        - name: plugins
           emptyDir: {}
         {{- end }}
         - name: config

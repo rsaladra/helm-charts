@@ -92,3 +92,13 @@ Return the proper Docker Image Registry Secret Names
         {{- default "default" -}}
     {{- end -}}
 {{- end -}}
+
+{{/*
+Extract plugin name from plugin URL
+*/}}
+{{- define "rabbitmq.pluginName" -}}
+{{- $url := . -}}
+{{- $filename := (regexReplaceAll ".*/" $url "") -}}
+{{- $filename = (regexReplaceAll "-[0-9]+\\.[0-9]+\\.[0-9]+.*" $filename "") -}}
+{{- $filename -}}
+{{- end -}}

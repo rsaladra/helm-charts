@@ -24,7 +24,32 @@
         "digest"
       ],
       "matchPackageNames": [
-        "/.*/"
+        "/^docker\\.io\\/.+/"
+      ],
+      "labels": [
+        "dependencies",
+        "renovate"
+      ],
+      "commitMessagePrefix": "[{{{ replace \"docker.io/\" \"\" packageName }}}]",
+      "commitMessageAction": "chore(deps): update"
+    },
+    {
+      "matchManagers": [
+        "helm-values"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest"
+      ],
+      "labels": [
+        "dependencies",
+        "renovate"
+      ],
+      "commitMessagePrefix": "[{{{ packageName }}}]",
+      "commitMessageAction": "chore(deps): update",
+      "matchPackageNames": [
+        "!/^docker\\.io\\/.+/"
       ]
     },
     {

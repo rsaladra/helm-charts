@@ -43,6 +43,7 @@ The command removes all the Kubernetes components associated with the chart and 
 This Helm chart is cryptographically signed with Cosign to ensure authenticity and prevent tampering.
 
 **Public Key:**
+
 ```
 -----BEGIN PUBLIC KEY-----
 MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7BgqFgKdPtHdXz6OfYBklYwJgGWQ
@@ -138,6 +139,12 @@ The following table lists the configurable parameters of the RabbitMQ chart and 
 | -------------------------- | --------------------------------- | ------- |
 | `managementPlugin.enabled` | Enable RabbitMQ management plugin | `true`  |
 
+## Plugin configuration
+
+| Parameter        | Description                                                                                                                                       | Default |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `installPlugins` | Additional 3rd party RabbitMQ plugins to download and enable | `[]`    |
+
 ### Metrics configuration
 
 | Parameter                              | Description                                                                                                                 | Default |
@@ -188,15 +195,21 @@ The following table lists the configurable parameters of the RabbitMQ chart and 
 
 ### Security Context
 
-| Parameter                                  | Description                                       | Default   |
-| ------------------------------------------ | ------------------------------------------------- | --------- |
-| `podSecurityContext.fsGroup`               | Group ID for the volumes of the pod               | `999`     |
-| `securityContext.allowPrivilegeEscalation` | Enable container privilege escalation             | `false`   |
-| `securityContext.runAsNonRoot`             | Configure the container to run as a non-root user | `true`    |
-| `securityContext.runAsUser`                | User ID for the RabbitMQ container                | `999`     |
-| `securityContext.runAsGroup`               | Group ID for the RabbitMQ container               | `999`     |
-| `securityContext.readOnlyRootFilesystem`   | Mount container root filesystem as read-only      | `true`    |
-| `securityContext.capabilities.drop`        | Linux capabilities to be dropped                  | `["ALL"]` |
+| Parameter                                                | Description                                       | Default   |
+| -------------------------------------------------------- | ------------------------------------------------- | --------- |
+| `podSecurityContext.fsGroup`                             | Group ID for the volumes of the pod               | `999`     |
+| `securityContext.allowPrivilegeEscalation`               | Enable container privilege escalation             | `false`   |
+| `securityContext.runAsNonRoot`                           | Configure the container to run as a non-root user | `true`    |
+| `securityContext.runAsUser`                              | User ID for the RabbitMQ container                | `999`     |
+| `securityContext.runAsGroup`                             | Group ID for the RabbitMQ container               | `999`     |
+| `securityContext.readOnlyRootFilesystem`                 | Mount container root filesystem as read-only      | `true`    |
+| `securityContext.capabilities.drop`                      | Linux capabilities to be dropped                  | `["ALL"]` |
+| `initContainer.securityContext.allowPrivilegeEscalation` | Enable container privilege escalation             | `false`   |
+| `initContainer.securityContext.runAsNonRoot`             | Configure the container to run as a non-root user | `true`    |
+| `initContainer.securityContext.runAsUser`                | User ID for the RabbitMQ container                | `999`     |
+| `initContainer.securityContext.runAsGroup`               | Group ID for the RabbitMQ container               | `999`     |
+| `initContainer.securityContext.readOnlyRootFilesystem`   | Mount container root filesystem as read-only      | `true`    |
+| `initContainer.securityContext.capabilities.drop`        | Linux capabilities to be dropped                  | `["ALL"]` |
 
 ### Liveness and readiness probes
 
@@ -259,7 +272,6 @@ extraObjects:
 ```
 
 All objects in `extraObjects` will be rendered and deployed with the release. You can use any valid Kubernetes manifest, and reference Helm values or built-in objects as needed (just remember to quote template expressions).
-
 
 ## Examples
 
@@ -346,15 +358,15 @@ persistence:
 affinity:
   podAntiAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
-    - weight: 100
-      podAffinityTerm:
-        labelSelector:
-          matchExpressions:
-          - key: app.kubernetes.io/name
-            operator: In
-            values:
-            - rabbitmq
-        topologyKey: kubernetes.io/hostname
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - rabbitmq
+          topologyKey: kubernetes.io/hostname
 ```
 
 ### Using Existing Secret for Authentication
@@ -405,6 +417,7 @@ kubectl port-forward service/my-rabbitmq 15672:15672
 ### Access Management UI
 
 Open http://localhost:15672 in your browser and login with:
+
 - **Username**: `admin` (or configured username)
 - **Password**: Get from secret or configured value
 
@@ -432,17 +445,20 @@ kubectl get secret my-rabbitmq -o jsonpath="{.data.password}" | base64 --decode
 ### Common Issues
 
 1. **Pod fails to start with permission errors**
+
    - Ensure your storage class supports the required access modes
    - Check if security contexts are compatible with your cluster policies
    - Verify the RabbitMQ data directory permissions
 
 2. **Cannot connect to RabbitMQ**
+
    - Verify the service is running: `kubectl get svc`
    - Check if authentication is properly configured
    - Ensure firewall rules allow access to ports 5672 (AMQP) and 15672 (Management UI)
    - Check RabbitMQ logs: `kubectl logs <pod-name>`
 
 3. **Clustering issues**
+
    - Verify all nodes can reach each other
    - Check Erlang cookie consistency across cluster nodes
    - Ensure proper DNS resolution for pod hostnames

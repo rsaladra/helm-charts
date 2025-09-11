@@ -11,6 +11,11 @@
 {{- if .Values.additionalPlugins }}
 {{ $plugins = concat $plugins .Values.additionalPlugins }}
 {{- end }}
+{{- if .Values.installPlugins }}
+{{- range .Values.installPlugins }}
+{{ $plugins = append $plugins (include "rabbitmq.pluginName" .) }}
+{{- end }}
+{{- end }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -32,7 +37,7 @@ data:
     # Management plugin options
     management.tcp.port = {{ .Values.service.managementPort }}
     {{- end }}
-    
+
     {{- if .Values.peerDiscoveryK8sPlugin.enabled }}
     # Clustering with K8s peer discovery plugin
     cluster_name = {{ include "rabbitmq.fullname" . }}-cluster
@@ -53,12 +58,12 @@ data:
     # Prometheus metrics
     prometheus.tcp.port = {{ .Values.metrics.port }}
     {{- end }}
-    
+
     {{- if and .Values.config.extraConfiguration (ne .Values.config.extraConfiguration "") }}
     # Extra configuration
 {{ .Values.config.extraConfiguration | indent 4 }}
     {{- end }}
-    
+
   {{- if and .Values.config.advancedConfiguration (ne .Values.config.advancedConfiguration "") }}
   advanced.config: |
 {{ .Values.config.advancedConfiguration | indent 4 }}

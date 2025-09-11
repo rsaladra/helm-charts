@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.3 (2025-09-09)
+## 0.2.5 (2025-09-10)
 
-* Update docker.io/postgres:17.6 Docker digest to 29574e2 ([#58](https://github.com/CloudPirates-io/helm-charts/pull/58))
+* [postgres] chore(deps): update docker.io/postgres:17.6 Docker digest to feff5b2 ([#76](https://github.com/CloudPirates-io/helm-charts/pull/76))
 
 ## <small>0.2.1 (2025-08-26)</small>
 

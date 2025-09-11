@@ -49,6 +49,63 @@ To verify the helm chart before installation, copy the public key to the file `c
 cosign verify --key cosign.pub registry-1.docker.io/cloudpirates/nginx:<version>
 ```
 
+## Common Use Cases
+
+### Custom Container Port (e.g., 8080)
+
+To run Nginx on port 8080 with matching health checks:
+
+```yaml
+# my-values.yaml
+containerPort: 8080
+serverConfig: |
+  server {
+    listen 0.0.0.0:8080;
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+    
+    location / {
+      try_files $uri $uri/ /index.html;
+    }
+  }
+livenessProbe:
+  type: httpGet
+  path: /
+readinessProbe:
+  type: httpGet
+  path: /
+```
+
+Then install with:
+```bash
+helm install my-nginx oci://registry-1.docker.io/cloudpirates/nginx -f my-values.yaml
+```
+
+### Multiple Ports Configuration
+
+For advanced setups with multiple ports:
+
+```yaml
+# advanced-values.yaml
+containerPorts:
+  - name: http
+    containerPort: 80
+    protocol: TCP
+  - name: https
+    containerPort: 443
+    protocol: TCP
+service:
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 443
+      targetPort: https
+      protocol: TCP
+      name: https
+```
+
 ## Configuration
 
 The following table lists the configurable parameters of the Nginx chart and their default values.
@@ -89,12 +146,55 @@ The following table lists the configurable parameters of the Nginx chart and the
 | `streamServerConfig`  | Custom stream server block to be added to NGINX config    | `""`    |
 
 
+### Container Port Parameters
+
+| Parameter         | Description                                                       | Default |
+| ----------------- | ----------------------------------------------------------------- | ------- |
+| `containerPort`   | Nginx container port                                              | `80`    |
+| `containerPorts`  | Array of container ports (advanced configuration) - see examples | `[]`    |
+
+#### Container Ports Examples
+
+**Single custom port:**
+```yaml
+containerPort: 8080
+```
+
+**Multiple ports (advanced):**
+```yaml
+containerPorts:
+  - name: http
+    containerPort: 80
+    protocol: TCP
+  - name: https
+    containerPort: 443
+    protocol: TCP
+```
+
+
 ### Service Parameters
 
-| Parameter        | Description              | Default     |
-| ---------------- | ------------------------ | ----------- |
-| `service.type`   | Nginx service type       | `ClusterIP` |
-| `service.port`   | Nginx service port       | `8080`      |
+| Parameter        | Description                                                | Default     |
+| ---------------- | ---------------------------------------------------------- | ----------- |
+| `service.type`   | Nginx service type                                         | `ClusterIP` |
+| `service.port`   | Nginx service port                                         | `80`        |
+| `service.ports`  | Array of service ports (advanced configuration) - see examples | `[]`    |
+
+#### Service Ports Examples
+
+**Multiple service ports (advanced):**
+```yaml
+service:
+  ports:
+    - port: 80
+      targetPort: nginx
+      protocol: TCP
+      name: http
+    - port: 443
+      targetPort: https
+      protocol: TCP
+      name: https
+```
 
 
 ### Security Context Parameters
@@ -116,20 +216,50 @@ The following table lists the configurable parameters of the Nginx chart and the
 
 ### Health Check Parameters
 
-| Parameter                            | Description                                   | Default |
-| ------------------------------------ | --------------------------------------------- | ------- |
-| `livenessProbe.enabled`              | Enable liveness probe                         | `true`  |
-| `livenessProbe.initialDelaySeconds`  | Initial delay before starting probes          | `30`    |
-| `livenessProbe.periodSeconds`        | How often to perform the probe                | `10`    |
-| `livenessProbe.timeoutSeconds`       | Timeout for each probe attempt                | `5`     |
-| `livenessProbe.failureThreshold`     | Number of failures before pod is restarted    | `3`     |
-| `livenessProbe.successThreshold`     | Number of successes to mark probe as successful| `1`    |
-| `readinessProbe.enabled`             | Enable readiness probe                        | `true`  |
-| `readinessProbe.initialDelaySeconds` | Initial delay before starting probes          | `5`     |
-| `readinessProbe.periodSeconds`       | How often to perform the probe                | `5`     |
-| `readinessProbe.timeoutSeconds`      | Timeout for each probe attempt                | `5`     |
-| `readinessProbe.failureThreshold`    | Number of failures before pod is marked unready| `3`    |
-| `readinessProbe.successThreshold`    | Number of successes to mark probe as successful| `1`    |
+| Parameter                            | Description                                   | Default     |
+| ------------------------------------ | --------------------------------------------- | ----------- |
+| `livenessProbe.enabled`              | Enable liveness probe                         | `true`      |
+| `livenessProbe.type`                 | Probe type (tcpSocket or httpGet)             | `tcpSocket` |
+| `livenessProbe.path`                 | Path for HTTP probe (only used when type is httpGet) | `/`     |
+| `livenessProbe.initialDelaySeconds`  | Initial delay before starting probes          | `30`        |
+| `livenessProbe.periodSeconds`        | How often to perform the probe                | `10`        |
+| `livenessProbe.timeoutSeconds`       | Timeout for each probe attempt                | `5`         |
+| `livenessProbe.failureThreshold`     | Number of failures before pod is restarted    | `3`         |
+| `livenessProbe.successThreshold`     | Number of successes to mark probe as successful| `1`        |
+| `readinessProbe.enabled`             | Enable readiness probe                        | `true`      |
+| `readinessProbe.type`                | Probe type (tcpSocket or httpGet)             | `tcpSocket` |
+| `readinessProbe.path`                | Path for HTTP probe (only used when type is httpGet) | `/`     |
+| `readinessProbe.initialDelaySeconds` | Initial delay before starting probes          | `5`         |
+| `readinessProbe.periodSeconds`       | How often to perform the probe                | `5`         |
+| `readinessProbe.timeoutSeconds`      | Timeout for each probe attempt                | `5`         |
+| `readinessProbe.failureThreshold`    | Number of failures before pod is marked unready| `3`        |
+| `readinessProbe.successThreshold`    | Number of successes to mark probe as successful| `1`        |
+
+#### Health Check Examples
+
+**HTTP-based probes for custom port 8080:**
+```yaml
+containerPort: 8080
+livenessProbe:
+  enabled: true
+  type: httpGet
+  path: /health
+readinessProbe:
+  enabled: true
+  type: httpGet
+  path: /ready
+```
+
+**TCP-based probes (default):**
+```yaml
+containerPort: 8080
+livenessProbe:
+  enabled: true
+  type: tcpSocket
+readinessProbe:
+  enabled: true
+  type: tcpSocket
+```
 
 
 ### Service Account Parameters

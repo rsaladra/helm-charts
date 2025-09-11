@@ -328,6 +328,14 @@
         "type": "string"
       }
     },
+    "installPlugins": {
+      "type": "array",
+      "title": "Install Plugins",
+      "description": "Additional 3rd party RabbitMQ plugins to download and enable",
+      "items": {
+        "type": "string"
+      }
+    },
     "persistence": {
       "type": "object",
       "title": "Persistence Configuration",
@@ -546,6 +554,55 @@
       "type": "object",
       "title": "Container Security Context",
       "description": "Security context for the RabbitMQ container",
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "type": "boolean",
+          "title": "Allow Privilege Escalation",
+          "description": "Enable container privilege escalation"
+        },
+        "runAsNonRoot": {
+          "type": "boolean",
+          "title": "Run As Non-Root",
+          "description": "Configure the container to run as a non-root user"
+        },
+        "runAsUser": {
+          "type": "integer",
+          "title": "Run As User",
+          "description": "User ID for the RabbitMQ container",
+          "minimum": 0
+        },
+        "runAsGroup": {
+          "type": "integer",
+          "title": "Run As Group",
+          "description": "Group ID for the RabbitMQ container",
+          "minimum": 0
+        },
+        "readOnlyRootFilesystem": {
+          "type": "boolean",
+          "title": "Read-Only Root Filesystem",
+          "description": "Mount container root filesystem as read-only"
+        },
+        "capabilities": {
+          "type": "object",
+          "title": "Capabilities",
+          "description": "Linux capabilities configuration",
+          "properties": {
+            "drop": {
+              "type": "array",
+              "title": "Drop Capabilities",
+              "description": "Linux capabilities to be dropped",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "initContainer.securityContext": {
+      "type": "object",
+      "title": "Init Container Security Context",
+      "description": "Security context for the init container",
       "properties": {
         "allowPrivilegeEscalation": {
           "type": "boolean",
