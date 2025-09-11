@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "zookeeper.fullname" . }}-config
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "zookeeper.labels" . | nindent 4 }}
+data:
+  zoo.cfg: |
+    tickTime={{ .Values.zookeeperConfig.tickTime | default 2000 }}
+    dataDir={{ .Values.zookeeperConfig.dataDir | default "/var/lib/zookeeper/data" }}
+    initLimit={{ .Values.zookeeperConfig.initLimit | default 10 }}
+    syncLimit={{ .Values.zookeeperConfig.syncLimit | default 5 }}
+    clientPort={{ .Values.service.ports.client | default 2181 }}
+    electionPortBindRetry={{ .Values.zookeeperConfig.electionPortBindRetry | default 10 }}
+    maxClientCnxns={{ .Values.zookeeperConfig.maxClientCnxns | default 60 }}
+    #standaloneEnabled={{ .Values.zookeeperConfig.standaloneEnabled | default "false" }}
+    adminServerEnabled={{ .Values.zookeeperConfig.adminServerEnabled | default "false" }}
+    commandsWhitelist={{ .Values.zookeeperConfig.commandsWhitelist | default "srvr" }}
+    autopurge.purgeInterval={{ .Values.zookeeperConfig.autopurge.purgeInterval | default 24 }}
+    autopurge.snapRetainCount={{ .Values.zookeeperConfig.autopurge.snapRetainCount | default 3 }}
+    quorumListenOnAllIPs=true
+    {{- if .Values.metrics.enabled }}
+    metricsProvider.className=org.apache.zookeeper.metrics.prometheus.PrometheusMetricsProvider
+    metricsProvider.httpHost=0.0.0.0
+    metricsProvider.httpPort={{ .Values.metrics.service.port | default 7000 }}
+    metricsProvider.exportJvmInfo=true
+    {{- end }}
+    {{- /* Add a line for each server in the ensemble */}}
+    {{- include "zookeeper.servers" . | nindent 4 }}
