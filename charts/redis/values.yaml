@@ -28,10 +28,12 @@ image:
 
 ## @section Redis Architecture
 ## @param architecture Redis architecture. Allowed values: standalone or replication
-architecture: standalone
+architecture: replication
 
-## @param replicaCount Number of Redis replicas to deploy (only when architecture=replication)
-replicaCount: 1
+## @param replicaCount Number of Redis instances to deploy (only when architecture=replication)
+## When using Sentinel, this is the total number of Redis instances (including the initial master)
+## For example: replicaCount: 3 creates 3 Redis instances where Sentinel manages master/replica roles
+replicaCount: 3
 
 service:
   ## @param service.type Kubernetes service type
@@ -151,9 +153,11 @@ extraVolumeMounts: []
 
 ## @section Redis Sentinel configuration
 ## This section configures Redis Sentinel for high availability in replication mode
+## When enabled, Redis instances use dynamic master/replica role assignment managed by Sentinel
 sentinel:
   ## @param sentinel.enabled Enable Redis Sentinel for high availability
-  enabled: false
+  ## IMPORTANT: When enabled, applications should use Sentinel-aware clients to discover the current master
+  enabled: true
   ## @param sentinel.image.repository Redis Sentinel image repository
   image:
     repository: redis

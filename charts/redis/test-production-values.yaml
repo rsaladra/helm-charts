@@ -1,7 +1,7 @@
 # Production-like Redis deployment with high availability
 architecture: replication
 
-# Deploy 3 Redis replicas (plus 1 master = 4 total Redis instances)
+# Deploy 3 Redis instances total (Sentinel manages master/replica roles dynamically)
 replicaCount: 3
 
 # Enable Sentinel for automatic failover
@@ -74,6 +74,7 @@ containerSecurityContext:
 podSecurityContext:
   fsGroup: 999
   runAsNonRoot: true
+  runAsUser: 999
 
 # Monitoring and health checks optimized for production
 livenessProbe:

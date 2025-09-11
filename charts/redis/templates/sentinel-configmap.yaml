@@ -17,8 +17,8 @@ data:
     port {{ .Values.sentinel.port }}
     bind 0.0.0.0
     
-    # Monitor the master
-    sentinel monitor {{ .Values.sentinel.masterName }} {{ include "redis.fullname" . }}-master {{ .Values.service.port }} {{ .Values.sentinel.quorum }}
+    # Monitor the master (initially pod-0)
+    sentinel monitor {{ .Values.sentinel.masterName }} {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} {{ .Values.service.port }} {{ .Values.sentinel.quorum }}
     
     # Master down after milliseconds
     sentinel down-after-milliseconds {{ .Values.sentinel.masterName }} {{ .Values.sentinel.downAfterMilliseconds }}

@@ -37,15 +37,15 @@ spec:
             - /bin/sh
             - -c
             - |
-              echo "Waiting for Redis master to be ready..."
+              echo "Waiting for Redis pod-0 to be ready..."
               {{- if .Values.auth.enabled }}
-              until redis-cli -h {{ include "redis.fullname" . }}-master -p {{ .Values.service.port }} -a "${REDIS_PASSWORD}" ping | grep -q "PONG"; do
-                echo "Master not ready, waiting..."
+              until redis-cli -h {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} -p {{ .Values.service.port }} -a "${REDIS_PASSWORD}" ping | grep -q "PONG"; do
+                echo "Redis pod-0 not ready, waiting..."
                 sleep 5
               done
               {{- else }}
-              until redis-cli -h {{ include "redis.fullname" . }}-master -p {{ .Values.service.port }} ping | grep -q "PONG"; do
-                echo "Master not ready, waiting..."
+              until redis-cli -h {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} -p {{ .Values.service.port }} ping | grep -q "PONG"; do
+                echo "Redis pod-0 not ready, waiting..."
                 sleep 5
               done
               {{- end }}
@@ -67,9 +67,9 @@ spec:
             - /bin/sh
             - -c
             - |
-              # Get master IP dynamically
-              MASTER_IP=$(getent hosts {{ include "redis.fullname" . }}-master | awk '{print $1}')
-              echo "Resolved master IP: $MASTER_IP"
+              # Get Redis pod-0 IP dynamically
+              MASTER_IP=$(getent hosts {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} | awk '{print $1}')
+              echo "Resolved Redis pod-0 IP: $MASTER_IP"
               
               # Create dynamic Sentinel config
               cat > /tmp/sentinel.conf << 'EOF'
