@@ -1,21 +1,6 @@
-suite: Zookeeper default values
+suite: Zookeeper specific tests
 
 tests:
-  - it: should respect global.imagePullSecrets
-    template: statefulset.yaml
-    set:
-      global:
-        imagePullSecrets:
-          - my-secret-1
-          - my-secret-2
-    asserts:
-      - equal:
-          path: spec.template.spec.imagePullSecrets[0].name
-          value: my-secret-1
-      - equal:
-          path: spec.template.spec.imagePullSecrets[1].name
-          value: my-secret-2
-
   - it: should set the correct replica count
     template: statefulset.yaml
     asserts:
