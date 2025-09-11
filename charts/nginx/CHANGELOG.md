@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.1.5 (2025-09-10)
+## 0.1.6 (2025-09-11)
 
-* [nginx] Implement static website git clone ([#71](https://github.com/CloudPirates-io/helm-charts/pull/71))
+* [nginx]: Implement fix ([#79](https://github.com/CloudPirates-io/helm-charts/pull/79))
 
 ## <small>0.1.3 (2025-09-08)</small>
 
