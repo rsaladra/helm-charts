@@ -29,11 +29,40 @@ image:
 ## @param replicaCount Number of Nginx replicas to deploy
 replicaCount: 1
 
+## @section Container port configuration
+## @param containerPorts Array of container ports
+## Example:
+## containerPorts:
+##   - name: http
+##     containerPort: 80
+##     protocol: TCP
+##   - name: https
+##     containerPort: 443
+##     protocol: TCP
+containerPorts:
+  - name: http
+    containerPort: 80
+    protocol: TCP
+
 service:
   ## @param service.type Kubernetes service type
   type: ClusterIP
-  ## @param service.port Nginx service port (use 8080 to avoid permission issues with non-root user)
-  port: 80
+  ## @param service.ports Array of service ports
+  ## Example:
+  ## ports:
+  ##   - port: 80
+  ##     targetPort: http
+  ##     protocol: TCP
+  ##     name: http
+  ##   - port: 443
+  ##     targetPort: https
+  ##     protocol: TCP
+  ##     name: https
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
 
 ## @section Ingress parameters
 ingress:
@@ -75,7 +104,7 @@ autoscaling:
 cloneStaticSiteFromGit:
   ## @param cloneStaticSiteFromGit.enabled Get the server static content from a Git repository
   ##
-  enabled: true
+  enabled: false
 
   ## Git image settings
   ##
@@ -158,6 +187,10 @@ podSecurityContext:
 livenessProbe:
   ## @param livenessProbe.enabled Enable liveness probe
   enabled: true
+  ## @param livenessProbe.type Probe type (tcpSocket or httpGet)
+  type: tcpSocket
+  ## @param livenessProbe.path Path for HTTP probe (only used when type is httpGet)
+  path: /
   ## @param livenessProbe.initialDelaySeconds Initial delay before starting probes
   initialDelaySeconds: 30
   ## @param livenessProbe.periodSeconds How often to perform the probe
@@ -172,6 +205,10 @@ livenessProbe:
 readinessProbe:
   ## @param readinessProbe.enabled Enable readiness probe
   enabled: true
+  ## @param readinessProbe.type Probe type (tcpSocket or httpGet)
+  type: tcpSocket
+  ## @param readinessProbe.path Path for HTTP probe (only used when type is httpGet)
+  path: /
   ## @param readinessProbe.initialDelaySeconds Initial delay before starting probes
   initialDelaySeconds: 5
   ## @param readinessProbe.periodSeconds How often to perform the probe
