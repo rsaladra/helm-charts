@@ -37,24 +37,76 @@ zkCli.sh -server my-zookeeper:2181
 
 ## Configuration
 
-| Parameter                   | Description                                 | Default                     |
-|-----------------------------|---------------------------------------------|-----------------------------|
-| `image.registry`            | ZooKeeper image registry                    | `docker.io`                 |
-| `image.repository`          | ZooKeeper image repository                  | `zookeeper`                 |
-| `image.tag`                 | ZooKeeper image tag                         | `3.9.3@sha256:9980cafbff742c15b339811ae829faa61c69154606ec504223560da9d31acd43`|
-| `image.pullPolicy`          | Image pull policy                           | `IfNotPresent`              |
-| `replicaCount`              | Number of ZooKeeper nodes                   | `3`                         |
-| `service.type`              | Kubernetes service type                     | `ClusterIP`                 |
-| `service.ports.client`      | ZooKeeper client port                       | `2181`                      |
-| `service.ports.quorum`      | ZooKeeper quorum port                       | `2888`                      |
-| `service.ports.leaderElection` | ZooKeeper leader election port           | `3888`                      |
-| `service.ports.admin`       | ZooKeeper admin port                        | `8080`                      |
-| `persistence.enabled`       | Enable persistent storage                   | `true`                      |
-| `persistence.size`          | Size of persistent volume                   | `8Gi`                       |
-| `persistence.mountPath`     | Mount path for ZooKeeper data               | `/data/zookeeper`           |
-| `resources.limits.memory`   | Memory limit                                | `512Mi`                     |
-| `resources.requests.cpu`    | CPU request                                 | `100m`                      |
-| `resources.requests.memory` | Memory request                              | `256Mi`                     |
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `global.imageRegistry` | Global Docker image registry | `""` |
+| `global.imagePullSecrets` | Global Docker registry secret names (array) | `[]` |
+| `nameOverride` | String to partially override fullname | `""` |
+| `fullnameOverride` | String to fully override fullname | `""` |
+| `commonLabels` | Labels to add to all deployed objects | `{}` |
+| `commonAnnotations` | Annotations to add to all deployed objects | `{}` |
+| `image.registry` | ZooKeeper image registry | `docker.io` |
+| `image.repository` | ZooKeeper image repository | `zookeeper` |
+| `image.tag` | ZooKeeper image tag | `3.9.3@sha256:9980cafbff742c15b339811ae829faa61c69154606ec504223560da9d31acd43` |
+| `image.imagePullPolicy` | ZooKeeper image pull policy | `Always` |
+| `replicaCount` | Number of ZooKeeper replicas to deploy | `3` |
+| `zookeeperConfig.tickTime` | ZooKeeper tick time | `2000` |
+| `zookeeperConfig.dataDir` | ZooKeeper data directory | `/var/lib/zookeeper/data` |
+| `zookeeperConfig.initLimit` | ZooKeeper init limit | `10` |
+| `zookeeperConfig.syncLimit` | ZooKeeper sync limit | `5` |
+| `zookeeperConfig.electionPortBindRetry` | ZooKeeper election port bind retry | `10` |
+| `zookeeperConfig.maxClientCnxns` | ZooKeeper max client connections | `60` |
+| `zookeeperConfig.standaloneEnabled` | Enable standalone mode | `"false"` |
+| `zookeeperConfig.adminServerEnabled` | Enable admin server | `"false"` |
+| `zookeeperConfig.commandsWhitelist` | 4-letter word commands whitelist | `srvr` |
+| `zookeeperConfig.autopurge.purgeInterval` | Autopurge purge interval (hours) | `24` |
+| `zookeeperConfig.autopurge.snapRetainCount` | Autopurge snapshot retain count | `3` |
+| `metrics.enabled` | Enable Prometheus metrics exporter | `true` |
+| `metrics.service.type` | Metrics service type | `ClusterIP` |
+| `metrics.service.ports.port` | Metrics service port | `7000` |
+| `containerSecurityContext.runAsUser` | Set container's Security Context runAsUser | `1000` |
+| `containerSecurityContext.runAsNonRoot` | Set container's Security Context runAsNonRoot | `true` |
+| `containerSecurityContext.allowPrivilegeEscalation` | Set container's privilege escalation | `false` |
+| `podSecurityContext.fsGroup` | Group ID for the volumes of the pod | `1000` |
+| `service.type` | Kubernetes service type | `ClusterIP` |
+| `service.ports.client` | ZooKeeper client service port | `2181` |
+| `service.ports.quorum` | ZooKeeper quorum service port | `2888` |
+| `service.ports.leaderElection` | ZooKeeper leader election service port | `3888` |
+| `service.ports.admin` | ZooKeeper admin service port | `8080` |
+| `resources` | Resource requests/limits | `{}` (user-defined) |
+| `nodeSelector` | Node selector for pod assignment | `{}` |
+| `priorityClassName` | Priority class name for pod eviction | `""` |
+| `tolerations` | Tolerations for pod assignment | `[]` |
+| `affinity` | Affinity rules for pod assignment | `{}` |
+| `persistence.enabled` | Enable persistence using PVC | `true` |
+| `persistence.storageClass` | Persistent Volume storage class | `""` |
+| `persistence.annotations` | Persistent Volume Claim annotations | `{}` |
+| `persistence.size` | Persistent Volume size | `8Gi` |
+| `persistence.accessModes` | Persistent Volume access modes | `[ReadWriteOnce]` |
+| `persistence.existingClaim` | Name of existing PVC to use | `""` |
+| `persistence.mountPath` | Path to mount the data volume | `/var/lib/zookeeper/data` |
+| `livenessProbe.enabled` | Enable livenessProbe | `true` |
+| `livenessProbe.initialDelaySeconds` | LivenessProbe initial delay | `30` |
+| `livenessProbe.periodSeconds` | LivenessProbe period seconds | `10` |
+| `livenessProbe.timeoutSeconds` | LivenessProbe timeout seconds | `5` |
+| `livenessProbe.failureThreshold` | LivenessProbe failure threshold | `6` |
+| `livenessProbe.successThreshold` | LivenessProbe success threshold | `1` |
+| `readinessProbe.enabled` | Enable readinessProbe | `true` |
+| `readinessProbe.initialDelaySeconds` | ReadinessProbe initial delay | `5` |
+| `readinessProbe.periodSeconds` | ReadinessProbe period seconds | `10` |
+| `readinessProbe.timeoutSeconds` | ReadinessProbe timeout seconds | `5` |
+| `readinessProbe.failureThreshold` | ReadinessProbe failure threshold | `6` |
+| `readinessProbe.successThreshold` | ReadinessProbe success threshold | `1` |
+| `startupProbe.enabled` | Enable startupProbe | `false` |
+| `startupProbe.initialDelaySeconds` | StartupProbe initial delay | `10` |
+| `startupProbe.periodSeconds` | StartupProbe period seconds | `10` |
+| `startupProbe.timeoutSeconds` | StartupProbe timeout seconds | `5` |
+| `startupProbe.failureThreshold` | StartupProbe failure threshold | `30` |
+| `startupProbe.successThreshold` | StartupProbe success threshold | `1` |
+| `extraEnv` | Additional environment variables | `[]` |
+| `extraVolumes` | Additional volumes to add to the pod | `[]` |
+| `extraVolumeMounts` | Additional volume mounts | `[]` |
+| `extraObjects` | Array of extra objects to deploy | `[]` |
 
 See [values.yaml](./values.yaml) for the full list of configurable parameters.
 
