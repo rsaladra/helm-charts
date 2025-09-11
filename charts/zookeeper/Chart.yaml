@@ -22,4 +22,4 @@ dependencies:
   - name: common
     version: "1.x.x"
     repository: oci://registry-1.docker.io/cloudpirates
-icon: https://a.storyblok.com/f/143071/512x512/9fcd98c061/zookeeper-logo.svg #TODO upload and use actual logo
+icon: https://a.storyblok.com/f/143071/512x512/07b0f90b58/apache-zookeeper-logo.svg
