@@ -1,11 +1,12 @@
-{{- if eq .Values.architecture "standalone" }}
+{{- if eq .Values.architecture "replication" }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "redis.fullname" . }}
+  name: {{ include "redis.fullname" . }}-replica
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "redis.labels" . | nindent 4 }}
+    app.kubernetes.io/component: replica
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -15,4 +16,5 @@ spec:
       name: redis
   selector:
     {{- include "redis.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: replica
 {{- end }}

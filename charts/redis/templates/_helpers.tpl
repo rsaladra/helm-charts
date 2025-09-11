@@ -82,3 +82,29 @@ Return the proper Docker Image Registry Secret Names
 {{- printf "%s/redis.conf" .Values.config.mountPath }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the proper Redis Sentinel image name
+*/}}
+{{- define "redis.sentinel.image" -}}
+{{- include "common.image" (dict "image" .Values.sentinel.image "global" .Values.global) -}}
+{{- end }}
+
+{{/*
+Sentinel selector labels
+*/}}
+{{- define "redis.sentinel.selectorLabels" -}}
+{{- include "redis.selectorLabels" . }}
+app.kubernetes.io/component: sentinel
+{{- end }}
+
+{{/*
+Check if architecture is replication
+*/}}
+{{- define "redis.isReplication" -}}
+{{- if eq .Values.architecture "replication" -}}
+true
+{{- else -}}
+false
+{{- end -}}
+{{- end -}}

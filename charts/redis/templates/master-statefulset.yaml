@@ -1,25 +1,28 @@
-{{- if eq .Values.architecture "standalone" }}
+{{- if eq .Values.architecture "replication" }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "redis.fullname" . }}
+  name: {{ include "redis.fullname" . }}-master
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "redis.labels" . | nindent 4 }}
+    app.kubernetes.io/component: master
   {{- with (include "redis.annotations" .) }}
   annotations:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  serviceName: {{ include "redis.fullname" . }}
-  replicas: {{ if eq .Values.architecture "standalone" }}1{{ else }}{{ .Values.replicaCount }}{{ end }}
+  serviceName: {{ include "redis.fullname" . }}-master
+  replicas: 1
   selector:
     matchLabels:
       {{- include "redis.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: master
   template:
     metadata:
       labels:
         {{- include "redis.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: master
     spec:
 {{- with (include "redis.imagePullSecrets" .) }}
 {{ . | nindent 6 }}

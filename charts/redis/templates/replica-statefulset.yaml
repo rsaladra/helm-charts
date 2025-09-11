@@ -1,25 +1,28 @@
-{{- if eq .Values.architecture "standalone" }}
+{{- if eq .Values.architecture "replication" }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "redis.fullname" . }}
+  name: {{ include "redis.fullname" . }}-replica
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "redis.labels" . | nindent 4 }}
+    app.kubernetes.io/component: replica
   {{- with (include "redis.annotations" .) }}
   annotations:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  serviceName: {{ include "redis.fullname" . }}
-  replicas: {{ if eq .Values.architecture "standalone" }}1{{ else }}{{ .Values.replicaCount }}{{ end }}
+  serviceName: {{ include "redis.fullname" . }}-replica
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "redis.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: replica
   template:
     metadata:
       labels:
         {{- include "redis.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: replica
     spec:
 {{- with (include "redis.imagePullSecrets" .) }}
 {{ . | nindent 6 }}
@@ -35,12 +38,18 @@ spec:
           command:
             - /bin/sh
             - -c
-            - redis-server {{ include "redis.configFullName" . }} --requirepass "${REDIS_PASSWORD}"
+            - |
+              redis-server {{ include "redis.configFullName" . }} \
+                --requirepass "${REDIS_PASSWORD}" \
+                --masterauth "${REDIS_PASSWORD}" \
+                --replicaof {{ include "redis.fullname" . }}-master {{ .Values.service.port }}
           {{- else }}
           command:
             - /bin/sh
             - -c
-            - redis-server {{ include "redis.configFullName" . }}
+            - |
+              redis-server {{ include "redis.configFullName" . }} \
+                --replicaof {{ include "redis.fullname" . }}-master {{ .Values.service.port }}
           {{- end }}
           ports:
             - name: redis
