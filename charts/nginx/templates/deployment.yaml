@@ -100,10 +100,10 @@ spec:
             {{- if eq .Values.livenessProbe.type "httpGet" }}
             httpGet:
               path: {{ .Values.livenessProbe.path }}
-              port: nginx
+              port: {{ if .Values.containerPorts }}{{ (index .Values.containerPorts 0).name }}{{ else }}nginx{{ end }}
             {{- else }}
             tcpSocket:
-              port: nginx
+              port: {{ if .Values.containerPorts }}{{ (index .Values.containerPorts 0).name }}{{ else }}nginx{{ end }}
             {{- end }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
@@ -116,10 +116,10 @@ spec:
             {{- if eq .Values.readinessProbe.type "httpGet" }}
             httpGet:
               path: {{ .Values.readinessProbe.path }}
-              port: nginx
+              port: {{ if .Values.containerPorts }}{{ (index .Values.containerPorts 0).name }}{{ else }}nginx{{ end }}
             {{- else }}
             tcpSocket:
-              port: nginx
+              port: {{ if .Values.containerPorts }}{{ (index .Values.containerPorts 0).name }}{{ else }}nginx{{ end }}
             {{- end }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
