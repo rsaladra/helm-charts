@@ -1,0 +1,207 @@
+## @section Global parameters
+global:
+  ## @param global.imageRegistry Global Docker Image registry
+  imageRegistry: ""
+  ## @param global.imagePullSecrets Global Docker registry secret names as an array
+  imagePullSecrets: []
+  #  - my-secret-1
+  #  - my-secret-2
+
+## @section Common parameters
+## @param nameOverride String to partially override redis.fullname
+nameOverride: ""
+## @param fullnameOverride String to fully override redis.fullname
+fullnameOverride: ""
+## @param commonLabels Labels to add to all deployed objects
+commonLabels: {}
+## @param commonAnnotations Annotations to add to all deployed objects
+commonAnnotations: {}
+
+## @section Zookeeper image parameters
+image:
+  ## @param image.registry Zookeeper image registry
+  registry: docker.io
+  ## @param image.repository Zookeeper image repository
+  repository: zookeeper
+  ## @param image.tag Zookeeper image tag
+  tag: "3.9.3@sha256:9980cafbff742c15b339811ae829faa61c69154606ec504223560da9d31acd43"
+  ## @param image.pullPolicy Zookeeper image pull policy
+  imagePullPolicy: Always
+
+## @param replicaCount Number of Zookeeper replicas to deploy
+replicaCount: 3
+
+## @section Zookeeper configuration parameters
+## @see https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_configuration
+zookeeperConfig:
+  ## @param zookeeperConfig.tickTime Zookeeper tick time
+  tickTime: 2000
+  ## @param zookeeperConfig.dataDir Zookeeper data directory (should match persistence.mountPath)
+  dataDir: /var/lib/zookeeper/data
+  ## @param zookeeperConfig.initLimit Zookeeper init limit
+  initLimit: 10
+  ## @param zookeeperConfig.syncLimit Zookeeper sync limit
+  syncLimit: 5
+  ## @param zookeeperConfig.electionPortBindRetry Zookeeper election port bind retry
+  electionPortBindRetry: 10
+  ## @param zookeeperConfig.maxClientCnxns Zookeeper max client connections
+  maxClientCnxns: 60
+  ## @param zookeeperConfig.standaloneEnabled Enable standalone mode (for single node deployments)
+  standaloneEnabled: "false"
+  ## @param zookeeperConfig.adminServerEnabled Enable admin server
+  adminServerEnabled: "false"
+  ## @param zookeeperConfig.4lwCommandsWhitelist Zookeeper 4-letter word commands whitelist
+  ## possible values are: "srvr,ruok,conf,cons,dump,envi,ruok,mntr,stat" or "*" to allow all commands
+  ## @see https://zookeeper.apache.org/doc/r3.5.9/zookeeperAdmin.html#sc_clusterOptions
+  commandsWhitelist: "srvr"
+  autopurge:
+    ## @param zookeeperConfig.autopurge.purgeInterval Zookeeper autopurge purge interval (in hours)
+    purgeInterval: 24
+    ## @param zookeeperConfig.autopurge.snapRetainCount Zookeeper autopurge snapshot retain count
+    snapRetainCount: 3
+
+## @section Zookeeper Metrics configuration
+metrics:
+  ## @param metrics.enabled Enable Prometheus metrics exporter
+  enabled: true
+  service:
+    ## @param metrics.service.type Zookeeper metrics service type
+    type: ClusterIP
+    ## @param metrics.service.ports.port Zookeeper metrics service port
+    port: 7000
+
+## @section MariaDB Container Security Context
+containerSecurityContext:
+  ## @param containerSecurityContext.runAsUser Set MariaDB container's Security Context runAsUser
+  runAsUser: 1000
+  ## @param containerSecurityContext.runAsNonRoot Set MariaDB container's Security Context runAsNonRoot
+  runAsNonRoot: true
+  ## @param containerSecurityContext.allowPrivilegeEscalation Set MariaDB container's privilege escalation
+  allowPrivilegeEscalation: false
+
+## @section Security Context
+podSecurityContext:
+  ## @param podSecurityContext.fsGroup Group ID for the volumes of the pod
+  fsGroup: 1000
+
+service:
+  ## @param service.type Kubernetes service type
+  type: ClusterIP
+  ports:
+    ## @param service.ports.client Zookeeper client service port
+    client: 2181
+    ## @param service.ports.quorum Zookeeper quorum service port
+    quorum: 2888
+    ## @param service.ports.leaderElection Zookeeper leader election service port
+    leaderElection: 3888
+    ## @param service.ports.admin Zookeeper admin service port
+    admin: 8080
+
+## @section Resources
+resources:
+  {}
+  ## We usually recommend not to specify default resources and to leave this as a conscious
+  ## choice for the user. This also increases chances charts run on environments with little
+  ## resources, such as Minikube. If you do want to specify resources, uncomment the following
+  ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   memory: 512Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 256Mi
+
+## @param nodeSelector Node selector for pod assignment
+nodeSelector: {}
+
+## @param priorityClassName for pod eviction
+priorityClassName: ""
+
+## @param tolerations Tolerations for pod assignment
+tolerations: []
+
+## @param affinity Affinity rules for pod assignment
+affinity: {}
+
+## @section Persistence
+persistence:
+  ## @param persistence.enabled Enable persistence using Persistent Volume Claims
+  enabled: true
+  ## @param persistence.storageClass Persistent Volume storage class
+  storageClass: ""
+  ## @param persistence.annotations Persistent Volume Claim annotations
+  annotations: {}
+  ## @param persistence.size Persistent Volume size
+  size: 8Gi
+  ## @param persistence.accessModes Persistent Volume access modes
+  accessModes:
+    - ReadWriteOnce
+  ## @param persistence.existingClaim The name of an existing PVC to use for persistence
+  existingClaim: ""
+  ## @param mountPath The path where to mount the data volume
+  mountPath: /var/lib/zookeeper/data
+
+## @section Liveness and readiness probes
+livenessProbe:
+  ## @param livenessProbe.enabled Enable livenessProbe on MinIO containers
+  enabled: true
+  ## @param livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
+  initialDelaySeconds: 30
+  ## @param livenessProbe.periodSeconds Period seconds for livenessProbe
+  periodSeconds: 10
+  ## @param livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
+  timeoutSeconds: 5
+  ## @param livenessProbe.failureThreshold Failure threshold for livenessProbe
+  failureThreshold: 6
+  ## @param livenessProbe.successThreshold Success threshold for livenessProbe
+  successThreshold: 1
+
+readinessProbe:
+  ## @param readinessProbe.enabled Enable readinessProbe on MinIO containers
+  enabled: true
+  ## @param readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
+  initialDelaySeconds: 5
+  ## @param readinessProbe.periodSeconds Period seconds for readinessProbe
+  periodSeconds: 10
+  ## @param readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
+  timeoutSeconds: 5
+  ## @param readinessProbe.failureThreshold Failure threshold for readinessProbe
+  failureThreshold: 6
+  ## @param readinessProbe.successThreshold Success threshold for readinessProbe
+  successThreshold: 1
+
+
+startupProbe:
+  ## @param startupProbe.enabled Enable startupProbe on MinIO containers
+  enabled: false
+  ## @param startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
+  initialDelaySeconds: 10
+  ## @param startupProbe.periodSeconds Period seconds for startupProbe
+  periodSeconds: 10
+  ## @param startupProbe.timeoutSeconds Timeout seconds for startupProbe
+  timeoutSeconds: 5
+  ## @param startupProbe.failureThreshold Failure threshold for startupProbe
+  failureThreshold: 30
+  ## @param startupProbe.successThreshold Success threshold for startupProbe
+  successThreshold: 1
+
+
+## @param extraEnv Additional environment variables to set
+extraEnv: []
+# - name: EXTRA_VAR
+#   value: "extra_value"
+
+## @param extraVolumes Additional volumes to add to the pod
+extraVolumes: []
+
+## @param extraVolumeMounts Additional volume mounts to add to the Redis container
+extraVolumeMounts: []
+
+## @param extraObjects Array of extra objects to deploy with the release
+extraObjects: []
+# - apiVersion: v1
+#   kind: ConfigMap
+#   metadata:
+#     name: extra-config
+#     namespace: "{{ .Release.Namespace }}"
+#   data:
+#     key: value
