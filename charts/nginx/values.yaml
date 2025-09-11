@@ -30,9 +30,7 @@ image:
 replicaCount: 1
 
 ## @section Container port configuration
-## @param containerPort Nginx container port
-containerPort: 80
-## @param containerPorts Array of container ports (advanced configuration)
+## @param containerPorts Array of container ports
 ## Example:
 ## containerPorts:
 ##   - name: http
@@ -41,25 +39,30 @@ containerPort: 80
 ##   - name: https
 ##     containerPort: 443
 ##     protocol: TCP
-containerPorts: []
+containerPorts:
+  - name: http
+    containerPort: 80
+    protocol: TCP
 
 service:
   ## @param service.type Kubernetes service type
   type: ClusterIP
-  ## @param service.port Nginx service port (use 8080 to avoid permission issues with non-root user)
-  port: 80
-  ## @param service.ports Array of service ports (advanced configuration)
+  ## @param service.ports Array of service ports
   ## Example:
   ## ports:
   ##   - port: 80
-  ##     targetPort: nginx
+  ##     targetPort: http
   ##     protocol: TCP
   ##     name: http
   ##   - port: 443
   ##     targetPort: https
   ##     protocol: TCP
   ##     name: https
-  ports: []
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
 
 ## @section Ingress parameters
 ingress:

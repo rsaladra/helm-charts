@@ -77,16 +77,10 @@ spec:
           image: {{ include "nginx.image" . | quote }}
           imagePullPolicy: {{ include "common.imagePullPolicy" (dict "image" .Values.image) }}
           ports:
-            {{- if .Values.containerPorts }}
             {{- range .Values.containerPorts }}
             - name: {{ .name }}
               containerPort: {{ .containerPort }}
               protocol: {{ .protocol | default "TCP" }}
-            {{- end }}
-            {{- else }}
-            - name: nginx
-              containerPort: {{ .Values.containerPort }}
-              protocol: TCP
             {{- end }}
           {{- if .Values.extraEnv }}
           env:
@@ -100,10 +94,10 @@ spec:
             {{- if eq .Values.livenessProbe.type "httpGet" }}
             httpGet:
               path: {{ .Values.livenessProbe.path }}
-              port: {{ if .Values.containerPorts }}{{ (index .Values.containerPorts 0).name }}{{ else }}nginx{{ end }}
+              port: {{ (index .Values.containerPorts 0).name }}
             {{- else }}
             tcpSocket:
-              port: {{ if .Values.containerPorts }}{{ (index .Values.containerPorts 0).name }}{{ else }}nginx{{ end }}
+              port: {{ (index .Values.containerPorts 0).name }}
             {{- end }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
@@ -116,10 +110,10 @@ spec:
             {{- if eq .Values.readinessProbe.type "httpGet" }}
             httpGet:
               path: {{ .Values.readinessProbe.path }}
-              port: {{ if .Values.containerPorts }}{{ (index .Values.containerPorts 0).name }}{{ else }}nginx{{ end }}
+              port: {{ (index .Values.containerPorts 0).name }}
             {{- else }}
             tcpSocket:
-              port: {{ if .Values.containerPorts }}{{ (index .Values.containerPorts 0).name }}{{ else }}nginx{{ end }}
+              port: {{ (index .Values.containerPorts 0).name }}
             {{- end }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
