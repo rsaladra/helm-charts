@@ -19,16 +19,12 @@ data:
     commandsWhitelist={{ .Values.zookeeperConfig.commandsWhitelist | default "srvr" }}
     autopurge.purgeInterval={{ .Values.zookeeperConfig.autopurge.purgeInterval | default 24 }}
     autopurge.snapRetainCount={{ .Values.zookeeperConfig.autopurge.snapRetainCount | default 3 }}
-
     quorumListenOnAllIPs=true
-
-    # iterate over servers entries in variable zookeeper.serverlist
-    {{- /* Add a line for each server in the ensemble */}}
-    {{- include "zookeeper.servers" . | nindent 4 }}
-    
     {{- if .Values.metrics.enabled }}
     metricsProvider.className=org.apache.zookeeper.metrics.prometheus.PrometheusMetricsProvider
     metricsProvider.httpHost=0.0.0.0
     metricsProvider.httpPort={{ .Values.metrics.service.port | default 7000 }}
     metricsProvider.exportJvmInfo=true
     {{- end }}
+    {{- /* Add a line for each server in the ensemble */}}
+    {{- include "zookeeper.servers" . | nindent 4 }}

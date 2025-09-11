@@ -4,6 +4,8 @@ global:
   imageRegistry: ""
   ## @param global.imagePullSecrets Global Docker registry secret names as an array
   imagePullSecrets: []
+  #  - my-secret-1
+  #  - my-secret-2
 
 ## @section Common parameters
 ## @param nameOverride String to partially override redis.fullname
@@ -24,7 +26,7 @@ image:
   ## @param image.tag Zookeeper image tag
   tag: "3.9.3@sha256:9980cafbff742c15b339811ae829faa61c69154606ec504223560da9d31acd43"
   ## @param image.pullPolicy Zookeeper image pull policy
-  pullPolicy: Always
+  imagePullPolicy: Always
 
 ## @param replicaCount Number of Zookeeper replicas to deploy
 replicaCount: 3

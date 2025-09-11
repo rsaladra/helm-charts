@@ -1,0 +1,61 @@
+suite: Zookeeper default values
+
+tests:
+  - it: should respect global.imagePullSecrets
+    template: statefulset.yaml
+    set:
+      global:
+        imagePullSecrets:
+          - my-secret-1
+          - my-secret-2
+    asserts:
+      - equal:
+          path: spec.template.spec.imagePullSecrets[0].name
+          value: my-secret-1
+      - equal:
+          path: spec.template.spec.imagePullSecrets[1].name
+          value: my-secret-2
+
+  - it: should set the correct replica count
+    template: statefulset.yaml
+    asserts:
+      - equal:
+          path: spec.replicas
+          value: 3
+
+  - it: should use the correct image repository and tag
+    template: statefulset.yaml
+    asserts:
+      - matchRegex:
+          path: spec.template.spec.containers[0].image
+          pattern: "docker.io/zookeeper"
+
+  - it: should expose the correct client port
+    template: service.yaml
+    asserts:
+      - equal:
+          path: spec.ports[0].port
+          value: 2181
+
+  - it: should create a normal service (not headless)
+    template: service.yaml
+    documentIndex: 0
+    asserts:
+      - notEqual:
+          path: spec.clusterIP
+          value: None
+
+  - it: should create a headless service
+    template: service.yaml
+    documentIndex: 1
+    asserts:
+      - equal:
+          path: spec.clusterIP
+          value: None
+
+  - it: should set tickTime in configmap
+    template: configmap.yaml
+    asserts:
+      - matchRegex:
+          path: data["zoo.cfg"]
+          pattern: "tickTime=2000"
