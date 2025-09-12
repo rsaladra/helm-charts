@@ -102,9 +102,41 @@ app.kubernetes.io/component: sentinel
 Check if architecture is replication
 */}}
 {{- define "redis.isReplication" -}}
-{{- if eq .Values.architecture "replication" -}}
-true
-{{- else -}}
-false
+{{- eq .Values.architecture "replication" -}}
 {{- end -}}
+
+{{/*
+Check if Sentinel is enabled
+*/}}
+{{- define "redis.sentinelEnabled" -}}
+{{- and (include "redis.isReplication" .) .Values.sentinel.enabled -}}
+{{- end -}}
+
+{{/*
+Generate Redis CLI command with auth
+*/}}
+{{- define "redis.cli" -}}
+{{- if .auth -}}
+redis-cli -a "${REDIS_PASSWORD}"
+{{- else -}}
+redis-cli
+{{- end -}}
+{{- end -}}
+
+{{/*
+Generate Sentinel CLI command with auth and connection info
+*/}}
+{{- define "redis.sentinelCli" -}}
+{{- if .auth -}}
+redis-cli -h {{ include "redis.fullname" .context }}-sentinel -p {{ .context.Values.sentinel.port }} -a "${REDIS_PASSWORD}"
+{{- else -}}
+redis-cli -h {{ include "redis.fullname" .context }}-sentinel -p {{ .context.Values.sentinel.port }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Common Sentinel master query command
+*/}}
+{{- define "redis.sentinelMasterQuery" -}}
+{{- include "redis.sentinelCli" (dict "auth" .auth "context" .context) }} sentinel get-master-addr-by-name {{ .context.Values.sentinel.masterName }}
 {{- end -}}

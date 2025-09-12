@@ -1,4 +1,4 @@
-{{- if and (eq .Values.architecture "replication") .Values.sentinel.enabled }}
+{{- if include "redis.sentinelEnabled" . }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -38,17 +38,10 @@ spec:
             - -c
             - |
               echo "Waiting for Redis pod-0 to be ready..."
-              {{- if .Values.auth.enabled }}
-              until redis-cli -h {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} -p {{ .Values.service.port }} -a "${REDIS_PASSWORD}" ping | grep -q "PONG"; do
+              until {{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} -h {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} -p {{ .Values.service.port }} ping | grep -q "PONG"; do
                 echo "Redis pod-0 not ready, waiting..."
                 sleep 5
               done
-              {{- else }}
-              until redis-cli -h {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} -p {{ .Values.service.port }} ping | grep -q "PONG"; do
-                echo "Redis pod-0 not ready, waiting..."
-                sleep 5
-              done
-              {{- end }}
               echo "Redis master is ready!"
           {{- if .Values.auth.enabled }}
           env:
