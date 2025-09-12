@@ -55,7 +55,7 @@ spec:
                   MASTER_INFO=$(timeout 5 {{ include "redis.sentinelMasterQuery" (dict "auth" .Values.auth.enabled "context" .) }} 2>/dev/null || echo "")
                   
                   if [ -n "$MASTER_INFO" ] && [ "$MASTER_INFO" != "Could not connect" ]; then
-                    echo "Successfully got master info from Sentinel"
+                    echo "Successfully got master info from Sentinel: $MASTER_INFO"
                     break
                   fi
                 fi
@@ -145,7 +145,7 @@ spec:
                     sleep 5
                     
                     # Try to query Sentinel for current master and reconfigure if needed
-                    for i in $(seq 1 10); do
+                    for i in $(seq 1 20); do
                       echo "PostStart attempt $i: Checking if Redis should be reconfigured..."
                       
                       MASTER_INFO=$({{ include "redis.sentinelMasterQuery" (dict "auth" .Values.auth.enabled "context" .) }} 2>/dev/null || echo "")
