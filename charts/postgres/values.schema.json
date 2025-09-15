@@ -719,6 +719,14 @@
         }
       }
     },
+    "extraEnv": {
+      "type": "object",
+      "title": "Extra Environment",
+      "description": "Additional environment variables from key-value pairs",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "extraObjects": {
       "type": "array",
       "title": "Extra Objects",
