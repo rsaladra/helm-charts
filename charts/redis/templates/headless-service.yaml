@@ -14,6 +14,12 @@ spec:
       targetPort: redis
       protocol: TCP
       name: redis
+    {{- if include "redis.sentinelEnabled" . }}
+    - port: {{ .Values.sentinel.port }}
+      targetPort: sentinel
+      protocol: TCP
+      name: sentinel
+    {{- end }}
   selector:
     {{- include "redis.selectorLabels" . | nindent 4 }}
 {{- end }}

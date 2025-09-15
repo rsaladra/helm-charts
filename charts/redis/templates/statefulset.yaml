@@ -10,7 +10,7 @@ metadata:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  serviceName: {{ include "redis.fullname" . }}
+  serviceName: {{ include "redis.fullname" . }}-headless
   replicas: {{ if eq .Values.architecture "standalone" }}1{{ else }}{{ .Values.replicaCount }}{{ end }}
   selector:
     matchLabels:
@@ -37,66 +37,90 @@ spec:
               set -e
               # Get pod ordinal from hostname
               POD_ORDINAL=$(hostname | sed 's/.*-//')
-              MY_POD_NAME=$(hostname)
-              
+              MY_HOSTNAME=$(hostname)
+
               # Copy base config
-              cp {{ include "redis.configFullName" . }} /tmp/redis.conf
-              
-              # Try to query Sentinel for current master first (for restarts/failovers)
-              echo "Checking if Sentinel is available and knows about a master..."
-              MASTER_INFO=""
-              
-              # Quick check for Sentinel availability (don't wait too long during bootstrap)
-              RETRY_COUNT=0
-              MAX_RETRIES=3
-              while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-                if timeout 2 nc -z {{ include "redis.fullname" . }}-sentinel {{ .Values.sentinel.port }} 2>/dev/null; then
-                  echo "Sentinel service is reachable, querying for master..."
-                  MASTER_INFO=$(timeout 3 {{ include "redis.sentinelMasterQuery" (dict "auth" .Values.auth.enabled "context" .) }} 2>/dev/null || echo "")
-                  
-                  if [ -n "$MASTER_INFO" ] && [ "$MASTER_INFO" != "Could not connect" ]; then
-                    echo "Sentinel reports existing master: $MASTER_INFO"
-                    break
-                  fi
+              if [ -f "{{ include "redis.configFullName" . }}" ]; then
+                cp {{ include "redis.configFullName" . }} /tmp/redis.conf
+              else
+                # Create minimal config if no config exists
+                cat > /tmp/redis.conf << EOF
+              bind 0.0.0.0
+              port 6379
+              EOF
+              fi
+
+              # Add Redis configurations for better Sentinel failover tolerance
+              echo "" >> /tmp/redis.conf
+              echo "# Configurations for Kubernetes force deletion tolerance" >> /tmp/redis.conf
+              echo "min-slaves-to-write 0" >> /tmp/redis.conf
+              echo "min-slaves-max-lag 0" >> /tmp/redis.conf
+
+              echo "Pod ordinal: $POD_ORDINAL, hostname: $MY_HOSTNAME"
+
+              # Try to determine current master from Sentinel (if any sentinel is available)
+              CURRENT_MASTER=""
+              SENTINEL_FOUND=false
+
+              # Check if any sentinel is already running and knows the master
+              for i in $(seq 0 $(({{ if eq .Values.architecture "standalone" }}1{{ else }}{{ .Values.replicaCount }}{{ end }} - 1))); do
+                SENTINEL_HOST="{{ include "redis.fullname" . }}-${i}.{{ include "redis.fullname" . }}-headless"
+                MASTER_INFO=$(redis-cli -h "${SENTINEL_HOST}" -p {{ .Values.sentinel.port }} {{- if .Values.auth.enabled }} -a "${REDIS_PASSWORD}"{{- end }} sentinel get-master-addr-by-name {{ .Values.sentinel.masterName }} 2>/dev/null | head -1 || echo "")
+                if [ -n "$MASTER_INFO" ] && [ "$MASTER_INFO" != "Could not connect" ]; then
+                  CURRENT_MASTER="$MASTER_INFO"
+                  SENTINEL_FOUND=true
+                  echo "Found current master from sentinel: $CURRENT_MASTER"
+                  break
                 fi
-                
-                RETRY_COUNT=$((RETRY_COUNT + 1))
-                echo "Sentinel attempt $RETRY_COUNT/$MAX_RETRIES failed"
-                sleep 1
               done
-              
-              # Configure based on Sentinel info or fall back to bootstrap logic
-              if [ -n "$MASTER_INFO" ] && [ "$MASTER_INFO" != "Could not connect" ]; then
-                MASTER_IP=$(echo "$MASTER_INFO" | head -1)
-                MASTER_PORT=$(echo "$MASTER_INFO" | tail -1)
+
+              # Configuration logic
+              if [ "$SENTINEL_FOUND" = true ] && [ -n "$CURRENT_MASTER" ]; then
+                # Sentinel knows the master - configure accordingly
+                MY_HOSTNAME=$(hostname)
+                MY_HOSTNAME_FQDN="${MY_HOSTNAME}.{{ include "redis.fullname" . }}-headless"
                 MY_IP=$(hostname -i)
-                
-                echo "Sentinel reports master at: $MASTER_IP:$MASTER_PORT"
-                echo "My IP is: $MY_IP"
-                
-                # Configure based on Sentinel's view
-                if [ "$MY_IP" != "$MASTER_IP" ]; then
-                  echo "Configuring as replica of existing master $MASTER_IP:$MASTER_PORT"
-                  echo "replicaof $MASTER_IP $MASTER_PORT" >> /tmp/redis.conf
+
+                # Check if I am the master by hostname or IP
+                if [ "$MY_IP" = "$CURRENT_MASTER" ] || [ "$MY_HOSTNAME_FQDN" = "$CURRENT_MASTER" ] || [ "$MY_HOSTNAME" = "$CURRENT_MASTER" ]; then
+                  echo "I am the current master according to Sentinel"
+                else
+                  echo "Configuring as replica of current master: $CURRENT_MASTER"
+                  echo "replicaof $CURRENT_MASTER {{ .Values.service.port }}" >> /tmp/redis.conf
                   {{- if .Values.auth.enabled }}
                   echo "masterauth ${REDIS_PASSWORD}" >> /tmp/redis.conf
                   {{- end }}
-                else
-                  echo "I am the current master according to Sentinel"
                 fi
               else
-                echo "No Sentinel master info available - using bootstrap logic"
-                # Bootstrap: pod-0 starts as master, others as replicas
+                # No sentinel available - use bootstrap logic
                 if [ "$POD_ORDINAL" != "0" ]; then
-                  echo "Non-pod-0 instance: configuring as replica of pod-0"
-                  echo "replicaof {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} {{ .Values.service.port }}" >> /tmp/redis.conf
+                  echo "Bootstrap mode: configuring as replica of pod-0"
+                  # Use IP-based replication for bootstrap
+                  POD_0_IP=$(getent hosts "{{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }}-headless" 2>/dev/null | awk '{print $1}' | head -1)
+                  if [ -n "$POD_0_IP" ]; then
+                    echo "replicaof $POD_0_IP {{ .Values.service.port }}" >> /tmp/redis.conf
+                    echo "Bootstrap replica using pod-0 IP: $POD_0_IP"
+                  else
+                    echo "replicaof {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }}-headless {{ .Values.service.port }}" >> /tmp/redis.conf
+                    echo "Bootstrap replica using pod-0 hostname (IP resolution failed)"
+                  fi
                   {{- if .Values.auth.enabled }}
                   echo "masterauth ${REDIS_PASSWORD}" >> /tmp/redis.conf
                   {{- end }}
                 else
-                  echo "Pod-0: starting as initial master (first time bootstrap)"
+                  echo "Bootstrap mode: pod-0 starting as initial master"
                 fi
               fi
+
+              # Configure for Sentinel discovery and force deletion tolerance
+              echo "replica-announce-ip $(hostname -i)" >> /tmp/redis.conf
+              echo "replica-announce-port {{ .Values.service.port }}" >> /tmp/redis.conf
+              echo "slave-announce-ip $(hostname -i)" >> /tmp/redis.conf
+              echo "slave-announce-port {{ .Values.service.port }}" >> /tmp/redis.conf
+
+              # Make slaves more eligible for promotion during force deletions
+              echo "slave-priority 100" >> /tmp/redis.conf
+              echo "replica-read-only yes" >> /tmp/redis.conf
           {{- if .Values.auth.enabled }}
           env:
             - name: REDIS_PASSWORD
@@ -108,7 +132,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: {{ .Values.config.mountPath }}
-            - name: redis-init-config
+            - name: redis-config
               mountPath: /tmp
         {{- end }}
       containers:
@@ -125,55 +149,12 @@ spec:
               {{- else }}
               CONFIG_FILE="{{ include "redis.configFullName" . }}"
               {{- end }}
+
               {{- if .Values.auth.enabled }}
               redis-server "$CONFIG_FILE" --requirepass "${REDIS_PASSWORD}"
               {{- else }}
               redis-server "$CONFIG_FILE"
               {{- end }}
-          {{- if include "redis.sentinelEnabled" . }}
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /bin/sh
-                  - -c
-                  - |
-                    # Wait for Redis to fully start
-                    echo "PostStart: Waiting for Redis to be ready..."
-                    sleep 10
-                    
-                    # Check if we need to fix our role based on Sentinel
-                    for i in $(seq 1 10); do
-                      echo "PostStart attempt $i: Checking role consistency with Sentinel..."
-                      
-                      MASTER_INFO=$({{ include "redis.sentinelMasterQuery" (dict "auth" .Values.auth.enabled "context" .) }} 2>/dev/null || echo "")
-                      
-                      if [ -n "$MASTER_INFO" ] && [ "$MASTER_INFO" != "Could not connect" ]; then
-                        MASTER_IP=$(echo "$MASTER_INFO" | head -1)
-                        MY_IP=$(hostname -i)
-                        MY_ROLE=$({{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} info replication | grep "role:master" || echo "")
-                        
-                        echo "PostStart: Sentinel says master is $MASTER_IP, I am $MY_IP"
-                        
-                        # If I'm master but shouldn't be, step down
-                        if [ -n "$MY_ROLE" ] && [ "$MY_IP" != "$MASTER_IP" ]; then
-                          echo "PostStart: I am incorrectly master, becoming replica of $MASTER_IP"
-                          {{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} REPLICAOF "$MASTER_IP" 6379
-                          {{- if .Values.auth.enabled }}
-                          {{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} CONFIG SET masterauth "${REDIS_PASSWORD}"
-                          {{- end }}
-                          echo "PostStart: Successfully reconfigured as replica"
-                          break
-                        else
-                          echo "PostStart: Role is correct"
-                          break
-                        fi
-                      fi
-                      
-                      echo "PostStart: Sentinel not ready, waiting..."
-                      sleep 5
-                    done
-          {{- end }}
           ports:
             - name: redis
               containerPort: 6379
@@ -215,11 +196,22 @@ spec:
               command:
                 - /bin/sh
                 - -c
-                {{- if .Values.auth.enabled }}
-                - redis-cli -a ${REDIS_PASSWORD} ping
-                {{- else }}
-                - redis-cli ping
-                {{- end }}
+                - |
+                  {{- if include "redis.sentinelEnabled" . }}
+                  # For Sentinel-enabled setup: simple connectivity check
+                  {{- if .Values.auth.enabled }}
+                  redis-cli -a ${REDIS_PASSWORD} ping | grep -q PONG
+                  {{- else }}
+                  redis-cli ping | grep -q PONG
+                  {{- end }}
+                  {{- else }}
+                  # Standard ping check for non-Sentinel
+                  {{- if .Values.auth.enabled }}
+                  redis-cli -a ${REDIS_PASSWORD} ping
+                  {{- else }}
+                  redis-cli ping
+                  {{- end }}
+                  {{- end }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
@@ -231,22 +223,141 @@ spec:
             - name: data
               mountPath: {{ .Values.persistence.mountPath }}
             {{- if include "redis.sentinelEnabled" . }}
-            - name: redis-init-config
+            - name: redis-config
               mountPath: /tmp
-            {{- else if or .Values.config.content .Values.config.existingConfigmap }}
+            {{- end }}
+            {{- if or .Values.config.content .Values.config.existingConfigmap }}
             - name: config
               mountPath: {{ .Values.config.mountPath }}
             {{- end }}
             {{- if .Values.extraVolumeMounts }}
             {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
             {{- end }}
+        {{- if include "redis.sentinelEnabled" . }}
+        - name: sentinel
+          securityContext: {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+          image: {{ include "redis.sentinel.image" . | quote }}
+          imagePullPolicy: {{ include "common.imagePullPolicy" (dict "image" .Values.sentinel.image) }}
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+
+              # Wait for Redis to be ready
+              echo "Waiting for Redis to start..."
+              while ! redis-cli {{- if .Values.auth.enabled }} -a "${REDIS_PASSWORD}"{{- end }} -h 127.0.0.1 -p {{ .Values.service.port }} ping >/dev/null 2>&1; do
+                sleep 1
+              done
+              echo "Redis is ready"
+
+              # Determine initial master: start with pod-0 IP, then try to find current master from sentinels
+              POD_ORDINAL=$(hostname | sed 's/.*-//')
+
+              # Use IP-based discovery but with dynamic reconfiguration for robustness
+              if [ "$POD_ORDINAL" = "0" ]; then
+                # If I am pod-0, use my own IP as initial master
+                MASTER_HOST=$(hostname -i)
+                echo "I am pod-0, using my IP as initial master: $MASTER_HOST"
+              else
+                # Try to get pod-0 IP for initial configuration
+                POD_0_IP=$(getent hosts "{{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }}-headless" 2>/dev/null | awk '{print $1}' | head -1)
+                if [ -n "$POD_0_IP" ]; then
+                  MASTER_HOST="$POD_0_IP"
+                  echo "Using pod-0 IP as initial master: $MASTER_HOST"
+                else
+                  echo "Cannot resolve pod-0, using self IP as fallback"
+                  MASTER_HOST=$(hostname -i)
+                fi
+              fi
+
+              # Try to query other sentinels to find the current master
+              for i in $(seq 0 $(({{ if eq .Values.architecture "standalone" }}1{{ else }}{{ .Values.replicaCount }}{{ end }} - 1))); do
+                if [ "$i" != "$POD_ORDINAL" ]; then
+                  SENTINEL_IP=$(getent hosts "{{ include "redis.fullname" . }}-${i}.{{ include "redis.fullname" . }}-headless" 2>/dev/null | awk '{print $1}' | head -1)
+                  if [ -n "$SENTINEL_IP" ]; then
+                    EXISTING_MASTER=$(redis-cli -h "${SENTINEL_IP}" -p {{ .Values.sentinel.port }} {{- if .Values.auth.enabled }} -a "${REDIS_PASSWORD}"{{- end }} sentinel get-master-addr-by-name {{ .Values.sentinel.masterName }} 2>/dev/null | head -1 || echo "")
+                    if [ -n "$EXISTING_MASTER" ] && [ "$EXISTING_MASTER" != "Could not connect" ]; then
+                      MASTER_HOST="$EXISTING_MASTER"
+                      echo "Found existing master via sentinel: $MASTER_HOST"
+                      break
+                    fi
+                  fi
+                fi
+              done
+
+              # Create Sentinel config
+              cat > /tmp/sentinel.conf << EOF
+              port {{ .Values.sentinel.port }}
+              bind 0.0.0.0
+              sentinel monitor {{ .Values.sentinel.masterName }} ${MASTER_HOST} {{ .Values.service.port }} 1
+              sentinel down-after-milliseconds {{ .Values.sentinel.masterName }} 2000
+              sentinel failover-timeout {{ .Values.sentinel.masterName }} {{ .Values.sentinel.failoverTimeout }}
+              sentinel parallel-syncs {{ .Values.sentinel.masterName }} {{ .Values.sentinel.parallelSyncs }}
+              {{- if .Values.auth.enabled }}
+              sentinel auth-pass {{ .Values.sentinel.masterName }} "${REDIS_PASSWORD}"
+              {{- end }}
+              # Make automatic failover more aggressive for Kubernetes force deletions
+              sentinel deny-scripts-reconfig yes
+              # Fix leader election issues during force deletions
+              protected-mode no
+              # CRITICAL: Track disconnected slaves for force deletion tolerance
+              sentinel_link_buffer_size 32768
+              # Allow sentinels to discover each other
+              sentinel announce-ip $(hostname -i)
+              sentinel announce-port {{ .Values.sentinel.port }}
+              logfile ""
+              loglevel notice
+              EOF
+
+              # Add known sentinels to help with discovery
+              for i in $(seq 0 $(({{ if eq .Values.architecture "standalone" }}1{{ else }}{{ .Values.replicaCount }}{{ end }} - 1))); do
+                if [ "$i" != "$POD_ORDINAL" ]; then
+                  SENTINEL_IP=$(getent hosts "{{ include "redis.fullname" . }}-${i}.{{ include "redis.fullname" . }}-headless" | awk '{print $1}' | head -1 2>/dev/null || echo "")
+                  if [ -n "$SENTINEL_IP" ]; then
+                    echo "sentinel known-sentinel {{ .Values.sentinel.masterName }} ${SENTINEL_IP} {{ .Values.sentinel.port }}" >> /tmp/sentinel.conf
+                  fi
+                fi
+              done
+
+              echo "Starting Sentinel with config:"
+              cat /tmp/sentinel.conf
+
+              redis-sentinel /tmp/sentinel.conf
+          ports:
+            - name: sentinel
+              containerPort: {{ .Values.sentinel.port }}
+              protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  # Check if sentinel is responding
+                  redis-cli -h 127.0.0.1 -p {{ .Values.sentinel.port }} {{- if .Values.auth.enabled }} -a "${REDIS_PASSWORD}"{{- end }} ping | grep -q PONG
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+            successThreshold: 1
+          {{- if .Values.auth.enabled }}
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "redis.secretName" . }}
+                  key: {{ include "redis.secretPasswordKey" . }}
+          {{- end }}
+          resources: {{- toYaml .Values.sentinel.resources | nindent 12 }}
+        {{- end }}
       volumes:
         {{- if not .Values.persistence.enabled }}
         - name: data
           emptyDir: {}
         {{- end }}
         {{- if include "redis.sentinelEnabled" . }}
-        - name: redis-init-config
+        - name: redis-config
           emptyDir: {}
         {{- end }}
         {{- if or .Values.config.content .Values.config.existingConfigmap }}
