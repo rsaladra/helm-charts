@@ -290,7 +290,10 @@ spec:
               cat > /tmp/sentinel.conf << EOF
               port {{ .Values.sentinel.port }}
               bind 0.0.0.0
-              sentinel monitor {{ .Values.sentinel.masterName }} ${MASTER_HOST} {{ .Values.service.port }} 1
+              # Enable hostname resolution for Redis Sentinel
+              sentinel resolve-hostnames yes
+              sentinel announce-hostnames yes
+              sentinel monitor {{ .Values.sentinel.masterName }} ${MASTER_HOST} {{ .Values.service.port }} {{ .Values.sentinel.quorum }}
               sentinel down-after-milliseconds {{ .Values.sentinel.masterName }} {{ .Values.sentinel.downAfterMilliseconds }}
               sentinel failover-timeout {{ .Values.sentinel.masterName }} {{ .Values.sentinel.failoverTimeout }}
               sentinel parallel-syncs {{ .Values.sentinel.masterName }} {{ .Values.sentinel.parallelSyncs }}
