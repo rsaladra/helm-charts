@@ -232,6 +232,12 @@ The following table lists the configurable parameters of the PostgreSQL chart an
 | `serviceAccount.name`                         | The name of the service account to use. If not set and create is true, a name is generated using the `fullname` template. | `""`    |
 | `serviceAccount.automountServiceAccountToken` | Whether to automount the SA token inside the pod                                                                          | `false` |
 
+### Extra Environment
+
+| Parameter  | Description                                           | Default |
+| ---------- | ----------------------------------------------------- | ------- |
+| `extraEnv` | Additional environment variables from key-value pairs | `{}`    |
+
 ### Extra Configuration Parameters
 
 | Parameter      | Description                                                             | Default |

@@ -254,5 +254,10 @@ serviceAccount:
   ## @param serviceAccount.automountServiceAccountToken whether to automount the SA token inside the pod
   automountServiceAccountToken: false
 
+## @param extraEnv Additional environment variables from key-value pairs
+extraEnv: {}
+# VARNAME1: value1
+# VARNAME2: value2
+
 ## @param extraObjects Array of extra objects to deploy with the release
 extraObjects: []
