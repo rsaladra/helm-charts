@@ -96,6 +96,17 @@ Return PostgreSQL configuration ConfigMap name
 {{- end }}
 
 {{/*
+Return PostgreSQL initialization scripts ConfigMap name
+*/}}
+{{- define "postgres.initdb.scriptsCM" -}}
+{{- if .Values.initdb.scriptsConfigMap -}}
+    {{- printf "%s" (tpl .Values.initdb.scriptsConfigMap $) -}}
+{{- else -}}
+    {{- printf "%s-init-scripts" (include "postgres.fullname" .) -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Return PostgreSQL data directory
 */}}
 {{- define "postgres.dataDir" -}}

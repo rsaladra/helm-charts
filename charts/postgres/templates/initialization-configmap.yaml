@@ -1,0 +1,14 @@
+{{- if and .Values.initdb.scripts (not .Values.initdb.scriptsConfigMap) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ printf "%s-init-scripts" (include "postgres.fullname" .) }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "postgres.labels" . | nindent 4 }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "postgres.annotations" . | nindent 4 }}
+  {{- end }}
+data: {{- include "common.tplvalues.render" (dict "value" .Values.initdb.scripts "context" .) | nindent 2 }}
+{{- end }}
