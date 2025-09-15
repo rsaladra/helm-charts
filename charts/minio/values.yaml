@@ -23,6 +23,10 @@ image:
   repository: minio/minio
   ## @param image.tag MinIO image tag (immutable tags are recommended)
   tag: "RELEASE.2025-09-07T16-13-09Z@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e"
+  ## @param image.useCpuV1 Use the Minio image tags suitable for old cpus (see https://github.com/minio/minio/issues/18365)
+  useCpuV1: false
+  ## @param iamge.tagCpuV1 The cpuv1 Minio image tag (immutable tags are recommended)
+  tagCpuV1: "RELEASE.2025-09-07T16-13-09Z-cpuv1@sha256:13582eff79c6605a2d315bdd0e70164142ea7e98fc8411e9e10d089502a6d883"
   ## @param image.imagePullPolicy MinIO image pull policy
   imagePullPolicy: Always
 
