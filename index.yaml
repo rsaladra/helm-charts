@@ -419,6 +419,33 @@ entries:
   minio:
   - apiVersion: v2
     appVersion: 2025.09.07
+    created: "2025-09-15T08:36:06.661018735Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: High Performance Object Storage compatible with Amazon S3 APIs
+    digest: bf06db49fbc748e9a4e57b5f347b30fb146be68d790cd1bc2b6ac9470ccda6b0
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/5d3310f00d/minio-logo.svg
+    keywords:
+    - minio
+    - object-storage
+    - s3
+    - storage
+    - cloud-native
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: minio
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/minio
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/minio-0.2.2/minio-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 2025.09.07
     created: "2025-09-08T14:26:58.614991625Z"
     dependencies:
     - name: common
@@ -1902,4 +1929,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-12T16:05:17.012174979Z"
+generated: "2025-09-15T08:36:06.661162085Z"
