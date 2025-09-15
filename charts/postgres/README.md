@@ -139,6 +139,13 @@ The following table lists the configurable parameters of the PostgreSQL chart an
 | `config.extraConfig`                          | Additional PostgreSQL configuration parameters                                          | `[]`    |
 | `config.existingConfigmap`                    | Name of existing ConfigMap with PostgreSQL configuration                                | `""`    |
 
+### PostgreSQL Initdb Configuration
+
+| Parameter                 | Description                                    | Default |
+| ------------------------- | ---------------------------------------------- | ------- |
+| `initdb.scripts`          | Dictionary of scripts to be run at first boot  | `{}`    |
+| `initdb.scriptsConfigMap` | ConfigMap with scripts to be run at first boot | `""`    |
+
 ### Service configuration
 
 | Parameter             | Description               | Default     |

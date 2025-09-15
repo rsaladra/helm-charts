@@ -136,6 +136,10 @@ spec:
               mountPath: {{ include "postgres.runDir" . }}
             - name: tmp
               mountPath: /tmp
+            {{- if or .Values.initdb.scriptsConfigMap .Values.initdb.scripts }}
+            - name: custom-init-scripts
+              mountPath: /docker-entrypoint-initdb.d/
+            {{- end }}
       volumes:
         {{- if not .Values.persistence.enabled }}
         - name: data
@@ -151,6 +155,11 @@ spec:
           emptyDir: {}
         - name: tmp
           emptyDir: {}
+        {{- if or .Values.initdb.scriptsConfigMap .Values.initdb.scripts }}
+        - name: custom-init-scripts
+          configMap:
+            name: {{ include "postgres.initdb.scriptsCM" . }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
