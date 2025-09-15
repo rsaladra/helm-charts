@@ -501,6 +501,28 @@
         }
       }
     },
+    "persistentVolumeClaimRetentionPolicy": {
+      "type": "object",
+      "title": "Persistent Volume Claim Retention Policy Configuration",
+      "description": "Persistent Volume Claim Retention Policy configuration parameters",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Enable Persistent volume retention policy",
+          "description": "Enable Persistent volume retention policy for the Statefulset"
+        },
+        "whenDeleted": {
+          "type": "string",
+          "title": "whenDeleted Volume retention behavior",
+          "description": "Volume retention behavior that applies when the StatefulSet is deleted"
+        },
+        "whenScaled": {
+          "type": "string",
+          "title": "whenScaled Volume retention behavior",
+          "description": "Volume retention behavior when the replica count of the StatefulSet is reduced"
+        }
+      }
+    },
     "livenessProbe": {
       "type": "object",
       "title": "Liveness Probe Configuration",

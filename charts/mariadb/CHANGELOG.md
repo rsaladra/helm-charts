@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.4 (2025-09-09)
+## 0.2.5 (2025-09-15)
 
-* [mariadb]: Mariadb initdbscript ([#62](https://github.com/CloudPirates-io/helm-charts/pull/62))
+* [mariadb] fix statefulset pvc template ([#90](https://github.com/CloudPirates-io/helm-charts/pull/90))
 
 ## 0.2.0 (2025-09-02)
 

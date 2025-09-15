@@ -177,6 +177,14 @@ The following table lists the configurable parameters of the PostgreSQL chart an
 | `persistence.accessModes`   | Persistent Volume access modes                     | `["ReadWriteOnce"]` |
 | `persistence.existingClaim` | The name of an existing PVC to use for persistence | `""`                |
 
+### Persistent Volume Claim Retention Policy
+
+| Parameter                                          | Description                                                                    | Default    |
+| -------------------------------------------------- | ------------------------------------------------------------------------------ | -----------|
+| `persistentVolumeClaimRetentionPolicy.enabled`     | Enable Persistent volume retention policy for the Statefulset                  | `false`    |
+| `persistentVolumeClaimRetentionPolicy.whenDeleted` | Volume retention behavior that applies when the StatefulSet is deleted         | `"Retain"` |
+| `persistentVolumeClaimRetentionPolicy.whenScaled`  | Volume retention behavior when the replica count of the StatefulSet is reduced | `"Retain"` |
+
 ### Liveness and readiness probes
 
 | Parameter                            | Description                                    | Default |
