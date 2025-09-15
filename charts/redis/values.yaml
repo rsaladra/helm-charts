@@ -168,7 +168,7 @@ sentinel:
   ## @param sentinel.quorum Number of Sentinels that need to agree about the fact the master is not reachable
   quorum: 2
   ## @param sentinel.downAfterMilliseconds Time in milliseconds after the master is declared down
-  downAfterMilliseconds: 30000
+  downAfterMilliseconds: 5000
   ## @param sentinel.failoverTimeout Timeout for failover in milliseconds
   failoverTimeout: 180000
   ## @param sentinel.parallelSyncs Number of replicas that can be reconfigured to use the new master during a failover

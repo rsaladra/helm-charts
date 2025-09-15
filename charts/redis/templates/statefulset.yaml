@@ -291,7 +291,7 @@ spec:
               port {{ .Values.sentinel.port }}
               bind 0.0.0.0
               sentinel monitor {{ .Values.sentinel.masterName }} ${MASTER_HOST} {{ .Values.service.port }} 1
-              sentinel down-after-milliseconds {{ .Values.sentinel.masterName }} 2000
+              sentinel down-after-milliseconds {{ .Values.sentinel.masterName }} {{ .Values.sentinel.downAfterMilliseconds }}
               sentinel failover-timeout {{ .Values.sentinel.masterName }} {{ .Values.sentinel.failoverTimeout }}
               sentinel parallel-syncs {{ .Values.sentinel.masterName }} {{ .Values.sentinel.parallelSyncs }}
               {{- if .Values.auth.enabled }}
