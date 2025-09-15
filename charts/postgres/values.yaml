@@ -174,6 +174,15 @@ persistence:
   ## @param persistence.existingClaim The name of an existing PVC to use for persistence
   existingClaim: ""
 
+## @section Persistent Volume Claim Retention Policy
+persistentVolumeClaimRetentionPolicy:
+  ## @param persistentVolumeClaimRetentionPolicy.enabled Enable Persistent volume retention policy for the Statefulset
+  enabled: false
+  ## @param persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
+  whenScaled: Retain
+  ## @param persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
+  whenDeleted: Retain
+
 ## @section Liveness and readiness probes
 livenessProbe:
   ## @param livenessProbe.enabled Enable livenessProbe on PostgreSQL containers
