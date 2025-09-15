@@ -42,33 +42,30 @@ spec:
               # Copy base config
               cp {{ include "redis.configFullName" . }} /tmp/redis.conf
               
-              # Try to query Sentinel for current master (with timeout)
-              echo "Attempting to query Sentinel for current master..."
+              # Try to query Sentinel for current master first (for restarts/failovers)
+              echo "Checking if Sentinel is available and knows about a master..."
               MASTER_INFO=""
               
-              # Try to contact Sentinel service with retries (service might take time to be available)
+              # Quick check for Sentinel availability (don't wait too long during bootstrap)
               RETRY_COUNT=0
-              MAX_RETRIES=6
+              MAX_RETRIES=3
               while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-                if timeout 3 nc -z {{ include "redis.fullname" . }}-sentinel {{ .Values.sentinel.port }} 2>/dev/null; then
+                if timeout 2 nc -z {{ include "redis.fullname" . }}-sentinel {{ .Values.sentinel.port }} 2>/dev/null; then
                   echo "Sentinel service is reachable, querying for master..."
-                  MASTER_INFO=$(timeout 5 {{ include "redis.sentinelMasterQuery" (dict "auth" .Values.auth.enabled "context" .) }} 2>/dev/null || echo "")
+                  MASTER_INFO=$(timeout 3 {{ include "redis.sentinelMasterQuery" (dict "auth" .Values.auth.enabled "context" .) }} 2>/dev/null || echo "")
                   
                   if [ -n "$MASTER_INFO" ] && [ "$MASTER_INFO" != "Could not connect" ]; then
-                    echo "Successfully got master info from Sentinel: $MASTER_INFO"
+                    echo "Sentinel reports existing master: $MASTER_INFO"
                     break
                   fi
                 fi
                 
                 RETRY_COUNT=$((RETRY_COUNT + 1))
-                echo "Sentinel attempt $RETRY_COUNT/$MAX_RETRIES failed, retrying in 2 seconds..."
-                sleep 2
+                echo "Sentinel attempt $RETRY_COUNT/$MAX_RETRIES failed"
+                sleep 1
               done
               
-              if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
-                echo "Could not reach Sentinel after $MAX_RETRIES attempts, using fallback logic"
-              fi
-              
+              # Configure based on Sentinel info or fall back to bootstrap logic
               if [ -n "$MASTER_INFO" ] && [ "$MASTER_INFO" != "Could not connect" ]; then
                 MASTER_IP=$(echo "$MASTER_INFO" | head -1)
                 MASTER_PORT=$(echo "$MASTER_INFO" | tail -1)
@@ -77,9 +74,9 @@ spec:
                 echo "Sentinel reports master at: $MASTER_IP:$MASTER_PORT"
                 echo "My IP is: $MY_IP"
                 
-                # If I'm not the current master, configure as replica
+                # Configure based on Sentinel's view
                 if [ "$MY_IP" != "$MASTER_IP" ]; then
-                  echo "Configuring as replica of $MASTER_IP:$MASTER_PORT"
+                  echo "Configuring as replica of existing master $MASTER_IP:$MASTER_PORT"
                   echo "replicaof $MASTER_IP $MASTER_PORT" >> /tmp/redis.conf
                   {{- if .Values.auth.enabled }}
                   echo "masterauth ${REDIS_PASSWORD}" >> /tmp/redis.conf
@@ -88,16 +85,16 @@ spec:
                   echo "I am the current master according to Sentinel"
                 fi
               else
-                echo "No master info from Sentinel, using fallback logic"
-                # Fallback: non-pod-0 instances become replicas of pod-0
+                echo "No Sentinel master info available - using bootstrap logic"
+                # Bootstrap: pod-0 starts as master, others as replicas
                 if [ "$POD_ORDINAL" != "0" ]; then
-                  echo "Configuring as replica of pod-0"
+                  echo "Non-pod-0 instance: configuring as replica of pod-0"
                   echo "replicaof {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} {{ .Values.service.port }}" >> /tmp/redis.conf
                   {{- if .Values.auth.enabled }}
                   echo "masterauth ${REDIS_PASSWORD}" >> /tmp/redis.conf
                   {{- end }}
                 else
-                  echo "I am pod-0, starting as potential master"
+                  echo "Pod-0: starting as initial master (first time bootstrap)"
                 fi
               fi
           {{- if .Values.auth.enabled }}
@@ -141,46 +138,40 @@ spec:
                   - /bin/sh
                   - -c
                   - |
-                    # Wait a moment for Redis to start
-                    sleep 5
+                    # Wait for Redis to fully start
+                    echo "PostStart: Waiting for Redis to be ready..."
+                    sleep 10
                     
-                    # Try to query Sentinel for current master and reconfigure if needed
-                    for i in $(seq 1 20); do
-                      echo "PostStart attempt $i: Checking if Redis should be reconfigured..."
+                    # Check if we need to fix our role based on Sentinel
+                    for i in $(seq 1 10); do
+                      echo "PostStart attempt $i: Checking role consistency with Sentinel..."
                       
                       MASTER_INFO=$({{ include "redis.sentinelMasterQuery" (dict "auth" .Values.auth.enabled "context" .) }} 2>/dev/null || echo "")
                       
                       if [ -n "$MASTER_INFO" ] && [ "$MASTER_INFO" != "Could not connect" ]; then
                         MASTER_IP=$(echo "$MASTER_INFO" | head -1)
-                        MASTER_PORT=$(echo "$MASTER_INFO" | tail -1)
                         MY_IP=$(hostname -i)
-                        
-                        echo "PostStart: Sentinel reports master at $MASTER_IP:$MASTER_PORT, my IP is $MY_IP"
-                        
-                        # Check my current role
                         MY_ROLE=$({{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} info replication | grep "role:master" || echo "")
                         
-                        # If I'm currently master but shouldn't be, reconfigure as slave
+                        echo "PostStart: Sentinel says master is $MASTER_IP, I am $MY_IP"
+                        
+                        # If I'm master but shouldn't be, step down
                         if [ -n "$MY_ROLE" ] && [ "$MY_IP" != "$MASTER_IP" ]; then
-                          echo "PostStart: I am master but shouldn't be. Reconfiguring as slave of $MASTER_IP:$MASTER_PORT"
-                          {{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} REPLICAOF "$MASTER_IP" "$MASTER_PORT"
+                          echo "PostStart: I am incorrectly master, becoming replica of $MASTER_IP"
+                          {{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} REPLICAOF "$MASTER_IP" 6379
                           {{- if .Values.auth.enabled }}
                           {{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} CONFIG SET masterauth "${REDIS_PASSWORD}"
                           {{- end }}
-                          echo "PostStart: Successfully reconfigured as slave"
-                          break
-                        elif [ -z "$MY_ROLE" ] && [ "$MY_IP" == "$MASTER_IP" ]; then
-                          echo "PostStart: I am slave but should be master. Promoting to master."
-                          {{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} REPLICAOF NO ONE
+                          echo "PostStart: Successfully reconfigured as replica"
                           break
                         else
-                          echo "PostStart: Configuration is correct"
+                          echo "PostStart: Role is correct"
                           break
                         fi
                       fi
                       
-                      echo "PostStart: Sentinel not available, waiting 3 seconds..."
-                      sleep 3
+                      echo "PostStart: Sentinel not ready, waiting..."
+                      sleep 5
                     done
           {{- end }}
           ports:

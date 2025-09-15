@@ -37,12 +37,22 @@ spec:
             - /bin/sh
             - -c
             - |
-              echo "Waiting for Redis pod-0 to be ready..."
-              until {{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} -h {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} -p {{ .Values.service.port }} ping | grep -q "PONG"; do
-                echo "Redis pod-0 not ready, waiting..."
+              echo "Waiting for Redis pod-0 to be ready and confirm it's the master..."
+              for i in $(seq 1 60); do
+                # Check if Redis is responding
+                if {{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} -h {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} -p {{ .Values.service.port }} ping | grep -q "PONG"; then
+                  # Check if it's running as master (or can become one)
+                  ROLE=$({{ include "redis.cli" (dict "auth" .Values.auth.enabled) }} -h {{ include "redis.fullname" . }}-0.{{ include "redis.fullname" . }} -p {{ .Values.service.port }} info replication | grep "role:" | cut -d':' -f2 | tr -d '\r')
+                  echo "Redis pod-0 is ready. Current role: $ROLE"
+                  
+                  if [ "$ROLE" = "master" ] || [ -z "$ROLE" ]; then
+                    echo "Redis pod-0 is ready as master!"
+                    break
+                  fi
+                fi
+                echo "Attempt $i/60: Redis pod-0 not ready as master, waiting..."
                 sleep 5
               done
-              echo "Redis master is ready!"
           {{- if .Values.auth.enabled }}
           env:
             - name: REDIS_PASSWORD
