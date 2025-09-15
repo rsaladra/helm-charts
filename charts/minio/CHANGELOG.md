@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.2 (2025-09-15)
+## 0.2.3 (2025-09-15)
 
-* [minio] add option to use cpu-v1 image ([#86](https://github.com/CloudPirates-io/helm-charts/pull/86))
+* [minio] Minio set deployment update strategy ([#87](https://github.com/CloudPirates-io/helm-charts/pull/87))
 
 ## <small>0.2.1 (2025-09-08)</small>
 
