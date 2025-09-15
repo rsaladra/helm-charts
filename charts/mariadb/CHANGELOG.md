@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.5 (2025-09-15)
+## 0.2.6 (2025-09-15)
 
-* [mariadb] fix statefulset pvc template ([#90](https://github.com/CloudPirates-io/helm-charts/pull/90))
+* [mariadb] Mariadb/fix pvc labels ([#91](https://github.com/CloudPirates-io/helm-charts/pull/91))
 
 ## 0.2.0 (2025-09-02)
 
