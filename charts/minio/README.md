@@ -81,8 +81,9 @@ The following table lists the configurable parameters of the MinIO chart and the
 | `image.registry`   | MinIO image registry                                                                                  | `docker.io`                      |
 | `image.repository` | MinIO image repository                                                                                | `minio/minio`                    |
 | `image.tag`        | MinIO image tag (immutable tags are recommended)                                                      | `"RELEASE.2024-08-17T01-24-54Z"` |
-| `image.digest`     | MinIO image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag | `""`                             |
-| `image.pullPolicy` | MinIO image pull policy                                                                               | `IfNotPresent`                   |
+| `image.useCpuV1`     | image.useCpuV1 Use the Minio image tags suitable for old cpus (see https://github.com/minio/minio/issues/18365)                 | `false` |
+| `image.tagCpuV1`     | image.useCpuV1 Use the Minio image tags suitable for old cpus (see https://github.com/minio/minio/issues/18365)                 | `RELEASE.2025-09-07T16-13-09Z-cpuv1@sha256:13582eff79c6605a2d315bdd0e70164142ea7e98fc8411e9e10d089502a6d883` |
+| `image.imagePullPolicy` | MinIO image pull policy                                                                               | `IfNotPresent`                   |
 
 ### MinIO Authentication
 
