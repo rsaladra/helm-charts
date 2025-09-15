@@ -213,6 +213,14 @@ spec:
             failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
             successThreshold: {{ .Values.readinessProbe.successThreshold }}
           {{- end }}
+          {{- if include "redis.sentinelEnabled" . }}
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /bin/bash
+                  - /scripts/prestop.sh
+          {{- end }}
           resources: {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: data
@@ -220,6 +228,9 @@ spec:
             {{- if include "redis.sentinelEnabled" . }}
             - name: redis-config
               mountPath: /tmp
+            - name: prestop-script
+              mountPath: /scripts
+              readOnly: true
             {{- end }}
             {{- if or .Values.config.content .Values.config.existingConfigmap }}
             - name: config
@@ -366,6 +377,10 @@ spec:
         {{- if include "redis.sentinelEnabled" . }}
         - name: redis-config
           emptyDir: {}
+        - name: prestop-script
+          configMap:
+            name: {{ include "redis.fullname" . }}-prestop-script
+            defaultMode: 0755
         {{- end }}
         {{- if or .Values.config.content .Values.config.existingConfigmap }}
         - name: config
