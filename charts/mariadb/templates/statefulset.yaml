@@ -182,8 +182,10 @@ spec:
       kind: PersistentVolumeClaim
       metadata:
         name: data
-        labels:
-          {{- include "mariadb.labels" . | nindent 10 }}
+        {{- with .Values.commonLabels }}
+        labels: 
+{{ toYaml . | indent 10}}
+        {{- end }}
         {{- with .Values.persistence.annotations }}
         annotations:
           {{- toYaml . | nindent 10 }}
