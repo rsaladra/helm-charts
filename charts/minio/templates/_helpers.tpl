@@ -48,7 +48,23 @@ Selector labels
 Return the proper MinIO image name
 */}}
 {{- define "minio.image" -}}
+{{- if .Values.image.useCpuV1 }}
+{{- $registryName := .Values.image.registry -}}
+{{- $repositoryName := .Values.image.repository -}}
+{{- $tag := .Values.image.tagCpuV1 | toString -}}
+{{- if .Values.global }}
+    {{- if .Values.global.imageRegistry }}
+        {{- $registryName = .Values.global.imageRegistry -}}
+    {{- end -}}
+{{- end -}}
+{{- if $registryName }}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- else -}}
+{{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+{{- else }}
 {{- include "common.image" (dict "image" .Values.image "global" .Values.global) -}}
+{{- end }}
 {{- end }}
 
 {{/*
