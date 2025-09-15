@@ -1,8 +1,20 @@
 # Changelog
 
-## 0.2.1 (2025-09-08)
+## 0.2.3 (2025-09-15)
 
-* [minio] Update minio to RELEASE.2025-09-07 ([#43](https://github.com/CloudPirates-io/helm-charts/pull/43))
+* [minio] Minio set deployment update strategy ([#87](https://github.com/CloudPirates-io/helm-charts/pull/87))
+
+## <small>0.2.1 (2025-09-08)</small>
+
+* Update appVersion ([5c23cb1](https://github.com/CloudPirates-io/helm-charts/commit/5c23cb1))
+* revert ([ba71354](https://github.com/CloudPirates-io/helm-charts/commit/ba71354))
+* revert 2 ([b64c81d](https://github.com/CloudPirates-io/helm-charts/commit/b64c81d))
+* revert 3 ([d8ced5c](https://github.com/CloudPirates-io/helm-charts/commit/d8ced5c))
+* Update CHANGELOG.md ([bb8e730](https://github.com/CloudPirates-io/helm-charts/commit/bb8e730))
+* Update CHANGELOG.md ([82fe11f](https://github.com/CloudPirates-io/helm-charts/commit/82fe11f))
+* Update CHANGELOG.md ([808cae0](https://github.com/CloudPirates-io/helm-charts/commit/808cae0))
+* Upgrade minio to latest stable ([94ab830](https://github.com/CloudPirates-io/helm-charts/commit/94ab830))
+* Upgrade minio to latest stable ([b199ea4](https://github.com/CloudPirates-io/helm-charts/commit/b199ea4))
 
 ## 0.2.0 (2025-09-02)
 
