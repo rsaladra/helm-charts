@@ -81,6 +81,34 @@ entries:
   mariadb:
   - apiVersion: v2
     appVersion: 12.0.2
+    created: "2025-09-16T05:58:51.156468105Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: MariaDB is a high-performance, open-source relational database server
+      that is a drop-in replacement for MySQL
+    digest: f7ee93d71dd955af8995e8e4ceab8d290f86f211348b84b8998c9922eac58156
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/6512dd22ee/mariadb-logo.svg
+    keywords:
+    - mariadb
+    - mysql
+    - database
+    - sql
+    - relational
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: mariadb
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mariadb
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/mariadb-0.2.7/mariadb-0.2.7.tgz
+    version: 0.2.7
+  - apiVersion: v2
+    appVersion: 12.0.2
     created: "2025-09-15T13:29:03.468774354Z"
     dependencies:
     - name: common
@@ -2156,4 +2184,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-15T17:21:10.264680376Z"
+generated: "2025-09-16T05:58:51.15657754Z"
