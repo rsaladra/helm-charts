@@ -23,4 +23,4 @@ dependencies:
   - name: common
     version: "1.x.x"
     repository: oci://registry-1.docker.io/cloudpirates
-icon: https://a.storyblok.com/f/143071/512x512/08e14ba4f3/keycloak-logo.svg
+icon: TODO
