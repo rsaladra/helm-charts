@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.5 (2025-09-10)
+## 0.2.9 (2025-09-16)
 
-* [postgres] chore(deps): update docker.io/postgres:17.6 Docker digest to feff5b2 ([#76](https://github.com/CloudPirates-io/helm-charts/pull/76))
+* [postgres] fix admin postgres-password env-variable ([#100](https://github.com/CloudPirates-io/helm-charts/pull/100))
 
 ## <small>0.2.1 (2025-08-26)</small>
 
