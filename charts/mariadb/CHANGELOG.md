@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.6 (2025-09-15)
+## 0.2.7 (2025-09-16)
 
-* [mariadb] Mariadb/fix pvc labels ([#91](https://github.com/CloudPirates-io/helm-charts/pull/91))
+* [mariadb] chore(deps): update docker.io/mariadb:12.0.2 Docker digest to 8a061ef ([#97](https://github.com/CloudPirates-io/helm-charts/pull/97))
 
 ## 0.2.0 (2025-09-02)
 
