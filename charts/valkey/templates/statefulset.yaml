@@ -125,6 +125,10 @@ spec:
             name: {{ include "valkey.configmapName" . }}
         - name: tmp
           emptyDir: {}
+        {{- if not .Values.persistence.enabled }}
+        - name: data
+          emptyDir: {}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -160,7 +164,4 @@ spec:
         storageClassName: {{ .Values.persistence.storageClass | quote }}
         {{- end }}
         {{- end }}
-  {{- else }}
-        - name: data
-          emptyDir: {}
   {{- end }}
