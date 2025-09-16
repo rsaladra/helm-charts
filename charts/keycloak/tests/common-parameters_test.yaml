@@ -146,14 +146,20 @@ tests:
     set:
       keycloak:
         adminPassword: test-password
+      postgres:
+        enabled: false
+      database:
+        type: dev-mem
     asserts:
       - isKind:
           of: Secret
         template: templates/secret.yaml
+        documentIndex: 0
       - equal:
           path: data['admin-password']
           value: dGVzdC1wYXNzd29yZA==
         template: templates/secret.yaml
+        documentIndex: 0
 
   - it: should render database secret for external database
     set:
@@ -173,7 +179,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--dev"
+          content: "start-dev"
         template: templates/deployment.yaml
 
   - it: should configure Keycloak environment for production mode
@@ -181,7 +187,7 @@ tests:
       keycloak:
         production: true
     asserts:
-      - notContains:
+      - contains:
           path: spec.template.spec.containers[0].args
-          content: "--dev"
+          content: "start"
         template: templates/deployment.yaml
