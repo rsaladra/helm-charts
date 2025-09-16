@@ -71,7 +71,7 @@ spec:
             {{- if .Values.keycloak.httpsPort }}
             - --https-port={{ .Values.keycloak.httpsPort }}
             {{- end }}
-            {{- if ne .Values.database.type "h2-file" }}
+            {{- if not (has .Values.database.type (list "h2-file" "h2-mem" "dev-mem")) }}
             - --db={{ .Values.database.type }}
             - --db-url={{ include "keycloak.databaseUrl" . }}
             {{- end }}
@@ -167,6 +167,7 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          {{- if or .Values.persistence.enabled .Values.cache.configFile }}
           volumeMounts:
             {{- if .Values.persistence.enabled }}
             - name: data
@@ -178,6 +179,8 @@ spec:
               subPath: cache-ispn.xml
               readOnly: true
             {{- end }}
+          {{- end }}
+      {{- if or .Values.persistence.enabled .Values.cache.configFile }}
       volumes:
         {{- if .Values.persistence.enabled }}
         - name: data
@@ -189,6 +192,7 @@ spec:
           configMap:
             name: {{ include "keycloak.fullname" . }}-cache
         {{- end }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
