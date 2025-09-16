@@ -300,4 +300,3 @@ mariadb:
     username: ""
     password: ""
     rootPassword: ""
-    
