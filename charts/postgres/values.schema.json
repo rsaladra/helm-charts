@@ -730,6 +730,11 @@
         "type": "string"
       }
     },
+    "extraEnvVarsSecret": {
+      "type": "string",
+      "title": "Extra Environment Secret",
+      "description": "Name of an existing Secret containing additional environment variables"
+    },
     "extraObjects": {
       "type": "array",
       "title": "Extra Objects",

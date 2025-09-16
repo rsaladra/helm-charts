@@ -236,9 +236,10 @@ The following table lists the configurable parameters of the PostgreSQL chart an
 
 ### Extra Configuration Parameters
 
-| Parameter      | Description                                                 | Default |
-| -------------- | ----------------------------------------------------------- | ------- |
-| `extraObjects` | Array of extra objects to deploy with the release          | `[]`    |
+| Parameter            | Description                                                            | Default   |
+|----------------------|------------------------------------------------------------------------|-----------|
+| `extraObjects`       | Array of extra objects to deploy with the release                      | `[]`      |
+| `extraEnvVarsSecret` | Name of an existing Secret containing additional environment variables | ``        |
 
 #### Extra Objects
 
