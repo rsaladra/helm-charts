@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "postgres.fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "postgres.labels" . | nindent 4 }}
   {{- if .Values.commonAnnotations }}
@@ -43,28 +43,25 @@ spec:
           image: {{ include "postgres.image" . }}
           imagePullPolicy: {{ .Values.image.imagePullPolicy }}
           env:
-            # Default PostgreSQL environment variables
             - name: PGDATA
               value: {{ include "postgres.dataDir" . }}/pgdata
-            {{- if .Values.auth.enablePostgresUser }}
-            - name: POSTGRES_POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "postgres.secretName" . }}
-                  key: {{ include "postgres.adminPasswordKey" . }}
+            {{- if .Values.initdb.args }}
+            - name: POSTGRES_INITDB_ARGS
+              value: {{ .Values.initdb.args | quote }}
             {{- end }}
-            {{- if eq (include "postgres.createUser" .) "true" }}
+            {{- if .Values.auth.username }}
             - name: POSTGRES_USER
               value: {{ .Values.auth.username | quote }}
+            {{- end }}
+            {{- if .Values.auth.database }}
+            - name: POSTGRES_DB
+              value: {{ .Values.auth.database | quote }}
+            {{- end }}
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "postgres.secretName" . }}
-                  key: {{ include "postgres.userPasswordKey" . }}
-            - name: POSTGRES_DB
-              value: {{ .Values.auth.database | quote }}
-            {{- end }}
-            # PostgreSQL configuration
+                  key: {{ .Values.auth.secretKeys.passwordKey }}
             {{- if .Values.config.postgresqlMaxConnections }}
             - name: POSTGRES_MAX_CONNECTIONS
               value: {{ .Values.config.postgresqlMaxConnections | quote }}
