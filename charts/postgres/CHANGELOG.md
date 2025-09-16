@@ -1,4 +1,7 @@
 # Changelog
+## 0.4.0 (2025-09-16)
+
+* [postgres] add support for extra env vars from a secret
 
 ## 0.3.0 (2025-09-16)
 
