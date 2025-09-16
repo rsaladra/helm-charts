@@ -1,0 +1,203 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "keycloak.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "keycloak.labels" . | nindent 4 }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "keycloak.annotations" . | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "keycloak.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- $annotations := merge .Values.podAnnotations .Values.commonAnnotations }}
+      {{- with $annotations }}
+      annotations: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "keycloak.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ include "keycloak.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.automountServiceAccountToken }}
+{{- with (include "keycloak.imagePullSecrets" .) }}
+{{ . | nindent 6 }}
+{{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: {{ include "keycloak.image" . }}
+          imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+          command:
+            - /opt/keycloak/bin/kc.sh
+          args:
+            {{- if .Values.keycloak.production }}
+            - start
+            {{- else }}
+            - start-dev
+            {{- end }}
+            {{- if .Values.keycloak.httpEnabled }}
+            - --http-enabled=true
+            {{- end }}
+            {{- if .Values.keycloak.hostname }}
+            - --hostname={{ include "keycloak.hostname" . }}
+            {{- end }}
+            {{- if .Values.keycloak.hostnameAdmin }}
+            - --hostname-admin={{ include "keycloak.hostnameAdmin" . }}
+            {{- end }}
+            {{- if .Values.keycloak.hostnameStrict }}
+            - --hostname-strict={{ .Values.keycloak.hostnameStrict }}
+            {{- end }}
+            {{- if .Values.keycloak.hostnameBackchannel }}
+            - --hostname-backchannel={{ include "keycloak.hostnameBackchannel" . }}
+            {{- end }}
+            {{- if ne .Values.keycloak.proxy "none" }}
+            - --proxy={{ .Values.keycloak.proxy }}
+            {{- end }}
+            {{- if .Values.keycloak.httpPort }}
+            - --http-port={{ .Values.keycloak.httpPort }}
+            {{- end }}
+            {{- if .Values.keycloak.httpsPort }}
+            - --https-port={{ .Values.keycloak.httpsPort }}
+            {{- end }}
+            {{- if ne .Values.database.type "h2-file" }}
+            - --db={{ .Values.database.type }}
+            - --db-url={{ include "keycloak.databaseUrl" . }}
+            {{- end }}
+            {{- if ne .Values.cache.stack "local" }}
+            - --cache={{ .Values.cache.stack }}
+            {{- end }}
+            {{- if .Values.features.enabled }}
+            - --features={{ join "," .Values.features.enabled }}
+            {{- end }}
+            {{- if .Values.features.disabled }}
+            - --features-disabled={{ join "," .Values.features.disabled }}
+            {{- end }}
+          env:
+            - name: KEYCLOAK_ADMIN
+              value: {{ .Values.keycloak.adminUser | quote }}
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "keycloak.secretName" . }}
+                  key: {{ include "keycloak.adminPasswordKey" . }}
+            {{- if or (eq .Values.database.type "postgres") (eq .Values.database.type "mysql") (eq .Values.database.type "mariadb") }}
+            - name: KC_DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "keycloak.databaseSecretName" . }}
+                  key: {{ include "keycloak.databaseUsernameKey" . }}
+            - name: KC_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "keycloak.databaseSecretName" . }}
+                  key: {{ include "keycloak.databasePasswordKey" . }}
+            {{- end }}
+            {{- range $key, $value := .Values.extraEnv }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.keycloak.httpPort }}
+              protocol: TCP
+            {{- if .Values.keycloak.httpsPort }}
+            - name: https
+              containerPort: {{ .Values.keycloak.httpsPort }}
+              protocol: TCP
+            {{- end }}
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              {{- if .Values.keycloak.production }}
+              path: /health/live
+              {{- else }}
+              path: /
+              {{- end }}
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              {{- if .Values.keycloak.production }}
+              path: /health/ready
+              {{- else }}
+              path: /
+              {{- end }}
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              {{- if .Values.keycloak.production }}
+              path: /health/ready
+              {{- else }}
+              path: /
+              {{- end }}
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.startupProbe.failureThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.persistence.enabled }}
+            - name: data
+              mountPath: /opt/keycloak/data
+            {{- end }}
+            {{- if .Values.cache.configFile }}
+            - name: cache-config
+              mountPath: /opt/keycloak/conf/cache-ispn.xml
+              subPath: cache-ispn.xml
+              readOnly: true
+            {{- end }}
+      volumes:
+        {{- if .Values.persistence.enabled }}
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ default (include "keycloak.fullname" .) .Values.persistence.existingClaim }}
+        {{- end }}
+        {{- if .Values.cache.configFile }}
+        - name: cache-config
+          configMap:
+            name: {{ include "keycloak.fullname" . }}-cache
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

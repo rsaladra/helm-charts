@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "keycloak.fullname" . }}
+  labels:
+    {{- include "keycloak.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.httpPort }}
+      targetPort: {{ .Values.service.httpTargetPort }}
+      protocol: TCP
+      name: http
+    {{- if .Values.keycloak.httpsPort }}
+    - port: {{ .Values.service.httpsPort }}
+      targetPort: {{ .Values.service.httpsTargetPort }}
+      protocol: TCP
+      name: https
+    {{- end }}
+  selector:
+    {{- include "keycloak.selectorLabels" . | nindent 4 }}
