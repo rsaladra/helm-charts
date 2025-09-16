@@ -70,13 +70,12 @@ The following table lists the configurable parameters of the PostgreSQL chart an
 
 ### PostgreSQL image configuration
 
-| Parameter          | Description                                                                                                | Default        |
-| ------------------ | ---------------------------------------------------------------------------------------------------------- | -------------- |
-| `image.registry`   | PostgreSQL image registry                                                                                  | `docker.io`    |
-| `image.repository` | PostgreSQL image repository                                                                                | `postgres`     |
-| `image.tag`        | PostgreSQL image tag (immutable tags are recommended)                                                      | `"17.2"`       |
-| `image.digest`     | PostgreSQL image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag | `""`           |
-| `image.pullPolicy` | PostgreSQL image pull policy                                                                               | `IfNotPresent` |
+| Parameter            | Description                                  | Default                                                                        |
+| -------------------- | -------------------------------------------- | ------------------------------------------------------------------------------ |
+| `image.registry`     | PostgreSQL image registry                    | `docker.io`                                                                    |
+| `image.repository`   | PostgreSQL image repository                  | `postgres`                                                                     |
+| `image.tag`          | PostgreSQL image tag (immutable tags are recommended) | `"17.6@sha256:feff5b24fedd610975a1f5e743c51a4b360437f4dc3a11acf740dcd708f413f6"` |
+| `image.imagePullPolicy` | PostgreSQL image pull policy              | `Always`                                                                       |
 
 ### Deployment configuration
 
@@ -111,15 +110,11 @@ The following table lists the configurable parameters of the PostgreSQL chart an
 
 | Parameter                                | Description                                                                           | Default                  |
 | ---------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------ |
-| `auth.enablePostgresUser`                | Enable/disable the postgres user                                                      | `true`                   |
-| `auth.postgresPassword`                  | Password for the postgres admin user. If not set, a random password will be generated | `""`                     |
-| `auth.username`                          | Name for a custom user to create                                                      | `""`                     |
+| `auth.username`                          | Name for a custom superuser to create at initialisation. (This will also create a database with the same name)                                                      | `"openfga"`             |
 | `auth.password`                          | Password for the custom user to create                                                | `""`                     |
-| `auth.database`                          | Name for a custom database to create                                                  | `""`                     |
+| `auth.database`                          | Alternative name for the default database to be created at initialisation                                                  | `""`                     |
 | `auth.existingSecret`                    | Name of existing secret to use for PostgreSQL credentials                             | `""`                     |
-| `auth.secretKeys.adminPasswordKey`       | Name of key in existing secret to use for PostgreSQL credentials                      | `"postgres-password"`    |
-| `auth.secretKeys.userPasswordKey`        | Name of key in existing secret to use for PostgreSQL credentials                      | `"password"`             |
-| `auth.secretKeys.replicationPasswordKey` | Name of key in existing secret to use for replication user password                   | `"replication-password"` |
+| `auth.secretKeys.passwordKey`       | Name of key in existing secret to use for PostgreSQL credentials                      | `"postgres-password"`    |
 
 ### PostgreSQL Configuration
 
@@ -141,10 +136,11 @@ The following table lists the configurable parameters of the PostgreSQL chart an
 
 ### PostgreSQL Initdb Configuration
 
-| Parameter                 | Description                                    | Default |
-| ------------------------- | ---------------------------------------------- | ------- |
-| `initdb.scripts`          | Dictionary of scripts to be run at first boot  | `{}`    |
-| `initdb.scriptsConfigMap` | ConfigMap with scripts to be run at first boot | `""`    |
+| Parameter                 | Description                                                                   | Default |
+| ------------------------- | ----------------------------------------------------------------------------- | ------- |
+| `initdb.args`             | Send arguments to postgres initdb. This is a space separated string of arguments | `""`    |
+| `initdb.scripts`          | Dictionary of initdb scripts                                                   | `{}`    |
+| `initdb.scriptsConfigMap` | ConfigMap with scripts to be run at first boot                                | `""`    |
 
 ### Service configuration
 
@@ -180,7 +176,7 @@ The following table lists the configurable parameters of the PostgreSQL chart an
 | `persistence.enabled`       | Enable persistence using Persistent Volume Claims  | `true`              |
 | `persistence.storageClass`  | Persistent Volume storage class                    | `""`                |
 | `persistence.annotations`   | Persistent Volume Claim annotations                | `{}`                |
-| `persistence.size`          | Persistent Volume size                             | `20Gi`              |
+| `persistence.size`          | Persistent Volume size                             | `8Gi`               |
 | `persistence.accessModes`   | Persistent Volume access modes                     | `["ReadWriteOnce"]` |
 | `persistence.existingClaim` | The name of an existing PVC to use for persistence | `""`                |
 
@@ -240,9 +236,9 @@ The following table lists the configurable parameters of the PostgreSQL chart an
 
 ### Extra Configuration Parameters
 
-| Parameter      | Description                                                             | Default |
-| -------------- | ----------------------------------------------------------------------- | ------- |
-| `extraObjects` | A list of additional Kubernetes objects to deploy alongside the release | `[]`    |
+| Parameter      | Description                                                 | Default |
+| -------------- | ----------------------------------------------------------- | ------- |
+| `extraObjects` | Array of extra objects to deploy with the release          | `[]`    |
 
 #### Extra Objects
 

@@ -128,17 +128,6 @@ Return PostgreSQL run directory
 {{- end }}
 
 {{/*
-Check if we should create a custom user
-*/}}
-{{- define "postgres.createUser" -}}
-{{- if and .Values.auth.username .Values.auth.database -}}
-true
-{{- else -}}
-false
-{{- end -}}
-{{- end }}
-
-{{/*
 Get PostgreSQL database name
 */}}
 {{- define "postgres.database" -}}

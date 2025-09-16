@@ -175,16 +175,6 @@
       "title": "PostgreSQL Authentication",
       "description": "PostgreSQL Authentication configuration",
       "properties": {
-        "enablePostgresUser": {
-          "type": "boolean",
-          "title": "Enable Postgres User",
-          "description": "Enable/disable the postgres user"
-        },
-        "postgresPassword": {
-          "type": "string",
-          "title": "Postgres Password",
-          "description": "Password for the postgres admin user. If not set, a random password will be generated"
-        },
         "username": {
           "type": "string",
           "title": "Custom Username",
@@ -210,20 +200,10 @@
           "title": "Secret Keys",
           "description": "Keys in existing secret",
           "properties": {
-            "adminPasswordKey": {
+            "passwordKey": {
               "type": "string",
-              "title": "Admin Password Key",
+              "title": "Postgres Password Key",
               "description": "Name of key in existing secret to use for PostgreSQL credentials"
-            },
-            "userPasswordKey": {
-              "type": "string",
-              "title": "User Password Key",
-              "description": "Name of key in existing secret to use for PostgreSQL credentials"
-            },
-            "replicationPasswordKey": {
-              "type": "string",
-              "title": "Replication Password Key",
-              "description": "Name of key in existing secret to use for replication user password"
             }
           }
         }
@@ -310,6 +290,11 @@
       "title": "PostgreSQL Initdb Configuration",
       "description": "PostgreSQL Initdb Configuration parameters",
       "properties": {
+        "args": {
+          "type": "string",
+          "title": "Initdb Arguments",
+          "description": "Send arguments to postgres initdb. This is a space separated string of arguments"
+        },
         "scripts": {
           "type": "object",
           "title": "Initdb Scripts",
@@ -424,7 +409,22 @@
           "title": "TLS Configuration",
           "description": "TLS configuration for PostgreSQL ingress",
           "items": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "secretName": {
+                "type": "string",
+                "title": "Secret Name",
+                "description": "Name of the secret containing TLS certificates"
+              },
+              "hosts": {
+                "type": "array",
+                "title": "TLS Hosts",
+                "description": "List of hosts covered by the TLS certificate",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -705,7 +705,10 @@
         "annotations": {
           "type": "object",
           "title": "Service Account Annotations",
-          "description": "Annotations to add to the service account"
+          "description": "Annotations to add to the service account",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "name": {
           "type": "string",
