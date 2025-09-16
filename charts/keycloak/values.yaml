@@ -89,21 +89,23 @@ keycloak:
 
 ## @section Database Configuration
 database:
-  ## @param database.type Database type (postgres, mysql, mariadb, h2-file, h2-mem)
-  type: h2-file
-  ## @param database.host Database host
+  ## @param database.type Database type (postgres, mysql, mariadb)
+  ## Note: H2 databases (h2-file, h2-mem) are not supported due to readonly filesystem restrictions
+  ## Use embedded postgres or mariadb instead
+  type: postgres
+  ## @param database.host Database host (only used when not using embedded database)
   host: ""
-  ## @param database.port Database port
+  ## @param database.port Database port (only used when not using embedded database)
   port: ""
-  ## @param database.name Database name
+  ## @param database.name Database name (only used when not using embedded database)
   name: keycloak
-  ## @param database.username Database username
+  ## @param database.username Database username (only used when not using embedded database)
   username: keycloak
-  ## @param database.password Database password
+  ## @param database.password Database password (only used when not using embedded database)
   password: ""
-  ## @param database.existingSecret Name of existing secret for database credentials
+  ## @param database.existingSecret Name of existing secret for database credentials (only used when not using embedded database)
   existingSecret: ""
-  ## @param database.secretKeys Secret keys for database credentials
+  ## @param database.secretKeys Secret keys for database credentials (only used when not using embedded database)
   secretKeys:
     passwordKey: "db-password"
     usernameKey: "db-username"
@@ -266,3 +268,35 @@ extraEnv: {}
 
 ## @param extraObjects Array of extra objects to deploy with the release
 extraObjects: []
+
+## @section PostgreSQL Configuration (when postgres.enabled=true)
+## @descriptionStart
+## PostgreSQL configuration for embedded database
+## @descriptionEnd
+postgres:
+  ## @param postgres.enabled Enable embedded PostgreSQL database
+  enabled: true
+  ## @param postgres.auth.database PostgreSQL database name
+  ## @param postgres.auth.username PostgreSQL database user (leave empty for default 'postgres')
+  ## @param postgres.auth.password PostgreSQL database password
+  auth:
+    database: "keycloak"
+    username: ""
+    password: ""
+
+## @section MariaDB Configuration (when mariadb.enabled=true)
+## @descriptionStart
+## MariaDB configuration for embedded database
+## @descriptionEnd
+mariadb:
+  ## @param mariadb.enabled Enable embedded MariaDB database (set to false when using postgres)
+  enabled: false
+  ## @param mariadb.auth.database MariaDB database name
+  ## @param mariadb.auth.username MariaDB database user (leave empty for root user)
+  ## @param mariadb.auth.password MariaDB database password
+  ## @param mariadb.auth.rootPassword MariaDB root password
+  auth:
+    database: "keycloak"
+    username: ""
+    password: ""
+    rootPassword: ""

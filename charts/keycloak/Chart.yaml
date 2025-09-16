@@ -23,4 +23,12 @@ dependencies:
   - name: common
     version: "1.x.x"
     repository: oci://registry-1.docker.io/cloudpirates
+  - name: postgres
+    version: "0.x.x"
+    repository: oci://registry-1.docker.io/cloudpirates
+    condition: postgres.enabled
+  - name: mariadb
+    version: "0.x.x"
+    repository: oci://registry-1.docker.io/cloudpirates
+    condition: mariadb.enabled
 icon: TODO
