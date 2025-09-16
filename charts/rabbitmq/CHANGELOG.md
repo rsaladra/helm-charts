@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.6 (2025-09-16)
+## 0.2.7 (2025-09-16)
 
-* [rabbitmq] chore(deps): update docker.io/rabbitmq:4.1.4-management Docker digest to 2d92ad8 ([#99](https://github.com/CloudPirates-io/helm-charts/pull/99))
+* [busybox] chore(deps): update docker.io/busybox:1.37.0 Docker digest to d82f458 ([#104](https://github.com/CloudPirates-io/helm-charts/pull/104))
 
 ## <small>0.1.1 (2025-09-08)</small>
 
