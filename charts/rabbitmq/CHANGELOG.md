@@ -1,4 +1,7 @@
 # Changelog
+## 0.2.9 (2025-09-16)
+
+* feat(rabbitmq): add support for extraPorts in Service and StatefulSet
 
 ## 0.2.7 (2025-09-16)
 
