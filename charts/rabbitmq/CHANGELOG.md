@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.7 (2025-09-16)
+## 0.2.8 (2025-09-17)
 
-* [busybox] chore(deps): update docker.io/busybox:1.37.0 Docker digest to d82f458 ([#104](https://github.com/CloudPirates-io/helm-charts/pull/104))
+* [rabbitmq] Custom init containers / post start scripts ([#111](https://github.com/CloudPirates-io/helm-charts/pull/111))
 
 ## <small>0.1.1 (2025-09-08)</small>
 
