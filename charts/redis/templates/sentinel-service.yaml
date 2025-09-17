@@ -1,9 +1,9 @@
-{{- if include "redis.sentinelEnabled" . }}
+{{- if and .Values.sentinel.enabled (eq .Values.architecture "replication") }}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "redis.fullname" . }}-sentinel
-  namespace: {{ .Release.Namespace | quote }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "redis.labels" . | nindent 4 }}
     app.kubernetes.io/component: sentinel

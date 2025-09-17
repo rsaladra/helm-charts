@@ -99,20 +99,6 @@ app.kubernetes.io/component: sentinel
 {{- end }}
 
 {{/*
-Check if architecture is replication
-*/}}
-{{- define "redis.isReplication" -}}
-{{- eq .Values.architecture "replication" -}}
-{{- end -}}
-
-{{/*
-Check if Sentinel is enabled
-*/}}
-{{- define "redis.sentinelEnabled" -}}
-{{- and (include "redis.isReplication" .) .Values.sentinel.enabled -}}
-{{- end -}}
-
-{{/*
 Generate Redis CLI command with auth
 */}}
 {{- define "redis.cli" -}}
