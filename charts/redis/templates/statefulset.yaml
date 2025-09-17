@@ -19,6 +19,10 @@ spec:
     metadata:
       labels:
         {{- include "redis.selectorLabels" . | nindent 8 }}
+      {{- if or .Values.config.content .Values.config.existingConfigmap }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{- end }}
     spec:
 {{- with (include "redis.imagePullSecrets" .) }}
 {{ . | nindent 6 }}
