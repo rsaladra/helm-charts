@@ -43,11 +43,11 @@ spec:
               mountPath: /shared-quarkus
         {{- if .Values.postgres.enabled }}
         - name: wait-for-postgres
-          image: postgres:15-alpine
+          image: {{ .Values.initContainers.waitForPostgres.image }}
           command: ["sh", "-c", "until pg_isready -h {{ .Release.Name }}-postgres -p 5432 -U postgres; do echo waiting for database; sleep 2; done;"]
         {{- else if .Values.mariadb.enabled }}
         - name: wait-for-mariadb
-          image: mariadb:10.11
+          image: {{ .Values.initContainers.waitForMariadb.image }}
           command: ["sh", "-c", "until mysqladmin ping -h {{ .Release.Name }}-mariadb -P 3306 --silent; do echo waiting for database; sleep 2; done;"]
         {{- end }}
       containers:

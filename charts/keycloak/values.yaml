@@ -95,7 +95,7 @@ database:
   type: postgres
   ## @param database.host Database host (only used when not using embedded database)
   host: ""
-  ## @param database.port Database port (only used when not using embedded database)
+  ## @param database.port Database port (only used when not using embedded database, defaults: postgres=5432, mysql/mariadb=3306)
   port: ""
   ## @param database.name Database name (only used when not using embedded database)
   name: keycloak
@@ -268,6 +268,15 @@ extraEnv: {}
 
 ## @param extraObjects Array of extra objects to deploy with the release
 extraObjects: []
+
+## @section Init Container Configuration
+initContainers:
+  ## @param initContainers.waitForPostgres.image PostgreSQL init container image for waiting
+  waitForPostgres:
+    image: "postgres:17.6@sha256:feff5b24fedd610975a1f5e743c51a4b360437f4dc3a11acf740dcd708f413f6"
+  ## @param initContainers.waitForMariadb.image MariaDB init container image for waiting
+  waitForMariadb:
+    image: "mariadb:12.0.2@sha256:8a061ef9813cf960f94a262930a32b190c3fbe5c8d3ab58456ef1df4b90fd5dc"
 
 ## @section PostgreSQL Configuration (when postgres.enabled=true)
 ## @descriptionStart
