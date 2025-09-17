@@ -2,7 +2,7 @@
 
 ## 0.2.9 (2025-09-17)
 
-* Feature/add addional ports rabbitmq ([#114](https://github.com/CloudPirates-io/helm-charts/pull/114))
+* [rabbitmq] Add support for extraPorts in Service and StatefulSet ([#114](https://github.com/CloudPirates-io/helm-charts/pull/114))
 
 ## <small>0.1.1 (2025-09-08)</small>
 
