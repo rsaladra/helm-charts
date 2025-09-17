@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.3.0 (2025-09-15)
+## 0.3.1 (2025-09-17)
 
-* [redis]: Implement redis sentinal functionality ([#81](https://github.com/CloudPirates-io/helm-charts/pull/81))
+* [redis] fix sentinel conditions. set default to standalone ([#106](https://github.com/CloudPirates-io/helm-charts/pull/106))
 
 ## 0.2.0 (2025-09-02)
 
