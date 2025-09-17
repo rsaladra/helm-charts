@@ -28,7 +28,7 @@ image:
 
 ## @section Redis Architecture
 ## @param architecture Redis architecture. Allowed values: standalone or replication
-architecture: replication
+architecture: standalone
 
 ## @param replicaCount Number of Redis instances to deploy (only when architecture=replication)
 ## When using Sentinel, this is the total number of Redis instances (including the initial master)
@@ -82,7 +82,7 @@ persistence:
 ## @param resources Resource limits and requests for Redis pod
 resources:
   limits:
-    memory: 256Mi
+    memory: 128Mi
   requests:
     cpu: 50m
     memory: 128Mi
@@ -157,7 +157,7 @@ extraVolumeMounts: []
 sentinel:
   ## @param sentinel.enabled Enable Redis Sentinel for high availability
   ## IMPORTANT: When enabled, applications should use Sentinel-aware clients to discover the current master
-  enabled: true
+  enabled: false
   ## @param sentinel.image.repository Redis Sentinel image repository
   image:
     repository: redis

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "redis.fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "redis.labels" . | nindent 4 }}
   {{- with (include "redis.annotations" .) }}
@@ -25,8 +25,8 @@ spec:
 {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if and .Values.sentinel.enabled (eq .Values.architecture "replication") }}
       initContainers:
-        {{- if include "redis.sentinelEnabled" . }}
         - name: redis-init
           image: {{ include "redis.image" . | quote }}
           imagePullPolicy: {{ include "common.imagePullPolicy" (dict "image" .Values.image) }}
@@ -139,7 +139,7 @@ spec:
             - /bin/sh
             - -c
             - |
-              {{- if include "redis.sentinelEnabled" . }}
+              {{- if and .Values.sentinel.enabled (eq .Values.architecture "replication") }}
               CONFIG_FILE="/tmp/redis.conf"
               {{- else }}
               CONFIG_FILE="{{ include "redis.configFullName" . }}"
@@ -192,15 +192,13 @@ spec:
                 - /bin/sh
                 - -c
                 - |
-                  {{- if include "redis.sentinelEnabled" . }}
-                  # For Sentinel-enabled setup: simple connectivity check
+                  {{- if and .Values.sentinel.enabled (eq .Values.architecture "replication") }}
                   {{- if .Values.auth.enabled }}
                   redis-cli -a ${REDIS_PASSWORD} ping | grep -q PONG
                   {{- else }}
                   redis-cli ping | grep -q PONG
                   {{- end }}
                   {{- else }}
-                  # Standard ping check for non-Sentinel
                   {{- if .Values.auth.enabled }}
                   redis-cli -a ${REDIS_PASSWORD} ping
                   {{- else }}
@@ -213,7 +211,7 @@ spec:
             failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
             successThreshold: {{ .Values.readinessProbe.successThreshold }}
           {{- end }}
-          {{- if include "redis.sentinelEnabled" . }}
+          {{- if and .Values.sentinel.enabled (eq .Values.architecture "replication") }}
           lifecycle:
             preStop:
               exec:
@@ -225,7 +223,7 @@ spec:
           volumeMounts:
             - name: data
               mountPath: {{ .Values.persistence.mountPath }}
-            {{- if include "redis.sentinelEnabled" . }}
+            {{- if and .Values.sentinel.enabled (eq .Values.architecture "replication") }}
             - name: redis-config
               mountPath: /tmp
             - name: prestop-script
@@ -239,7 +237,7 @@ spec:
             {{- if .Values.extraVolumeMounts }}
             {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
             {{- end }}
-        {{- if include "redis.sentinelEnabled" . }}
+        {{- if and .Values.sentinel.enabled (eq .Values.architecture "replication") }}
         - name: sentinel
           securityContext: {{- toYaml .Values.containerSecurityContext | nindent 12 }}
           image: {{ include "redis.sentinel.image" . | quote }}
@@ -374,7 +372,7 @@ spec:
         - name: data
           emptyDir: {}
         {{- end }}
-        {{- if include "redis.sentinelEnabled" . }}
+        {{- if and .Values.sentinel.enabled (eq .Values.architecture "replication") }}
         - name: redis-config
           emptyDir: {}
         - name: prestop-script
