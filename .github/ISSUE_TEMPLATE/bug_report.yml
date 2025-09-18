@@ -1,6 +1,6 @@
 name: 🐞 Bug Report
 description: Create a report to help us improve
-labels: ["tech-issues"]
+labels: ["bug"]
 body:
   - type: markdown
     attributes:
@@ -43,3 +43,30 @@ body:
     attributes:
       label: Additional informations
       description: Tell us anything else you think we should know.
+  - type: markdown
+    attributes:
+      value: |
+        Select affected helm charts so we can auto-label your issue.
+  - type: dropdown
+    attributes:
+      label: Affected Helm charts
+      description: Select one or more
+      multiple: true
+      options:
+        - universal
+        - clusterpirate
+        - common
+        - keycloak
+        - mariadb
+        - memcached
+        - minio
+        - mongodb
+        - nginx
+        - postgres
+        - rabbitmq
+        - redis
+        - timescaledb
+        - valkey
+        - zookeeper
+    validations:
+      required: true

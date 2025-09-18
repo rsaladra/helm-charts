@@ -135,6 +135,10 @@ spec:
             - name: prometheus
               containerPort: {{ .Values.metrics.port }}
             {{- end }}
+            {{- range .Values.extraPorts }}
+            - containerPort: {{ .containerPort }}
+              name: {{ .name }}
+            {{- end }}
           env:
             {{- if .Values.auth.enabled }}
             - name: RABBITMQ_DEFAULT_USER
