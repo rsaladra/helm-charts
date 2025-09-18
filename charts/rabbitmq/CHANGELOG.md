@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.8 (2025-09-17)
+## 0.2.9 (2025-09-18)
 
-* [rabbitmq] Custom init containers / post start scripts ([#111](https://github.com/CloudPirates-io/helm-charts/pull/111))
+* [rabbitmq] chore(deps): update docker.io/rabbitmq:4.1.4-management Docker digest to 85cb76f ([#118](https://github.com/CloudPirates-io/helm-charts/pull/118))
 
 ## <small>0.1.1 (2025-09-08)</small>
 
