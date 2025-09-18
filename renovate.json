@@ -9,7 +9,7 @@
     "managerFilePatterns": [
       "/^charts/.*values\\.yaml$/"
     ],
-    "versioning": "regex:^.+@.+$",
+    "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<prerelease>-[^@]*)?@(?<compatibility>.+)$",
     "extractVersion": "(?<version>[^@]+)@(?<sha>sha256:[a-f0-9]{64})",
     "rangeStrategy": "replace"
   },
