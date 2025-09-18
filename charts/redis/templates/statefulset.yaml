@@ -21,7 +21,11 @@ spec:
         {{- include "redis.selectorLabels" . | nindent 8 }}
       {{- if or .Values.config.content .Values.config.existingConfigmap }}
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- if and .Values.config.content (not .Values.config.existingConfigmap) }}
+        checksum/config: {{ .Values.config.content | sha256sum }}
+        {{- else if .Values.config.existingConfigmap }}
+        checksum/config: {{ .Values.config.existingConfigmap | sha256sum }}
+        {{- end }}
       {{- end }}
     spec:
 {{- with (include "redis.imagePullSecrets" .) }}
