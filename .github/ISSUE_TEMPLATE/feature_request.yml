@@ -56,3 +56,4 @@ body:
         - redis
         - timescaledb
         - valkey
+        - zookeeper
