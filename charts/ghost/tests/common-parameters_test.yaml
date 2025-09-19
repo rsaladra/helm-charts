@@ -1,4 +1,4 @@
-suite: test ghost. common parameters
+suite: test ghost common parameters
 templates:
   - deployment.yaml
 set:
@@ -9,16 +9,16 @@ tests:
     asserts:
       - equal:
           path: metadata.name
-          value: RELEASE-NAME-ghost.
+          value: RELEASE-NAME-ghost
       - equal:
           path: metadata.labels["app.kubernetes.io/name"]
-          value: ghost.
+          value: ghost
       - equal:
           path: metadata.labels["app.kubernetes.io/instance"]
           value: RELEASE-NAME
       - equal:
           path: spec.template.spec.containers[0].image
-          value: docker.io/ghost.:1.6.31@sha256:testdigest123
+          value: docker.io/ghost:1.6.31@sha256:testdigest123
       - equal:
           path: spec.template.spec.containers[0].imagePullPolicy
           value: Always
@@ -30,7 +30,7 @@ tests:
     asserts:
       - equal:
           path: spec.template.spec.containers[0].image
-          value: my-registry.com/ghost.:1.6.31@sha256:testdigest123
+          value: my-registry.com/ghost:1.6.31@sha256:testdigest123
 
   - it: should respect global.imagePullSecrets
     set:
@@ -98,16 +98,16 @@ tests:
     asserts:
       - equal:
           path: spec.template.spec.containers[0].image
-          value: custom-registry.io/ghost.:1.6.31@sha256:testdigest123
+          value: custom-registry.io/ghost:1.6.31@sha256:testdigest123
 
   - it: should respect image.repository override
     set:
       image:
-        repository: "custom/ghost."
+        repository: "custom/ghost"
     asserts:
       - equal:
           path: spec.template.spec.containers[0].image
-          value: docker.io/custom/ghost.:1.6.31@sha256:testdigest123
+          value: docker.io/custom/ghost:1.6.31@sha256:testdigest123
 
   - it: should respect image.tag override
     set:
@@ -116,7 +116,7 @@ tests:
     asserts:
       - equal:
           path: spec.template.spec.containers[0].image
-          value: docker.io/ghost.:1.6.30@sha256:newdigest123
+          value: docker.io/ghost:1.6.30@sha256:newdigest123
 
   - it: should respect image.imagePullPolicy override
     set:
@@ -136,7 +136,7 @@ tests:
     asserts:
       - equal:
           path: spec.template.spec.containers[0].image
-          value: global-registry.com/ghost.:1.6.31@sha256:testdigest123
+          value: global-registry.com/ghost:1.6.31@sha256:testdigest123
 
   - it: should combine all overrides correctly
     set:
@@ -144,19 +144,19 @@ tests:
         imageRegistry: "global-reg.io"
         imagePullSecrets:
           - name: global-secret
-      nameOverride: "custom-ghost."
+      nameOverride: "custom-ghost"
       commonLabels:
         env: "prod"
       commonAnnotations:
         version: "v1.0.0"
       image:
-        repository: "custom/ghost."
+        repository: "custom/ghost"
         tag: "1.6.29@sha256:custom123"
         imagePullPolicy: "Never"
     asserts:
       - equal:
           path: metadata.name
-          value: RELEASE-NAME-custom-ghost.
+          value: RELEASE-NAME-custom-ghost
       - equal:
           path: metadata.labels.env
           value: prod
@@ -165,7 +165,7 @@ tests:
           value: v1.0.0
       - equal:
           path: spec.template.spec.containers[0].image
-          value: global-reg.io/custom/ghost.:1.6.29@sha256:custom123
+          value: global-reg.io/custom/ghost:1.6.29@sha256:custom123
       - equal:
           path: spec.template.spec.containers[0].imagePullPolicy
           value: Never
