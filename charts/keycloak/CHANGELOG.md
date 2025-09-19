@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.1.0 (2025-09-18)
+## 0.1.1 (2025-09-19)
 
-* [rabbitmq] Add support for extraPorts in Service and StatefulSet ([#114](https://github.com/CloudPirates-io/helm-charts/pull/114))
+* [keycloak] add readme documentation and values.schema.json ([#127](https://github.com/CloudPirates-io/helm-charts/pull/127))
