@@ -80,7 +80,7 @@ ingress:
           pathType: Prefix
     - host: admin.ghost.localhost
       paths:
-        - path: /
+        - path: /ghost
           pathType: Prefix
   ## @param ingress.tls An array with the tls configuration
   tls: []
