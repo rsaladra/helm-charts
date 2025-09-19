@@ -22,6 +22,13 @@ To install with custom values:
 helm install my-ghost oci://registry-1.docker.io/cloudpirates/ghost -f my-values.yaml
 ```
 
+The output should show you the URL's for your Ghost instance and Admin interface accoriding to your settings in my-values.yaml
+
+```
+URLS:
+ 1) Website: https://ghost.localhost
+ 2) Admin: https://admin.ghost.localhost/ghost
+```
 
 ## Uninstalling
 
@@ -53,6 +60,29 @@ cosign verify --key cosign.pub registry-1.docker.io/cloudpirates/ghost:<version>
 
 
 ## Configuration
+
+### External database support
+
+If you want to use an external database (e.g., AWS RDS, DigitalOcean Managed Databases), you need to set the following values in your `my-values.yaml`:
+
+```yaml
+mariadb:
+  enabled: false
+config:
+  database:
+    client: "mysql"
+    externalConnection:
+      host: "ghost-mariadb"
+      port: 3306
+      user: "ghost"
+      password: "changeme"
+      database: "ghost"
+    pool:
+      min: 2
+      max: 10
+  ...
+```
+
 
 The following tables list the configurable parameters of the Ghost chart organized by category:
 
@@ -166,16 +196,13 @@ The following tables list the configurable parameters of the Ghost chart organiz
 
 
 ## Example: Custom Ghost Configuration
-
-Create a `my-values.yaml` file to override default settings:
-
 https://docs.ghost.org/config 
 
 ```yaml
 config:
   database:
     client: "mysql"
-    connection:
+    externalConnection:
       host: "ghost-mariadb"
       port: 3306
       user: "ghost"
