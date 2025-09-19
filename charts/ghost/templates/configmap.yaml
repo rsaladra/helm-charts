@@ -8,7 +8,7 @@ metadata:
 data:
   config.production.json: |-
     {
-      "url": {{ .Values.config.url | quote }},
+      "url": {{ printf "https://%s" (first .Values.ingress.hosts).host | quote }},
       "database": {
         "client": {{ .Values.config.database.client | quote }},
         "connection": {
@@ -38,7 +38,7 @@ data:
         "from": {{ .Values.config.mail.from | quote }}
       },
       "admin": {
-        "url": {{ .Values.config.admin.url | quote }}
+        "url": {{ printf "https://%s" (index .Values.ingress.hosts 1).host | quote }}
       },
       "server": {
         "host": {{ .Values.config.server.host | quote }},
@@ -84,18 +84,6 @@ data:
       "imageOptimization": {
         "resize": {{ .Values.config.imageOptimization.resize }}
       },
-      "storage": {
-        "active": {{ .Values.config.storage.active | quote }}
-      },
-      "adapters": {
-        "cache": {
-          "imageSizes": {
-            "adapter": {{ .Values.config.adapters.cache.imageSizes.adapter | quote }},
-            "ttl": {{ .Values.config.adapters.cache.imageSizes.ttl }},
-            "keyPrefix": {{ .Values.config.adapters.cache.imageSizes.keyPrefix | quote }}
-          }
-        }
-      },
       "portal": {
         "url": {{ .Values.config.portal.url | quote }}
       },
@@ -106,5 +94,8 @@ data:
       "comments": {
         "url": {{ .Values.config.comments.url | quote }},
         "styles": {{ .Values.config.comments.styles | quote }}
+      },
+      "enableDeveloperExperiments": {
+        "enableDeveloperExperiments": false
       }
     }

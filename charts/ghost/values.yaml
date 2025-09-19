@@ -41,7 +41,7 @@ replicaCount: 1
 ##     protocol: TCP
 containerPorts:
   - name: http
-    containerPort: 80
+    containerPort: 2368
     protocol: TCP
 
 service:
@@ -67,14 +67,18 @@ service:
 ## @section Ingress parameters
 ingress:
   ## @param ingress.enabled Enable ingress record generation
-  enabled: false
+  enabled: true
   ## @param ingress.className IngressClass that will be be used to implement the Ingress
   className: ""
   ## @param ingress.annotations Additional annotations for the Ingress resource
   annotations: {}
   ## @param ingress.hosts An array with hosts and paths
   hosts:
-    - host: ghost.local
+    - host: ghost.localhost
+      paths:
+        - path: /
+          pathType: Prefix
+    - host: admin.ghost.localhost
       paths:
         - path: /
           pathType: Prefix
@@ -124,7 +128,7 @@ affinity: {}
 
 containerSecurityContext:
   ## @param containerSecurityContext.runAsUser User ID to run the container
-  runAsUser: 101
+  runAsUser: 1000
   ## @param containerSecurityContext.runAsNonRoot Run as non-root user
   runAsNonRoot: true
   ## @param containerSecurityContext.allowPrivilegeEscalation Set Nginx container's privilege escalation
@@ -133,7 +137,7 @@ containerSecurityContext:
 ## @param podSecurityContext Security context for the pod
 podSecurityContext:
   ## @param podSecurityContext.fsGroup Set Nginx pod's Security Context fsGroup
-  fsGroup: 101
+  fsGroup: 1000
 
 livenessProbe:
   ## @param livenessProbe.enabled Enable liveness probe
@@ -163,11 +167,11 @@ readinessProbe:
   ## @param readinessProbe.initialDelaySeconds Initial delay before starting probes
   initialDelaySeconds: 5
   ## @param readinessProbe.periodSeconds How often to perform the probe
-  periodSeconds: 5
+  periodSeconds: 12
   ## @param readinessProbe.timeoutSeconds Timeout for each probe attempt
   timeoutSeconds: 5
   ## @param readinessProbe.failureThreshold Number of failures before pod is marked unready
-  failureThreshold: 3
+  failureThreshold: 12
   ## @param readinessProbe.successThreshold Number of successes to mark probe as successful
   successThreshold: 1
 
@@ -186,15 +190,14 @@ extraVolumeMounts: []
 extraObjects: []
 
 config:
-  url: "https://example.com"
   database:
     client: "mysql"
     connection:
       host: "ghost-mariadb"
       port: 3306
       user: &db-user "ghost"
-      password: &db-password "ghost"
-      database: &db-database "changeme"
+      password: &db-password "changeme"
+      database: &db-database "ghost"
     pool:
       min: 2
       max: 10
@@ -209,10 +212,8 @@ config:
         user: "postmaster@example.mailgun.org"
         pass: "1234567890"
     from: "support@example.com"
-  admin:
-    url: "https://example.com"
   server:
-    host: "127.0.0.1"
+    host: "0.0.0.0"
     port: 2368
   privacy:
     useUpdateCheck: false
