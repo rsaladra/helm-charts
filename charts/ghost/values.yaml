@@ -296,7 +296,7 @@ persistence:
   storageClass: ""
   ## @param persistence.accessMode Access mode of the PVC
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   ## @param persistence.size Size of persistent volume claim
   size: 8Gi
 
@@ -318,4 +318,3 @@ mariadb:
 
   service:
     port: 3306
-  
