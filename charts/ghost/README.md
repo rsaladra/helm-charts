@@ -138,6 +138,12 @@ The following tables list the configurable parameters of the Ghost chart organiz
 | `readinessProbe.initialDelaySeconds` | Initial delay seconds               | `5`             |
 | `readinessProbe.periodSeconds`       | Period seconds                      | `12`            |
 
+### Init Container Parameters
+
+| Parameter                              | Description                         | Default         |
+|----------------------------------------|-------------------------------------|-----------------|
+| `initContainers.waitForMariadb.image`  | MariaDB init container image        | `mariadb:12.0.2`|
+
 ### Autoscaling Parameters
 
 | Parameter                               | Description                      | Default         |

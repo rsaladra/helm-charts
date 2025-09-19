@@ -10,6 +10,16 @@ data:
     {
       "url": {{ printf "https://%s" (first .Values.ingress.hosts).host | quote }},
       "database": {
+        {{- if .Values.mariadb.enabled }}
+        "client": "mysql",
+        "connection": {
+          "host": "{{ include "ghost.fullname" . }}-mariadb",
+          "port": {{ .Values.mariadb.service.port }},
+          "user": {{ .Values.mariadb.auth.username | quote }},
+          "password": {{ .Values.mariadb.auth.password | quote }},
+          "database": {{ .Values.mariadb.auth.database | quote }}
+        },
+        {{- else }}
         "client": {{ .Values.config.database.client | quote }},
         "connection": {
           "host": {{ .Values.config.database.connection.host | quote }},
@@ -18,6 +28,7 @@ data:
           "password": {{ .Values.config.database.connection.password | quote }},
           "database": {{ .Values.config.database.connection.database | quote }}
         },
+        {{- end }}
         "pool": {
           "min": {{ .Values.config.database.pool.min }},
           "max": {{ .Values.config.database.pool.max }}
