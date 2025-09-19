@@ -22,4 +22,4 @@ dependencies:
     version: "0.2.x"
     repository: oci://registry-1.docker.io/cloudpirates
     condition: mariadb.enabled
-icon: https://a.storyblok.com/f/143071/512x512/9fcd98c061/ghost-logo.svg
+icon: https://a.storyblok.com/f/143071/512x512/a130ba5305/ghost-logo.svg
