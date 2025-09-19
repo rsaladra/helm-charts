@@ -199,12 +199,12 @@ initContainers:
 config:
   database:
     client: "mysql"
-    connection:
-      host: "ghost-mariadb"
+    externalConnection:
+      host: "my-external-db"
       port: 3306
-      user: &db-user "ghost"
-      password: &db-password "changeme"
-      database: &db-database "ghost"
+      user: "ghost"
+      password: "changeme"
+      database: "ghost"
     pool:
       min: 2
       max: 10
@@ -306,11 +306,11 @@ mariadb:
 
   auth:
     ## @param mariadb.auth.database MariaDB custom database
-    database: *db-database
+    database: ghost
     ## @param mariadb.auth.username MariaDB custom user name
-    username: *db-user
+    username: ghost
     ## @param mariadb.auth.password MariaDB custom user password
-    password: *db-password
+    password: changeme
     ## @param mariadb.auth.existingSecret Name of existing secret to use for MariaDB credentials
     existingSecret: ""
     ## @param mariadb.auth.allowEmptyRootPassword Allow the root user of MariaDB to have no password set

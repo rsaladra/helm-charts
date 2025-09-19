@@ -43,7 +43,7 @@ spec:
             - -c
             - >
               retries=0;
-              max_retries=1500;
+              max_retries=15;
               until [ $retries -ge $max_retries ] || mariadb-admin ping -h {{ include "ghost.fullname" . }}-mariadb 
               -P {{ .Values.mariadb.service.port }} 
               -u{{ .Values.mariadb.auth.username }} 
@@ -65,7 +65,6 @@ spec:
           securityContext: {{- toYaml .Values.containerSecurityContext | nindent 12 }}
           image: {{ include "ghost.image" . | quote }}
           imagePullPolicy: {{ include "common.imagePullPolicy" (dict "image" .Values.image) }}
-          #command: ['tail', '-f', '/dev/null']
           ports:
             {{- range .Values.containerPorts }}
             - name: {{ .name }}

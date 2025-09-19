@@ -22,11 +22,11 @@ data:
         {{- else }}
         "client": {{ .Values.config.database.client | quote }},
         "connection": {
-          "host": {{ .Values.config.database.connection.host | quote }},
-          "port": {{ .Values.config.database.connection.port }},
-          "user": {{ .Values.config.database.connection.user | quote }},
-          "password": {{ .Values.config.database.connection.password | quote }},
-          "database": {{ .Values.config.database.connection.database | quote }}
+          "host": {{ .Values.config.database.externalConnection.host | quote }},
+          "port": {{ .Values.config.database.externalConnection.port }},
+          "user": {{ .Values.config.database.externalConnection.user | quote }},
+          "password": {{ .Values.config.database.externalConnection.password | quote }},
+          "database": {{ .Values.config.database.externalConnection.database | quote }}
         },
         {{- end }}
         "pool": {
