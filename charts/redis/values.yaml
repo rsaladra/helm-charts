@@ -210,13 +210,12 @@ metrics:
   image:
     registry: docker.io
     repository: oliver006/redis_exporter
-    tag: "v1.58.0"
-    pullPolicy: IfNotPresent
+    tag: "v1.58.0@sha256:2e42c98f2c53aaf3ce205e746ff8bfa25d39e30d8b4f401ce0ad2740836bb817"
+    pullPolicy: Always
   ## @param metrics.resources Resource limits and requests for metrics container
   resources:
     limits:
-      cpu: 250m
-      memory: 256Mi
+      memory: 64Mi
     requests:
       cpu: 50m
       memory: 64Mi
