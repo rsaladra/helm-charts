@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.1.1 (2025-09-19)
+## 0.1.2 (2025-09-22)
 
-* [keycloak] add readme documentation and values.schema.json ([#127](https://github.com/CloudPirates-io/helm-charts/pull/127))
+* [keycloak] Fix deprecated environment variable warning ([#132](https://github.com/CloudPirates-io/helm-charts/pull/132))
