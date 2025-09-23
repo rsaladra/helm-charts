@@ -162,6 +162,7 @@ redis-cli -h my-redis -a $REDIS_PASSWORD
 | `priorityClassName` | Priority class for pod eviction   | `""`    |
 | `tolerations`       | Tolerations for pod assignment    | `[]`    |
 | `affinity`          | Affinity rules for pod assignment | `{}`    |
+| `topologySpreadConstraints` | Topology spread constraints for pod assignment | `[]` |
 
 ### Security Context
 
