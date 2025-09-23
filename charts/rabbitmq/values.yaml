@@ -324,10 +324,10 @@ customScripts:
   #     - name: data
   #       mountPath: /var/lib/rabbitmq
 
-## @param podManagementPolicy 
+## @param podManagementPolicy
 podManagementPolicy: OrderedReady
 
-## @section Persistent Volume Claim Retention Policy 
+## @section Persistent Volume Claim Retention Policy
 persistentVolumeClaimRetentionPolicy:
   ## @param persistentVolumeClaimRetentionPolicy.enabled Enable Persistent volume retention policy
   enabled: false
