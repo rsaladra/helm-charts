@@ -103,6 +103,38 @@ redis-cli -h my-redis -a $REDIS_PASSWORD
 | `config.existingConfigmap`    | Name of existing ConfigMap to use    | `""`                   |
 | `config.existingConfigmapKey` | Key in existing ConfigMap            | `""`                   |
 
+### Metrics
+
+| Parameter                                    | Description                                                                                   | Default |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------- | ------- |
+| `metrics.enabled`                            | Start a sidecar Prometheus exporter to expose Redis metrics                                    | `false` |
+| `metrics.image.registry`                     | Redis exporter image registry                                                                 | `docker.io` |
+| `metrics.image.repository`                   | Redis exporter image repository                                                               | `oliver006/redis_exporter` |
+| `metrics.image.tag`                          | Redis exporter image tag                                                                      | `v1.58.0@sha256:2e42c98f2c53aaf3ce205e746ff8bfa25d39e30d8b4f401ce0ad2740836bb817` |
+| `metrics.image.pullPolicy`                   | Redis exporter image pull policy                                                              | `Always` |
+| `metrics.resources.requests.cpu`             | CPU request for the metrics container                                                         | `50m` |
+| `metrics.resources.requests.memory`          | Memory request for the metrics container                                                      | `64Mi` |
+| `metrics.resources.limits.cpu`               | CPU limit for the metrics container                                                           | `nil` |
+| `metrics.resources.limits.memory`            | Memory limit for the metrics container                                                        | `64Mi` |
+| `metrics.extraArgs`                          | Extra arguments for Redis exporter (e.g. `--redis.addr`, `--web.listen-address`)               | `[]` |
+| `metrics.service.type`                       | Metrics service type                                                                          | `ClusterIP` |
+| `metrics.service.port`                       | Metrics service port                                                                          | `9121` |
+| `metrics.service.annotations`                | Additional custom annotations for Metrics service                                             | `{}` |
+| `metrics.service.loadBalancerIP`             | LoadBalancer IP if metrics service type is `LoadBalancer`                                     | `""` |
+| `metrics.service.loadBalancerSourceRanges`   | Addresses allowed when metrics service is `LoadBalancer`                                      | `[]` |
+| `metrics.service.clusterIP`                  | Static clusterIP or None for headless services when metrics service type is `ClusterIP`        | `""` |
+| `metrics.service.nodePort`                   | NodePort value for LoadBalancer and NodePort service types                                    | `""` |
+| `metrics.serviceMonitor.enabled`             | Create ServiceMonitor resource(s) for scraping metrics using Prometheus Operator              | `false` |
+| `metrics.serviceMonitor.namespace`           | Namespace in which to create ServiceMonitor resource(s)                                       | `""` |
+| `metrics.serviceMonitor.interval`            | Interval at which metrics should be scraped                                                   | `30s` |
+| `metrics.serviceMonitor.scrapeTimeout`       | Timeout after which the scrape is ended                                                       | `""` |
+| `metrics.serviceMonitor.relabelings`         | Additional relabeling of metrics                                                              | `[]` |
+| `metrics.serviceMonitor.metricRelabelings`   | Additional metric relabeling of metrics                                                       | `[]` |
+| `metrics.serviceMonitor.honorLabels`         | Honor metrics labels                                                                          | `false` |
+| `metrics.serviceMonitor.selector`            | Prometheus instance selector labels                                                           | `{}` |
+| `metrics.serviceMonitor.annotations`         | Additional custom annotations for the ServiceMonitor                                          | `{}` |
+| `metrics.serviceMonitor.namespaceSelector`   | Namespace selector for ServiceMonitor                                                         | `{}` |
+
 ### Persistence
 
 | Parameter                  | Description                              | Default         |
