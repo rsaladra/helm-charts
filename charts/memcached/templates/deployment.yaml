@@ -40,7 +40,7 @@ spec:
             - {{ .Values.config.maxConnections | quote }}
             {{- end }}
             {{- if .Values.config.verbosity }}
-            - {{ printf "-%s" (repeat .Values.config.verbosity "v") | quote }}
+            - {{ printf "-%s" (repeat (.Values.config.verbosity | int) "v") | quote }}
             {{- end }}
             {{- range .Values.config.extraArgs }}
             - {{ . | quote }}
