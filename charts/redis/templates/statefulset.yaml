@@ -33,6 +33,10 @@ spec:
 {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- if and .Values.sentinel.enabled (eq .Values.architecture "replication") }}
       initContainers:
         - name: redis-init
@@ -251,6 +255,10 @@ spec:
           securityContext: {{- toYaml .Values.containerSecurityContext | nindent 12 }}
           image: {{ include "redis.sentinel.image" . | quote }}
           imagePullPolicy: {{ include "common.imagePullPolicy" (dict "image" .Values.sentinel.image) }}
+          {{- if .Values.sentinel.extraVolumeMounts }}
+          volumeMounts:
+            {{- toYaml .Values.sentinel.extraVolumeMounts | nindent 12 }}
+          {{- end }}
           command:
             - /bin/sh
             - -c
