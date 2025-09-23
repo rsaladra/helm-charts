@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.4.0 (2025-09-22)
+## 0.4.2 (2025-09-23)
 
-* [redis] Implement redis service monitoring ([#131](https://github.com/CloudPirates-io/helm-charts/pull/131))
+* [redis]: Persistent volume claim retentionpolicy ([#143](https://github.com/CloudPirates-io/helm-charts/pull/143))
 
 ## 0.2.0 (2025-09-02)
 
