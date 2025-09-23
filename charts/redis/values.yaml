@@ -99,6 +99,9 @@ tolerations: []
 ## @param affinity Affinity rules for pod assignment
 affinity: {}
 
+## @param topologySpreadConstraints Topology Spread Constraints for pod assignment
+topologySpreadConstraints: []
+
 containerSecurityContext:
   ## @param securityContext.runAsUser User ID to run the container
   runAsUser: 999
