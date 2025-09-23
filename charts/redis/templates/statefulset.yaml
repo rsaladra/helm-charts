@@ -255,6 +255,10 @@ spec:
           securityContext: {{- toYaml .Values.containerSecurityContext | nindent 12 }}
           image: {{ include "redis.sentinel.image" . | quote }}
           imagePullPolicy: {{ include "common.imagePullPolicy" (dict "image" .Values.sentinel.image) }}
+          {{- if .Values.sentinel.extraVolumeMounts }}
+          volumeMounts:
+            {{- toYaml .Values.sentinel.extraVolumeMounts | nindent 12 }}
+          {{- end }}
           command:
             - /bin/sh
             - -c

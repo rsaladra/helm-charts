@@ -178,6 +178,8 @@ sentinel:
   parallelSyncs: 1
   ## @param sentinel.port Sentinel port
   port: 26379
+  ## @param sentinel.extraVolumeMounts Additional volume mounts to add to the Sentinel container
+  extraVolumeMounts: []
   service:
     ## @param sentinel.service.type Kubernetes service type for Sentinel
     type: ClusterIP
