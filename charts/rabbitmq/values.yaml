@@ -14,8 +14,7 @@ fullnameOverride: ""
 ## @param commonLabels Labels to add to all deployed objects
 commonLabels: {}
 ## @param commonAnnotations Annotations to add to all deployed objects
-commonAnnotations:
-  test: "1"
+commonAnnotations: {}
 
 ## @section RabbitMQ image parameters
 image:
