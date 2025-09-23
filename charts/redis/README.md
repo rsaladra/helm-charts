@@ -146,6 +146,14 @@ redis-cli -h my-redis -a $REDIS_PASSWORD
 | `persistence.mountPath`    | Mount path for Redis data                | `/data`         |
 | `persistence.annotations`  | Annotations for persistent volume claims | `{}`            |
 
+### Persistent Volume Claim Retention Policy
+
+| Parameter                                            | Description                                                                     | Default     |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------- | ----------- |
+| `persistentVolumeClaimRetentionPolicy.enabled`      | Enable Persistent volume retention policy for the Statefulset                  | `false`     |
+| `persistentVolumeClaimRetentionPolicy.whenDeleted`  | Volume retention behavior that applies when the StatefulSet is deleted         | `"Retain"`  |
+| `persistentVolumeClaimRetentionPolicy.whenScaled`   | Volume retention behavior when the replica count of the StatefulSet is reduced | `"Retain"`  |
+
 ### Resource Management
 
 | Parameter                   | Description    | Default |
