@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.12 (2025-09-23)
+## 0.2.12 (2025-09-24)
 
 * [RabbitMQ] several new configuration options ([#148](https://github.com/CloudPirates-io/helm-charts/pull/148))
 
