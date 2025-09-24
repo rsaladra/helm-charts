@@ -325,6 +325,7 @@ spec:
               sentinel parallel-syncs {{ .Values.sentinel.masterName }} {{ .Values.sentinel.parallelSyncs }}
               {{- if .Values.auth.enabled }}
               sentinel auth-pass {{ .Values.sentinel.masterName }} "${REDIS_PASSWORD}"
+              requirepass "${REDIS_PASSWORD}"
               {{- end }}
               # Make automatic failover more aggressive for Kubernetes force deletions
               sentinel deny-scripts-reconfig yes

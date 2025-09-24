@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.4.4 (2025-09-24)
+## 0.4.5 (2025-09-24)
 
-* [postgres] fix: Change default name for CUSTOM_PASSWORD ([#144](https://github.com/CloudPirates-io/helm-charts/pull/144))
+* [redis] fix requirepass for sentinels when password is set ([#152](https://github.com/CloudPirates-io/helm-charts/pull/152))
