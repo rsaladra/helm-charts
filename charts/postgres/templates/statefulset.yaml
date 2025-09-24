@@ -116,7 +116,7 @@ spec:
                   {{- if .Values.customUser.secretKeys }}
                   key: {{ .Values.customUser.secretKeys.password }}
                   {{- else }}
-                  key: CUSTOM_DB
+                  key: CUSTOM_PASSWORD
                   {{- end }}
             {{- end }}
           {{- if .Values.extraEnvVarsSecret }}

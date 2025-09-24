@@ -22,7 +22,7 @@ image:
   ## @param image.repository PostgreSQL image repository
   repository: postgres
   ## @param image.tag PostgreSQL image tag (immutable tags are recommended)
-  tag: "17.6@sha256:feff5b24fedd610975a1f5e743c51a4b360437f4dc3a11acf740dcd708f413f6"
+  tag: "17.6@sha256:0f4f20021a065d114083d1b95d9fb89ad847cbc4c3cc9238417815c7df42350f"
   ## @param image.imagePullPolicy PostgreSQL image pull policy
   imagePullPolicy: Always
 
