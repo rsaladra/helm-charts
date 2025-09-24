@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.5.0 (2025-09-18)
+## 0.5.1 (2025-09-24)
 
-* [postgres] add support for custom user at initialisation ([#124](https://github.com/CloudPirates-io/helm-charts/pull/124))
+* [postgres] chore(deps): update docker.io/postgres:17.6 Docker digest to 0f4f200 ([#150](https://github.com/CloudPirates-io/helm-charts/pull/150))
 
 ## <small>0.2.1 (2025-08-26)</small>
 
