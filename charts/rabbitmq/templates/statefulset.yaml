@@ -21,7 +21,7 @@ spec:
       labels:
         {{- include "rabbitmq.selectorLabels" . | nindent 8 }}
         {{- if .Values.podLabels }}
-        {{ .Values.podLabels | nindent 8 }}
+        {{- toYaml .Values.podLabels | nindent 8 }}
         {{- end }}
     spec:
       {{- with (include "rabbitmq.imagePullSecrets" .) }}
