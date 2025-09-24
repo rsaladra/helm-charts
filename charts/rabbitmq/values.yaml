@@ -337,6 +337,8 @@ persistentVolumeClaimRetentionPolicy:
 
 ## @param statefulsetLabels statefulset labels
 statefulsetLabels: {}
+## @param podLabels pod labels
+podLabels: {}
 ## @param statefulsetAnnotations statefulset annotations.
 statefulsetAnnotations: {}
 

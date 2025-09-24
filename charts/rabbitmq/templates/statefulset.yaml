@@ -20,6 +20,7 @@ spec:
     metadata:
       labels:
         {{- include "rabbitmq.selectorLabels" . | nindent 8 }}
+        {{- toYaml (merge (include "rabbitmq.labels" . | fromYaml) .Values.podLabels) | nindent 8 }}
     spec:
       {{- with (include "rabbitmq.imagePullSecrets" .) }}
       {{ . | nindent 6 }}
