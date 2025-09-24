@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.4.4 (2025-09-23)
+## 0.4.4 (2025-09-24)
 
-* Update Git user configuration for GitHub Actions ([#145](https://github.com/CloudPirates-io/helm-charts/pull/145))
+* [postgres] fix: Change default name for CUSTOM_PASSWORD ([#144](https://github.com/CloudPirates-io/helm-charts/pull/144))
