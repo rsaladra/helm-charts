@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.1.3 (2025-09-23)
+## 0.1.4 (2025-09-24)
 
-* Update Git user configuration for GitHub Actions ([#145](https://github.com/CloudPirates-io/helm-charts/pull/145))
+* [postgres] chore(deps): update postgres:17.6 Docker digest to 0f4f200 ([#151](https://github.com/CloudPirates-io/helm-charts/pull/151))
