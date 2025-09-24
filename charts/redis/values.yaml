@@ -79,6 +79,15 @@ persistence:
   ## @param persistence.annotations Annotations for persistent volume claims
   annotations: {}
 
+## @section Persistent Volume Claim Retention Policy
+persistentVolumeClaimRetentionPolicy:
+  ## @param persistentVolumeClaimRetentionPolicy.enabled Enable Persistent volume retention policy for the Statefulset
+  enabled: false
+  ## @param persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
+  whenScaled: Retain
+  ## @param persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
+  whenDeleted: Retain
+
 ## @param resources Resource limits and requests for Redis pod
 resources:
   limits:
@@ -178,6 +187,8 @@ sentinel:
   parallelSyncs: 1
   ## @param sentinel.port Sentinel port
   port: 26379
+  ## @param sentinel.extraVolumeMounts Additional volume mounts to add to the Sentinel container
+  extraVolumeMounts: []
   service:
     ## @param sentinel.service.type Kubernetes service type for Sentinel
     type: ClusterIP
