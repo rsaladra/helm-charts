@@ -64,6 +64,22 @@ entries:
   common:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-09-26T10:27:23.261666751Z"
+    description: A library chart for common templates and helper functions
+    digest: ff00f8a0aa33a21e1c62c3730b33d52c7e329f1a136ddf03a1388de8159ce437
+    home: https://www.cloudpirates.io
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: common
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mariadb
+    type: library
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/common-1.1.0/common-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-08-26T14:58:20.946035544Z"
     description: A library chart for common templates and helper functions
     digest: a84362fd8bdc4438a617ff9acfa6a66ef9f8fccedeb27b2a8b9d14ac018561d2
@@ -1144,6 +1160,34 @@ entries:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/mongodb-0.1.5/mongodb-0.1.5.tgz
     version: 0.1.5
   nginx:
+  - apiVersion: v2
+    appVersion: 1.29.1
+    created: "2025-09-26T10:27:23.454136614Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: Nginx is a high-performance HTTP server and reverse proxy.
+    digest: d8cd527b8865959333e9f60fb4275beb18ec56fe0f559ccb8d13437e1a93bb33
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/9fcd98c061/nginx-logo.svg
+    keywords:
+    - nginx
+    - web server
+    - http
+    - reverse proxy
+    - load balancer
+    - proxy
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: nginx
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/nginx
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/nginx-0.1.8/nginx-0.1.8.tgz
+    version: 0.1.8
   - apiVersion: v2
     appVersion: 1.29.1
     created: "2025-09-25T08:01:51.520221977Z"
@@ -3350,6 +3394,40 @@ entries:
       license: Apache-2.0
     apiVersion: v2
     appVersion: 3.9.3
+    created: "2025-09-26T10:27:23.706302614Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: Apache ZooKeeper is a centralized service for maintaining configuration
+      information, naming, providing distributed synchronization, and providing group
+      services.
+    digest: 58bc81c530ad56ca3b37950a4a36bebc65ff20d480e1571ed48bad3a03173b6c
+    home: https://zookeeper.apache.org/
+    icon: https://a.storyblok.com/f/143071/512x512/07b0f90b58/apache-zookeeper-logo.svg
+    keywords:
+    - zookeeper
+    - distributed
+    - coordination
+    - apache
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    - email: gianni.carafa@srf.ch
+      name: Gianni Carafa
+      url: https://www.srf.ch
+    name: zookeeper
+    sources:
+    - https://github.com/apache/zookeeper
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.2/zookeeper-0.1.2.tgz
+    version: 0.1.2
+  - annotations:
+      category: Database
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 3.9.3
     created: "2025-09-25T10:05:55.134083302Z"
     dependencies:
     - name: common
@@ -3413,4 +3491,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-26T09:55:57.352205628Z"
+generated: "2025-09-26T10:27:23.706567738Z"
