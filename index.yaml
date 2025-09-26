@@ -64,6 +64,22 @@ entries:
   common:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-09-26T15:27:44.332189972Z"
+    description: A library chart for common templates and helper functions
+    digest: 631bf946a016416195594cc0465cc29ca37da3ece65607202d94d39afaf73a1f
+    home: https://www.cloudpirates.io
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: common
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mariadb
+    type: library
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/common-1.1.1/common-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-09-26T10:27:23.261666751Z"
     description: A library chart for common templates and helper functions
     digest: ff00f8a0aa33a21e1c62c3730b33d52c7e329f1a136ddf03a1388de8159ce437
@@ -3518,4 +3534,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-26T10:56:29.769377716Z"
+generated: "2025-09-26T15:27:44.332493679Z"
