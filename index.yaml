@@ -1244,6 +1244,34 @@ entries:
   nginx:
   - apiVersion: v2
     appVersion: 1.29.1
+    created: "2025-09-30T07:56:08.759422082Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: Nginx is a high-performance HTTP server and reverse proxy.
+    digest: 4b476a0c5479ec4328e1ed2ffa95de18c6341d871f2d747511489e5c25e59966
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/9fcd98c061/nginx-logo.svg
+    keywords:
+    - nginx
+    - web server
+    - http
+    - reverse proxy
+    - load balancer
+    - proxy
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: nginx
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/nginx
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/nginx-0.1.9/nginx-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: 1.29.1
     created: "2025-09-26T10:27:23.454136614Z"
     dependencies:
     - name: common
@@ -3584,6 +3612,40 @@ entries:
       license: Apache-2.0
     apiVersion: v2
     appVersion: 3.9.3
+    created: "2025-09-30T07:56:09.000534737Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: Apache ZooKeeper is a centralized service for maintaining configuration
+      information, naming, providing distributed synchronization, and providing group
+      services.
+    digest: a01aee7760bb7e2656c3b7a01df2d02f98db27442cc2c27c2e5f7565a89ef36f
+    home: https://zookeeper.apache.org/
+    icon: https://a.storyblok.com/f/143071/512x512/07b0f90b58/apache-zookeeper-logo.svg
+    keywords:
+    - zookeeper
+    - distributed
+    - coordination
+    - apache
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    - email: gianni.carafa@srf.ch
+      name: Gianni Carafa
+      url: https://www.srf.ch
+    name: zookeeper
+    sources:
+    - https://github.com/apache/zookeeper
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.4/zookeeper-0.1.4.tgz
+    version: 0.1.4
+  - annotations:
+      category: Database
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 3.9.3
     created: "2025-09-26T17:19:19.845070057Z"
     dependencies:
     - name: common
@@ -3715,4 +3777,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-30T07:50:51.316867414Z"
+generated: "2025-09-30T07:56:09.00076647Z"
