@@ -35,6 +35,8 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: copy-quarkus-lib
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "keycloak.image" . }}
           imagePullPolicy: {{ .Values.image.imagePullPolicy }}
           command: ["sh", "-c", "cp -r /opt/keycloak/lib/quarkus/* /shared-quarkus/"]
@@ -57,7 +59,7 @@ spec:
           image: {{ include "keycloak.image" . }}
           imagePullPolicy: {{ .Values.image.imagePullPolicy }}
           command:
-            - /opt/keycloak/bin/kc.sh
+            - {{ .Values.image.command }}
           args:
             {{- if .Values.keycloak.production }}
             - start
