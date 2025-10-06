@@ -113,6 +113,39 @@ entries:
   ghost:
   - apiVersion: v2
     appVersion: 6.0.9
+    created: "2025-10-06T06:34:57.48457393Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.3.x
+    description: A simple, powerful publishing platform that allows you to share your
+      stories with the world.
+    digest: 89cb01c2d463297c01ed8b80c429f214502883cbfcdd50dab8f6c5eacd83a730
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/3a5c1cb0c5/ghost-logo.png
+    keywords:
+    - ghost
+    - blogging
+    - content management
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    - email: gianni.carafa@srf.ch
+      name: Gianni Carafa
+      url: https://www.srf.ch
+    name: ghost
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/ghost
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/ghost-0.2.3/ghost-0.2.3.tgz
+    version: 0.2.3
+  - apiVersion: v2
+    appVersion: 6.0.9
     created: "2025-10-01T11:11:15.075565397Z"
     dependencies:
     - name: common
@@ -244,6 +277,44 @@ entries:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/ghost-0.1.0/ghost-0.1.0.tgz
     version: 0.1.0
   keycloak:
+  - apiVersion: v2
+    appVersion: 26.3.4
+    created: "2025-10-06T06:34:57.728729927Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    - condition: postgres.enabled
+      name: postgres
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.x.x
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.x.x
+    description: Open Source Identity and Access Management Solution
+    digest: 6bf530d345810fcbb3d56000011508b6b9b9ec484900c887132192f5607d1b9f
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/6a85e594b2/keycloak-logo.svg
+    keywords:
+    - keycloak
+    - identity
+    - access-management
+    - authentication
+    - authorization
+    - oauth
+    - openid-connect
+    - saml
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: keycloak
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/keycloak
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/keycloak-0.1.12/keycloak-0.1.12.tgz
+    version: 0.1.12
   - apiVersion: v2
     appVersion: 26.3.4
     created: "2025-10-06T06:09:57.801856191Z"
@@ -4614,4 +4685,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-06T06:31:05.932142033Z"
+generated: "2025-10-06T06:34:57.729070307Z"
