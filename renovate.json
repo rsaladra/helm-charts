@@ -55,8 +55,11 @@
       "commitMessagePrefix": "[helm]"
     },
     {
+      "matchDatasources": [
+        "docker"
+      ],
       "matchPackageNames": [
-        "cloudpirates/clusterpirate"
+        "koperator-internal/services/clusterpirate"
       ],
       "enabled": false
     },
