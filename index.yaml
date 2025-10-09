@@ -4640,6 +4640,34 @@ entries:
   timescaledb:
   - apiVersion: v2
     appVersion: 2.22.0-pg17
+    created: "2025-10-09T09:39:40.787694397Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: TimescaleDB - The Open Source Time-Series Database for PostgreSQL
+    digest: 4df491dafe0cbcfc72239a5243c951d0b12c2be0ea0452dca0f71b3a23cc2702
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/b2e01452ce/timescaledb-logo.svg
+    keywords:
+    - timescaledb
+    - timeseries
+    - postgresql
+    - database
+    - sql
+    - analytics
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: timescaledb
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/timescaledb
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/timescaledb-0.3.1/timescaledb-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
+    appVersion: 2.22.0-pg17
     created: "2025-10-02T15:32:01.966793325Z"
     dependencies:
     - name: common
@@ -5250,4 +5278,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-09T09:37:17.19713365Z"
+generated: "2025-10-09T09:39:40.788125404Z"
