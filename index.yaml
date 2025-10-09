@@ -312,6 +312,44 @@ entries:
   keycloak:
   - apiVersion: v2
     appVersion: 26.3.4
+    created: "2025-10-09T09:30:16.771518096Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    - condition: postgres.enabled
+      name: postgres
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.x.x
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.x.x
+    description: Open Source Identity and Access Management Solution
+    digest: 7abaf81e9d08dc3b170cb00d810893dc3c7ac0cf3baa5aa1bcf785a642cab74a
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/6a85e594b2/keycloak-logo.svg
+    keywords:
+    - keycloak
+    - identity
+    - access-management
+    - authentication
+    - authorization
+    - oauth
+    - openid-connect
+    - saml
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: keycloak
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/keycloak
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/keycloak-0.3.1/keycloak-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
+    appVersion: 26.3.4
     created: "2025-10-08T07:22:44.020671249Z"
     dependencies:
     - name: common
@@ -5127,4 +5165,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-09T09:25:00.092207103Z"
+generated: "2025-10-09T09:30:16.771891104Z"
