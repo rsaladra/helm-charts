@@ -132,6 +132,37 @@ entries:
       license: Apache-2.0
     apiVersion: v2
     appVersion: 3.6.0
+    created: "2025-10-10T08:17:08.383953571Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: etcd is a distributed reliable key-value store for the most critical
+      data of a distributed system
+    digest: 9eae6a5ede8351bbf12e4c1e4529c638f1696ebdf8f6d73c0dbecf7418bf2f18
+    home: https://etcd.io/
+    icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/etcd/icon/color/etcd-icon-color.svg
+    keywords:
+    - etcd
+    - distributed
+    - key-value
+    - consensus
+    - raft
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: etcd
+    sources:
+    - https://github.com/etcd-io/etcd
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/etcd-0.1.1/etcd-0.1.1.tgz
+    version: 0.1.1
+  - annotations:
+      category: Database
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 3.6.0
     created: "2025-10-10T06:41:56.234741915Z"
     dependencies:
     - name: common
@@ -5897,4 +5928,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-10T07:52:31.914743339Z"
+generated: "2025-10-10T08:17:08.384268181Z"
