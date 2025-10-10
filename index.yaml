@@ -4263,6 +4263,38 @@ entries:
       category: Database
       license: Apache-2.0
     apiVersion: v2
+    appVersion: 8.2.2
+    created: "2025-10-10T07:46:17.98688985Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: An open source, in-memory data structure store used as a database,
+      cache, and message broker.
+    digest: 2308ecd85bc0977daf35e77e83debe67e94230b36eea5ca53bd56258c36cabc7
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/32c74816d1/redis-logo.svg
+    keywords:
+    - redis
+    - database
+    - cache
+    - in-memory
+    - key-value
+    - nosql
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: redis
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/redis
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/redis-0.6.3/redis-0.6.3.tgz
+    version: 0.6.3
+  - annotations:
+      category: Database
+      license: Apache-2.0
+    apiVersion: v2
     appVersion: 8.2.1
     created: "2025-10-09T18:27:38.35347828Z"
     dependencies:
@@ -5832,4 +5864,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-10T07:10:49.123275879Z"
+generated: "2025-10-10T07:46:17.987519917Z"
