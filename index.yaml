@@ -2845,6 +2845,33 @@ entries:
   postgres:
   - apiVersion: v2
     appVersion: "18.0"
+    created: "2025-10-12T09:38:38.365549616Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: The World's Most Advanced Open Source Relational Database
+    digest: c953f824a4a598c875a70164a58c426620ae2369d8a4b37ea54a83ffb7b4ed7a
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/95e7f13e62/postgres-logo.svg
+    keywords:
+    - postgres
+    - postgresql
+    - database
+    - sql
+    - relational
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: postgres
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/postgres
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/postgres-0.8.2/postgres-0.8.2.tgz
+    version: 0.8.2
+  - apiVersion: v2
+    appVersion: "18.0"
     created: "2025-10-10T15:33:49.547782431Z"
     dependencies:
     - name: common
@@ -6058,4 +6085,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-10T15:37:26.915106877Z"
+generated: "2025-10-12T09:38:38.36602257Z"
