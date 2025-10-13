@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.7 (2025-10-13)
+
+* Manual changelog update triggered via workflow_dispatch ([#manual](https://github.com/CloudPirates-io/helm-charts/actions/runs/18473029457))
+
+## 0.1.7 (2025-10-13)
+
+* add tests for openshift (#226) ([c80c98a](https://github.com/CloudPirates-io/helm-charts/commit/c80c98a))
 
 ## 0.1.6 (2025-10-09)
 

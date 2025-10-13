@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.3 (2025-10-13)
+
+* Manual changelog update triggered via workflow_dispatch ([#manual](https://github.com/CloudPirates-io/helm-charts/actions/runs/18473029457))
 
 ## 0.2.3 (2025-10-13)
 
