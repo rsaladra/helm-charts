@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 0.4.1 (2025-10-13)
+
+
 ## 0.4.0 (2025-10-13)
 
 * [rabbitmq]: Rabbitmq Loging + levels (#355) ([9c661bf](https://github.com/CloudPirates-io/helm-charts/commit/9c661bf))

@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 0.1.3 (2025-10-13)
+
+
 ## 0.1.2 (2025-10-13)
 
 * update helm-chart icon (#360) ([6544ddf](https://github.com/CloudPirates-io/helm-charts/commit/6544ddf))
