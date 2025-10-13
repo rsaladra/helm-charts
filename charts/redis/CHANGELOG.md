@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.4 (2025-10-13)
+
+* [universal] Fix imagepullsecret in vales.schema.json ([#374](https://github.com/CloudPirates-io/helm-charts/pull/374))
 
 ## 0.6.3 (2025-10-10)
 

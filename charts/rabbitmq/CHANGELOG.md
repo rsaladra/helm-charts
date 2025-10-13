@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.1 (2025-10-13)
+
+* [universal] Fix imagepullsecret in vales.schema.json ([#374](https://github.com/CloudPirates-io/helm-charts/pull/374))
+
+## 0.4.0 (2025-10-13)
+
+* [rabbitmq]: Rabbitmq Loging + levels (#355) ([9c661bf](https://github.com/CloudPirates-io/helm-charts/commit/9c661bf))
+
+## 0.3.7 (2025-10-13)
+
+* use the same default readiness probes as bitnami chart (#356) ([5eac28e](https://github.com/CloudPirates-io/helm-charts/commit/5eac28e))
 
 ## 0.3.6 (2025-10-10)
 
