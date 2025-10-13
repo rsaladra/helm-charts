@@ -3551,6 +3551,37 @@ entries:
       license: Apache-2.0
     apiVersion: v2
     appVersion: 4.1.4
+    created: "2025-10-13T08:58:57.352889966Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 1.x.x
+    description: A messaging broker that implements the Advanced Message Queuing Protocol
+      (AMQP)
+    digest: 7bf01a1bfb5679aea2e823d6c33a089558ff6cdf4948e20be393f345dbfbf910
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/aa1bd68288/rabbitmq-logo.svg
+    keywords:
+    - rabbitmq
+    - message broker
+    - amqp
+    - messaging
+    - queue
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: rabbitmq
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/rabbitmq-0.3.7/rabbitmq-0.3.7.tgz
+    version: 0.3.7
+  - annotations:
+      category: Message Broker
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 4.1.4
     created: "2025-10-10T11:34:41.442778525Z"
     dependencies:
     - name: common
@@ -6085,4 +6116,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-12T09:38:38.36602257Z"
+generated: "2025-10-13T08:58:57.353360326Z"
