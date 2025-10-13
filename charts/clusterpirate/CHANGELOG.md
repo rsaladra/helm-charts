@@ -1,8 +1,9 @@
 # Changelog
 
+
 ## 1.1.3 (2025-10-13)
 
-* Fix clusterpirate ([#372](https://github.com/CloudPirates-io/helm-charts/pull/372))
+* Fix clusterpirate (#372) ([e659f51](https://github.com/CloudPirates-io/helm-charts/commit/e659f51))
 
 ## 1.1.2 (2025-10-13)
 
