@@ -13,6 +13,11 @@ on:
         required: false
         type: boolean
         default: false
+      clean_start:
+        description: 'Delete existing CHANGELOG.md files and start fresh'
+        required: false
+        type: boolean
+        default: false
       custom_message:
         description: 'Custom changelog message (optional)'
         required: false
@@ -107,6 +112,41 @@ jobs:
             fi
           fi
 
+      - name: Clean start - Delete existing CHANGELOG.md files
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.clean_start == 'true' && steps.charts-to-update.outputs.changed == 'true'
+        run: |
+          echo "Clean start enabled - deleting existing CHANGELOG.md files"
+          CHANGED_CHARTS="${{ steps.charts-to-update.outputs.changedCharts }}"
+          
+          for chart_directory in $CHANGED_CHARTS; do
+            CHART_NAME=${chart_directory#charts/}
+            CHANGELOG_FILE="charts/${CHART_NAME}/CHANGELOG.md"
+            
+            if [ -f "$CHANGELOG_FILE" ]; then
+              echo "Deleting $CHANGELOG_FILE"
+              rm "$CHANGELOG_FILE"
+              
+              # Check if directory is empty except for ignored files
+              if [ -z "$(ls -A "charts/${CHART_NAME}" | grep -vE '^(Chart\.yaml|values\.yaml|\.helmignore|templates|crds|\.gitkeep)$')" ]; then
+                echo "Directory charts/${CHART_NAME} would be empty after deletion, but keeping it"
+              fi
+            else
+              echo "No CHANGELOG.md found at $CHANGELOG_FILE"
+            fi
+          done
+          
+          # Commit the deletions if any files were removed
+          if git status --porcelain | grep -q 'CHANGELOG.md'; then
+            echo "CHANGELOG.md files deleted successfully"
+            git add charts/*/CHANGELOG.md
+            git commit -m "chore: remove existing CHANGELOG.md files for clean start" \
+              -m "Signed-off-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+            echo "clean_start_completed=true" >> $GITHUB_ENV
+          else
+            echo "No CHANGELOG.md files to delete"
+            echo "clean_start_completed=false" >> $GITHUB_ENV
+          fi
+
       - name: Get PR information for push events
         id: pr-info-push
         if: github.event_name == 'push' && steps.charts-to-update.outputs.changed == 'true'
@@ -145,7 +185,11 @@ jobs:
           if [ -n "${{ github.event.inputs.custom_message }}" ]; then
             PR_TITLE="${{ github.event.inputs.custom_message }}"
           else
-            PR_TITLE="Manual changelog update triggered via workflow_dispatch"
+            if [ "${{ github.event.inputs.clean_start }}" = "true" ]; then
+              PR_TITLE="Manual changelog update with clean start"
+            else
+              PR_TITLE="Manual changelog update triggered via workflow_dispatch"
+            fi
           fi
           
           echo "pr_number=manual" >> $GITHUB_OUTPUT
@@ -163,12 +207,14 @@ jobs:
           PR_TITLE: ${{ github.event_name == 'push' && steps.pr-info-push.outputs.pr_title || steps.manual-info.outputs.pr_title }}
           PR_URL: ${{ github.event_name == 'push' && steps.pr-info-push.outputs.pr_url || steps.manual-info.outputs.pr_url }}
           UPDATE_MODE: ${{ steps.charts-to-update.outputs.update_mode }}
+          CLEAN_START: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.clean_start || 'false' }}
         run: |
           set -e
 
           CHANGED_CHARTS="${{ steps.charts-to-update.outputs.changedCharts }}"
           
           echo "Update mode: $UPDATE_MODE"
+          echo "Clean start: $CLEAN_START"
           echo "Processing charts: $CHANGED_CHARTS"
 
           # Process each chart individually
@@ -195,7 +241,7 @@ jobs:
           fi
 
       - name: Commit and push changelog updates
-        if: steps.generate-changelog.outputs.has_changes == 'true'
+        if: steps.generate-changelog.outputs.has_changes == 'true' && env.clean_start_completed != 'true'
         run: |
           git add charts/*/CHANGELOG.md
           
@@ -203,6 +249,9 @@ jobs:
             COMMIT_MSG="chore: update CHANGELOG.md via manual trigger"
             if [ "${{ github.event.inputs.update_all_charts }}" = "true" ]; then
               COMMIT_MSG="chore: update CHANGELOG.md for all charts via manual trigger"
+            fi
+            if [ "${{ github.event.inputs.clean_start }}" = "true" ]; then
+              COMMIT_MSG="chore: regenerate CHANGELOG.md with clean start"
             fi
           else
             COMMIT_MSG="chore: update CHANGELOG.md for merged changes"
