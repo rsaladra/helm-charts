@@ -47,7 +47,7 @@ jobs:
           BEFORE_SHA="${{ github.event.before }}"
 
           # Find changed charts directories using git diff
-          changed_files=$(git diff --name-only "${BEFORE_SHA}" HEAD -- 'charts/*/')
+          changed_files=$(git diff --name-only "${BEFORE_SHA}" HEAD -- 'charts/**')
 
           if [[ -n "$changed_files" ]]; then
             # Extract unique chart directories
