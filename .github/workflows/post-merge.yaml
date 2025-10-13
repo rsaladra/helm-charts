@@ -152,4 +152,9 @@ jobs:
           git add charts/*/CHANGELOG.md
           git commit -m "chore: update CHANGELOG.md for merged changes" \
             -m "Signed-off-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+
+          # Pull latest changes and rebase our commit on top
+          git pull --rebase origin main
+
+          # Push the changes
           git push origin main
