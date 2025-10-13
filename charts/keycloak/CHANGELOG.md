@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.0 (2025-10-13)
+
+* [keycloak] feat: add metrics ([#368](https://github.com/CloudPirates-io/helm-charts/pull/368))
 
 ## 0.4.0 (2025-10-10)
 
