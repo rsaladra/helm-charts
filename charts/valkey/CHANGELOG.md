@@ -1,8 +1,5 @@
 # Changelog
 
-## 0.6.0 (2025-10-14)
-
-* [mariadb] add galera cluster support for mariadb ([#348](https://github.com/CloudPirates-io/helm-charts/pull/348))
 
 ## 0.6.0 (2025-10-14)
 
