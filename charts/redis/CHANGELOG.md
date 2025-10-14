@@ -1,8 +1,12 @@
 # Changelog
 
+
 ## 0.8.0 (2025-10-14)
 
-* [redis] Add pdb and rootOnlyFilesystem options ([#383](https://github.com/CloudPirates-io/helm-charts/pull/383))
+* Add pdb and rootOnlyFilesystem options (#383) ([86b889f](https://github.com/CloudPirates-io/helm-charts/commit/86b889f))
+* chore: update CHANGELOG.md for merged changes ([1ec9aab](https://github.com/CloudPirates-io/helm-charts/commit/1ec9aab))
+* chore: update CHANGELOG.md for merged changes ([c9ff4ec](https://github.com/CloudPirates-io/helm-charts/commit/c9ff4ec))
+* chore: update CHANGELOG.md for merged changes ([86f1d25](https://github.com/CloudPirates-io/helm-charts/commit/86f1d25))
 
 ## 0.7.0 (2025-10-14)
 
