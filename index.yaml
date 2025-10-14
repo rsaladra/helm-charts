@@ -298,6 +298,37 @@ entries:
       license: Apache-2.0
     apiVersion: v2
     appVersion: 3.6.0
+    created: "2025-10-14T10:50:52.440871705Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: etcd is a distributed reliable key-value store for the most critical
+      data of a distributed system
+    digest: b51f99540eb434dfc40c7e8e72bb7f634b87c92699f4aa5f5e365000d5542a55
+    home: https://etcd.io/
+    icon: https://a.storyblok.com/f/143071/513x513/36b7a72378/etcd-logo.svg
+    keywords:
+    - etcd
+    - distributed
+    - key-value
+    - consensus
+    - raft
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: etcd
+    sources:
+    - https://github.com/etcd-io/etcd
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/etcd-0.2.0/etcd-0.2.0.tgz
+    version: 0.2.0
+  - annotations:
+      category: Database
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 3.6.0
     created: "2025-10-13T16:33:23.919978428Z"
     dependencies:
     - name: common
@@ -1484,6 +1515,34 @@ entries:
   mariadb:
   - apiVersion: v2
     appVersion: 12.0.2
+    created: "2025-10-14T10:50:52.657779957Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: MariaDB is a high-performance, open-source relational database server
+      that is a drop-in replacement for MySQL
+    digest: d760c9453777d92c2f6ec3732d710d57ce0972d0fabcde529332c70271b8e8b1
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/6512dd22ee/mariadb-logo.svg
+    keywords:
+    - mariadb
+    - mysql
+    - database
+    - sql
+    - relational
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: mariadb
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mariadb
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/mariadb-0.4.0/mariadb-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    appVersion: 12.0.2
     created: "2025-10-13T16:33:24.338376475Z"
     dependencies:
     - name: common
@@ -1933,6 +1992,34 @@ entries:
   memcached:
   - apiVersion: v2
     appVersion: 1.6.39
+    created: "2025-10-14T10:50:52.912266988Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: Memcached is an in-memory key-value store for small chunks of arbitrary
+      data (strings, objects) from results of database calls, API calls, or page rendering.
+    digest: ecc70bef4a8c0180353510e4b6854e6f15d65ab658302c4329f8f3e38ca1b98a
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/0faa83eb34/memcached-logo.svg
+    keywords:
+    - memcached
+    - cache
+    - in-memory
+    - key-value
+    - distributed
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: memcached
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/memcached
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/memcached-0.3.0/memcached-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 1.6.39
     created: "2025-10-13T16:33:24.544445776Z"
     dependencies:
     - name: common
@@ -2214,6 +2301,33 @@ entries:
   minio:
   - apiVersion: v2
     appVersion: 2025.09.07
+    created: "2025-10-14T10:50:53.114972915Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: High Performance Object Storage compatible with Amazon S3 APIs
+    digest: 9a76146091ef0efc1c48a642a034cfc1305a7b9846c55cc65390a289b06c55f9
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/5d3310f00d/minio-logo.svg
+    keywords:
+    - minio
+    - object-storage
+    - s3
+    - storage
+    - cloud-native
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: minio
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/minio
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/minio-0.5.0/minio-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
+    appVersion: 2025.09.07
     created: "2025-10-13T16:33:24.765804298Z"
     dependencies:
     - name: common
@@ -2483,6 +2597,31 @@ entries:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/minio-0.1.7/minio-0.1.7.tgz
     version: 0.1.7
   mongodb:
+  - apiVersion: v2
+    appVersion: 8.0.13
+    created: "2025-10-14T10:50:53.325653859Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: MongoDB a flexible NoSQL database for scalable, real-time data management
+    digest: 6e711c53b6ac4041af93f3cb4218e22d29acce588f9513c3435db9a6310db64b
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/5d228988dc/mongodb-logo.svg
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: mongodb
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mongodb
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/mongodb-0.5.0/mongodb-0.5.0.tgz
+    version: 0.5.0
   - apiVersion: v2
     appVersion: 8.0.13
     created: "2025-10-10T06:54:08.708119688Z"
@@ -2809,6 +2948,34 @@ entries:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/mongodb-0.1.5/mongodb-0.1.5.tgz
     version: 0.1.5
   nginx:
+  - apiVersion: v2
+    appVersion: 1.29.1
+    created: "2025-10-14T10:50:53.585930645Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: Nginx is a high-performance HTTP server and reverse proxy.
+    digest: 8add00582a0722182e76fa64cda486c4fb473c88f08c98eefa77387be23bc8d6
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/9fcd98c061/nginx-logo.svg
+    keywords:
+    - nginx
+    - web server
+    - http
+    - reverse proxy
+    - load balancer
+    - proxy
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: nginx
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/nginx
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/nginx-0.2.0/nginx-0.2.0.tgz
+    version: 0.2.0
   - apiVersion: v2
     appVersion: 1.29.1
     created: "2025-10-09T09:35:24.110335682Z"
@@ -3230,6 +3397,33 @@ entries:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/nginx-0.1.0/nginx-0.1.0.tgz
     version: 0.1.0
   postgres:
+  - apiVersion: v2
+    appVersion: "18.0"
+    created: "2025-10-14T10:50:53.838626131Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: The World's Most Advanced Open Source Relational Database
+    digest: 00407f2ce0f75e6af110b4ad03a8eff0a0cbe96e7b51d4e6f14094bbddc2c443
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/95e7f13e62/postgres-logo.svg
+    keywords:
+    - postgres
+    - postgresql
+    - database
+    - sql
+    - relational
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: postgres
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/postgres
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/postgres-0.9.0/postgres-0.9.0.tgz
+    version: 0.9.0
   - apiVersion: v2
     appVersion: "18.0"
     created: "2025-10-13T16:33:25.127254137Z"
@@ -3960,6 +4154,37 @@ entries:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/postgres-0.2.0/postgres-0.2.0.tgz
     version: 0.2.0
   rabbitmq:
+  - annotations:
+      category: Message Broker
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 4.1.4
+    created: "2025-10-14T10:50:54.058140939Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: A messaging broker that implements the Advanced Message Queuing Protocol
+      (AMQP)
+    digest: 28168e4a3ed28486d5c554e597ca08561e1f3f79969687e25dfffa50363f764c
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/aa1bd68288/rabbitmq-logo.svg
+    keywords:
+    - rabbitmq
+    - message broker
+    - amqp
+    - messaging
+    - queue
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: rabbitmq
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/rabbitmq-0.5.0/rabbitmq-0.5.0.tgz
+    version: 0.5.0
   - annotations:
       category: Message Broker
       license: Apache-2.0
@@ -4958,6 +5183,38 @@ entries:
       license: Apache-2.0
     apiVersion: v2
     appVersion: 8.2.2
+    created: "2025-10-14T10:50:54.267286458Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: An open source, in-memory data structure store used as a database,
+      cache, and message broker.
+    digest: e43da368d31bcaae320df99f14cf80b1d804e13f371441ebfd116cd91ccdc267
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/32c74816d1/redis-logo.svg
+    keywords:
+    - redis
+    - database
+    - cache
+    - in-memory
+    - key-value
+    - nosql
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: redis
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/redis
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/redis-0.7.0/redis-0.7.0.tgz
+    version: 0.7.0
+  - annotations:
+      category: Database
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 8.2.2
     created: "2025-10-13T16:33:25.624002347Z"
     dependencies:
     - name: common
@@ -5884,6 +6141,34 @@ entries:
   timescaledb:
   - apiVersion: v2
     appVersion: 2.22.0-pg17
+    created: "2025-10-14T10:50:54.484903756Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: TimescaleDB - The Open Source Time-Series Database for PostgreSQL
+    digest: 5e8f3de461cbb5ac01825cbe16585694af80b6ca9a92db8fc5e1f5a96e07ea8d
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/b2e01452ce/timescaledb-logo.svg
+    keywords:
+    - timescaledb
+    - timeseries
+    - postgresql
+    - database
+    - sql
+    - analytics
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: timescaledb
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/timescaledb
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/timescaledb-0.4.0/timescaledb-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    appVersion: 2.22.0-pg17
     created: "2025-10-13T16:33:25.826462884Z"
     dependencies:
     - name: common
@@ -6107,6 +6392,40 @@ entries:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/timescaledb-0.1.0/timescaledb-0.1.0.tgz
     version: 0.1.0
   valkey:
+  - annotations:
+      category: Database
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 8.1.3
+    created: "2025-10-14T10:50:54.727888688Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: High performance in-memory data structure store, fork of Redis. Valkey
+      is an open-source, high-performance key/value datastore that supports a variety
+      of workloads such as caching, message queues, and can act as a primary database.
+    digest: 70c7393c2d1c6d3013c413a0f387caf54462c9027fd0f88b32be01c09739bcb7
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/5242c0e31a/valkey-logo.svg
+    keywords:
+    - valkey
+    - redis
+    - cache
+    - database
+    - key-value
+    - in-memory
+    - nosql
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: valkey
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/valkey
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/valkey-0.6.0/valkey-0.6.0.tgz
+    version: 0.6.0
   - annotations:
       category: Database
       license: Apache-2.0
@@ -6453,6 +6772,40 @@ entries:
       license: Apache-2.0
     apiVersion: v2
     appVersion: 3.9.3
+    created: "2025-10-14T10:50:54.927400309Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: Apache ZooKeeper is a centralized service for maintaining configuration
+      information, naming, providing distributed synchronization, and providing group
+      services.
+    digest: de4c79cf459833e3593b00b5bfd7f1faede75159fe8b46ada73c49f98ee194d3
+    home: https://zookeeper.apache.org/
+    icon: https://a.storyblok.com/f/143071/512x512/07b0f90b58/apache-zookeeper-logo.svg
+    keywords:
+    - zookeeper
+    - distributed
+    - coordination
+    - apache
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    - email: gianni.carafa@srf.ch
+      name: Gianni Carafa
+      url: https://www.srf.ch
+    name: zookeeper
+    sources:
+    - https://github.com/apache/zookeeper
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.2.0/zookeeper-0.2.0.tgz
+    version: 0.2.0
+  - annotations:
+      category: Database
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 3.9.3
     created: "2025-10-13T16:33:26.315641665Z"
     dependencies:
     - name: common
@@ -6720,4 +7073,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-14T09:05:37.917763427Z"
+generated: "2025-10-14T10:50:54.928984578Z"
