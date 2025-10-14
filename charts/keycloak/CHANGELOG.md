@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.1 (2025-10-14)
+
+* [keycloak]: Implement TLS in keycloak ([#373](https://github.com/CloudPirates-io/helm-charts/pull/373))
 
 ## 0.6.0 (2025-10-14)
 
