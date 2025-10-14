@@ -1,8 +1,11 @@
 # Changelog
 
+
 ## 0.8.1 (2025-10-14)
 
-* [redis] Fix namespace key prefix on redis pdb ([#385](https://github.com/CloudPirates-io/helm-charts/pull/385))
+* Fix namespace key prefix on redis pdb (#385) ([6451b4c](https://github.com/CloudPirates-io/helm-charts/commit/6451b4c))
+* chore: update CHANGELOG.md for merged changes ([420f342](https://github.com/CloudPirates-io/helm-charts/commit/420f342))
+* chore: update CHANGELOG.md for merged changes ([f594b6b](https://github.com/CloudPirates-io/helm-charts/commit/f594b6b))
 
 ## 0.8.0 (2025-10-14)
 
