@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.0 (2025-10-14)
+
+* Update chart.yaml dependencies for indepentent charts ([#382](https://github.com/CloudPirates-io/helm-charts/pull/382))
 
 ## 0.1.7 (2025-10-13)
 
