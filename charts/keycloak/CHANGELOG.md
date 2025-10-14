@@ -1,8 +1,12 @@
 # Changelog
 
+
 ## 0.6.1 (2025-10-14)
 
-* [keycloak]: Implement TLS in keycloak ([#373](https://github.com/CloudPirates-io/helm-charts/pull/373))
+* [keycloak]: Implement TLS in keycloak (#373) ([04abaee](https://github.com/CloudPirates-io/helm-charts/commit/04abaee))
+* chore: update CHANGELOG.md for merged changes ([4b02e57](https://github.com/CloudPirates-io/helm-charts/commit/4b02e57))
+* chore: update CHANGELOG.md for merged changes ([bf2e3b2](https://github.com/CloudPirates-io/helm-charts/commit/bf2e3b2))
+* chore: update CHANGELOG.md for merged changes ([2f87d0e](https://github.com/CloudPirates-io/helm-charts/commit/2f87d0e))
 
 ## 0.6.0 (2025-10-14)
 
