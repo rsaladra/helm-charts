@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.10.0 (2025-10-14)
+
+* [postgres] Add support for `extraVolumes` and `extraVolumeMounts` ([#387](https://github.com/CloudPirates-io/helm-charts/pull/387))
 
 ## 0.9.0 (2025-10-14)
 
