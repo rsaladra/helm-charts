@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.0 (2025-10-14)
+
+* [common] rename templates from common.* to cloudpirates.* to prevent collisions ([#377](https://github.com/CloudPirates-io/helm-charts/pull/377))
 
 ## 1.1.2 (2025-10-10)
 
