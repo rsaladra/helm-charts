@@ -1,8 +1,5 @@
 # Changelog
 
-## 0.3.0 (2025-10-14)
-
-* [universal] All charts use cloudpirates prefix ([#378](https://github.com/CloudPirates-io/helm-charts/pull/378))
 
 ## 0.2.6 (2025-10-10)
 
