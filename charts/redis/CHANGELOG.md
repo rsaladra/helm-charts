@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.2 (2025-10-15)
+
+* [universal] Rework all schema json ([#393](https://github.com/CloudPirates-io/helm-charts/pull/393))
 
 ## 0.8.2 (2025-10-14)
 
