@@ -1,8 +1,10 @@
 # Changelog
 
+
 ## 0.5.2 (2025-10-15)
 
-* [busybox] Update image to 2f590fc ([#391](https://github.com/CloudPirates-io/helm-charts/pull/391))
+* chore: update CHANGELOG.md for merged changes ([aa0d9fd](https://github.com/CloudPirates-io/helm-charts/commit/aa0d9fd))
+* chore: update CHANGELOG.md for merged changes ([cb41af3](https://github.com/CloudPirates-io/helm-charts/commit/cb41af3))
 
 ## 0.5.1 (2025-10-15)
 
