@@ -44,6 +44,7 @@ spec:
       initContainers:
         - name: redis-init
           image: {{ include "redis.image" . | quote }}
+          securityContext: {{ include "cloudpirates.renderContainerSecurityContext" . | nindent 12 }}
           imagePullPolicy: {{ include "cloudpirates.imagePullPolicy" (dict "image" .Values.image) }}
           command:
             - /bin/sh
