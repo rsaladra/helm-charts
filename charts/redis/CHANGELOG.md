@@ -1,8 +1,13 @@
 # Changelog
 
+
 ## 0.8.3 (2025-10-15)
 
-* [redis] Add initContainer securityContext and improve security defaults ([#397](https://github.com/CloudPirates-io/helm-charts/pull/397))
+* Add initContainer securityContext and improve security defaults (#397) ([2b5c4bd](https://github.com/CloudPirates-io/helm-charts/commit/2b5c4bd))
+* chore: update CHANGELOG.md for merged changes ([b54c4f1](https://github.com/CloudPirates-io/helm-charts/commit/b54c4f1))
+* chore: update CHANGELOG.md for merged changes ([5a2ed20](https://github.com/CloudPirates-io/helm-charts/commit/5a2ed20))
+* chore: update CHANGELOG.md for merged changes ([7b3173b](https://github.com/CloudPirates-io/helm-charts/commit/7b3173b))
+* chore: update CHANGELOG.md for merged changes ([ea7518b](https://github.com/CloudPirates-io/helm-charts/commit/ea7518b))
 
 ## 0.8.2 (2025-10-14)
 
