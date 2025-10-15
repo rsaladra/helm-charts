@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.2 (2025-10-15)
+
+* [keycloak] Add support for templating hostname and hostnameAdmin ([#390](https://github.com/CloudPirates-io/helm-charts/pull/390))
 
 ## 0.6.1 (2025-10-14)
 
