@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.1 (2025-10-15)
+
+* Bugfix/redis non cloudpirates prefix ([#394](https://github.com/CloudPirates-io/helm-charts/pull/394))
 
 ## 0.5.0 (2025-10-14)
 
