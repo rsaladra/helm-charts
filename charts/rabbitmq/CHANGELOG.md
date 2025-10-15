@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.2 (2025-10-15)
+
+* [busybox] Update image to 2f590fc ([#391](https://github.com/CloudPirates-io/helm-charts/pull/391))
 
 ## 0.5.1 (2025-10-15)
 
