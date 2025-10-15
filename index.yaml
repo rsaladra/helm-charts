@@ -2808,6 +2808,31 @@ entries:
   mongodb:
   - apiVersion: v2
     appVersion: 8.0.13
+    created: "2025-10-15T06:26:26.506007074Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: MongoDB a flexible NoSQL database for scalable, real-time data management
+    digest: 9c9838f7e09ee38ab2eec783cf79963a8883bcecb22f65f15f925840f4b293e0
+    home: https://www.cloudpirates.io
+    icon: https://a.storyblok.com/f/143071/512x512/5d228988dc/mongodb-logo.svg
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    maintainers:
+    - name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: mongodb
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mongodb
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/mongodb-0.5.1/mongodb-0.5.1.tgz
+    version: 0.5.1
+  - apiVersion: v2
+    appVersion: 8.0.13
     created: "2025-10-14T10:50:53.325653859Z"
     dependencies:
     - name: common
@@ -7467,4 +7492,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-15T06:21:17.207670802Z"
+generated: "2025-10-15T06:26:26.634617546Z"
