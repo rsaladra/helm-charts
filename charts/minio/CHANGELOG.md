@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.1 (2025-10-17)
+
+*  [minio] Fix bucketname trimming whitespaces in MinIO post-job configuration script. ([#406](https://github.com/CloudPirates-io/helm-charts/pull/406))
 
 ## 0.5.0 (2025-10-14)
 
