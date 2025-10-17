@@ -48,8 +48,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[keycloak] realm import"
+        - kind: changed
+          description: "[keycloak/keycloak] Update charts/keycloak/values.yaml keycloak/keycloak to v26.4.1 (patch) (#400)"
           links:
-            - name: "PR #402"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/402"
+            - name: "Commit c6f2ca2"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/c6f2ca2"
