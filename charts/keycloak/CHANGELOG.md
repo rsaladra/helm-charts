@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.3 (2025-10-17)
+
+* [keycloak/keycloak] Update charts/keycloak/values.yaml keycloak/keycloak to v26.4.1 (patch) ([#400](https://github.com/CloudPirates-io/helm-charts/pull/400))
 
 ## 0.6.2 (2025-10-14)
 
