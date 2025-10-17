@@ -49,7 +49,7 @@ annotations:
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
         - kind: changed
-          description: "[keycloak/keycloak] Update charts/keycloak/values.yaml keycloak/keycloak to v26.4.1 (patch) (#400)"
+          description: "realm import (#402)"
           links:
-            - name: "Commit c6f2ca2"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/c6f2ca2"
+            - name: "Commit 4257b8b"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/4257b8b"
