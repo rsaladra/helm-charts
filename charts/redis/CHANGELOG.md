@@ -1,6 +1,14 @@
 # Changelog
 
 
+## 0.9.0 (2025-10-17)
+
+* Network policies (#412) ([43c7285](https://github.com/CloudPirates-io/helm-charts/commit/43c7285))
+* chore: update CHANGELOG.md for merged changes ([1a4f87b](https://github.com/CloudPirates-io/helm-charts/commit/1a4f87b))
+* chore: update CHANGELOG.md for merged changes ([da866ca](https://github.com/CloudPirates-io/helm-charts/commit/da866ca))
+* chore: update CHANGELOG.md for merged changes ([96dc658](https://github.com/CloudPirates-io/helm-charts/commit/96dc658))
+* chore: update CHANGELOG.md for merged changes ([80f5de8](https://github.com/CloudPirates-io/helm-charts/commit/80f5de8))
+
 ## 0.8.5 (2025-10-17)
 
 * [oliver006/redis_exporter] Update image to v1.79.0 (#408) ([11c625a](https://github.com/CloudPirates-io/helm-charts/commit/11c625a))

@@ -39,7 +39,7 @@ annotations:
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
         - kind: changed
-          description: "[oliver006/redis_exporter] Update image to v1.79.0 (#408)"
+          description: "Network policies (#412)"
           links:
-            - name: "Commit 11c625a"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/11c625a"
+            - name: "Commit 43c7285"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/43c7285"
