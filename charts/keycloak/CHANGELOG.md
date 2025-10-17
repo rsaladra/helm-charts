@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.4 (2025-10-17)
+
+* [keycloak] realm import ([#402](https://github.com/CloudPirates-io/helm-charts/pull/402))
 
 ## 0.6.3 (2025-10-17)
 

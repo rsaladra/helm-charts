@@ -47,3 +47,9 @@ annotations:
       url: https://github.com/keycloak/keycloak
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
+  artifacthub.io/changes: |2
+        - kind: added
+          description: "[keycloak] realm import"
+          links:
+            - name: "PR #402"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/402"
