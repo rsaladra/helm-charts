@@ -5747,6 +5747,56 @@ entries:
     version: 0.0.2
   redis:
   - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |2
+            - kind: added
+              description: "[redis] Network policies"
+              links:
+                - name: "PR #412"
+                  url: "https://github.com/CloudPirates-io/helm-charts/pull/412"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/links: |
+        - name: Redis
+          url: https://redis.io
+        - name: Helm Chart
+          url: https://github.com/CloudPirates-io/helm-charts/tree/main/charts/redis
+        - name: Application
+          url: https://github.com/redis/redis
+        - name: Maintainer CloudPirates
+          url: https://www.cloudpirates.io
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: 8.2.2
+    created: "2025-10-17T15:14:50.830728045Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: An open source, in-memory data structure store used as a database,
+      cache, and message broker.
+    digest: 000cc8d179582bbefe8a0f3f3dc101b4d543cbd8a540d91007130d5838949201
+    home: https://www.redis.io
+    icon: https://a.storyblok.com/f/143071/512x512/32c74816d1/redis-logo.svg
+    keywords:
+    - redis
+    - database
+    - cache
+    - in-memory
+    - key-value
+    - nosql
+    maintainers:
+    - email: hello@cloudpirates.io
+      name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    name: redis
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/redis
+    - https://github.com/redis/redis
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/redis-0.9.0/redis-0.9.0.tgz
+    version: 0.9.0
+  - annotations:
       category: Database
       license: Apache-2.0
     apiVersion: v2
@@ -7867,4 +7917,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-17T13:28:34.119073802Z"
+generated: "2025-10-17T15:14:50.831283633Z"
