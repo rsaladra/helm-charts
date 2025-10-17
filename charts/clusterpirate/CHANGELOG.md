@@ -1,8 +1,12 @@
 # Changelog
 
+
 ## 1.2.1 (2025-10-17)
 
-* [helm] Update valkey Docker tag to v0.6.1 ([#410](https://github.com/CloudPirates-io/helm-charts/pull/410))
+* chore: update CHANGELOG.md for merged changes ([b54c4f1](https://github.com/CloudPirates-io/helm-charts/commit/b54c4f1))
+* chore: update CHANGELOG.md for merged changes ([5a2ed20](https://github.com/CloudPirates-io/helm-charts/commit/5a2ed20))
+* chore: update CHANGELOG.md for merged changes ([bf2e3b2](https://github.com/CloudPirates-io/helm-charts/commit/bf2e3b2))
+* chore: update CHANGELOG.md for merged changes ([2f87d0e](https://github.com/CloudPirates-io/helm-charts/commit/2f87d0e))
 
 ## 1.2.0 (2025-10-14)
 
