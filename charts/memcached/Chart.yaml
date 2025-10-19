@@ -38,8 +38,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "[memcached]: add missing automountServiceAccountToken key to deployment spec (#395)"
+        - kind: added
+          description: "[unversal] Add signing informations for artifacthub"
           links:
-            - name: "Commit 93fee01"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/93fee01"
+            - name: "PR #415"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/415"

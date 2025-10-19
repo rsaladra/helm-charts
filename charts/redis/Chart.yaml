@@ -41,8 +41,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Network policies (#412)"
+        - kind: added
+          description: "[unversal] Add signing informations for artifacthub"
           links:
-            - name: "Commit 43c7285"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/43c7285"
+            - name: "PR #415"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/415"
