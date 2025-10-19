@@ -1,8 +1,5 @@
 # Changelog
 
-## 0.2.0 (2025-10-19)
-
-* [unversal] Add signing informations for artifacthub ([#415](https://github.com/CloudPirates-io/helm-charts/pull/415))
 
 ## 0.2.0 (2025-10-14)
 
