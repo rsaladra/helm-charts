@@ -44,8 +44,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[ghost] Update charts/ghost/values.yaml ghost to v6.4.0 (minor)"
+        - kind: changed
+          description: "Update charts/ghost/values.yaml ghost to v6.4.0 (minor) (#414)"
           links:
-            - name: "PR #414"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/414"
+            - name: "Commit 05b099b"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/05b099b"
