@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.0 (2025-10-20)
+
+* [universal] fix all appversions in charts ([#417](https://github.com/CloudPirates-io/helm-charts/pull/417))
 
 ## 0.2.0 (2025-10-14)
 
