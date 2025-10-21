@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.9.1 (2025-10-21)
+
+* [redis] add support for replication mode without sentinel ([#428](https://github.com/CloudPirates-io/helm-charts/pull/428))
 
 ## 0.9.0 (2025-10-17)
 
