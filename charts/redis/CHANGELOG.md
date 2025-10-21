@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.9.2 (2025-10-21)
+
+* [redis] Modifiable cluster domain ([#427](https://github.com/CloudPirates-io/helm-charts/pull/427))
 
 ## 0.9.1 (2025-10-21)
 
