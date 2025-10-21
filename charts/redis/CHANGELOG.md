@@ -1,8 +1,13 @@
 # Changelog
 
+
 ## 0.9.2 (2025-10-21)
 
-* [redis] Modifiable cluster domain ([#427](https://github.com/CloudPirates-io/helm-charts/pull/427))
+* Modifiable cluster domain (#427) ([88652de](https://github.com/CloudPirates-io/helm-charts/commit/88652de))
+* chore: update CHANGELOG.md for merged changes ([c086532](https://github.com/CloudPirates-io/helm-charts/commit/c086532))
+* chore: update CHANGELOG.md for merged changes ([1742285](https://github.com/CloudPirates-io/helm-charts/commit/1742285))
+* chore: update CHANGELOG.md for merged changes ([48cf77d](https://github.com/CloudPirates-io/helm-charts/commit/48cf77d))
+* chore: update CHANGELOG.md for merged changes ([cd0be3e](https://github.com/CloudPirates-io/helm-charts/commit/cd0be3e))
 
 ## 0.9.1 (2025-10-21)
 
