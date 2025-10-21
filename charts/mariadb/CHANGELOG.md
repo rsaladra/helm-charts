@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.2 (2025-10-21)
+
+* fix bug 418 [mariadb] enhance stateful set with extra mounts ([#420](https://github.com/CloudPirates-io/helm-charts/pull/420))
 
 ## 0.5.1 (2025-10-15)
 
