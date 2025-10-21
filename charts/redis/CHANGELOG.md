@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.9.1 (2025-10-21)
+
+* [universal] add --upload=true to cosign sign ([#437](https://github.com/CloudPirates-io/helm-charts/pull/437))
 
 ## 0.9.1 (2025-10-21)
 
