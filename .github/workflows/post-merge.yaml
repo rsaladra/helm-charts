@@ -242,7 +242,7 @@ jobs:
 
       - name: Update appVersion in Chart.yaml files
         if: steps.generate-changelog.outputs.has_changes == 'true' && env.clean_start_completed != 'true'
-        run: update-appversion.sh --all
+        run: ./update-appversion.sh --all
 
       - name: Commit and push changelog and chart updates
         if: steps.generate-changelog.outputs.has_changes == 'true' && env.clean_start_completed != 'true'
