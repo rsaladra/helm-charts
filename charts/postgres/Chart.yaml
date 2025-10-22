@@ -42,8 +42,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[postgres] Update charts/postgres/values.yaml postgres"
+        - kind: changed
+          description: "Update charts/postgres/values.yaml postgres (#448)"
           links:
-            - name: "PR #448"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/448"
+            - name: "Commit fdf19cf"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/fdf19cf"
