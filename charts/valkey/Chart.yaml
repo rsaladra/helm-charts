@@ -43,4 +43,7 @@ annotations:
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
         - kind: changed
-          description: "Chart updated"
+          description: "[valkey/valkey] Update charts/valkey/values.yaml valkey/valkey to v9 (major) (#442)"
+          links:
+            - name: "Commit 75276a8"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/75276a8"
