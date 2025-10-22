@@ -38,8 +38,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[memcached] Update charts/memcached/values.yaml memcached"
+        - kind: changed
+          description: "Update charts/memcached/values.yaml memcached (#425)"
           links:
-            - name: "PR #425"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/425"
+            - name: "Commit de0a4a1"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/de0a4a1"
