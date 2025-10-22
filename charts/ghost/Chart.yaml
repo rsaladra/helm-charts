@@ -44,8 +44,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[ghost] Update charts/ghost/values.yaml ghost"
+        - kind: changed
+          description: "Update charts/ghost/values.yaml ghost (#433)"
           links:
-            - name: "PR #433"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/433"
+            - name: "Commit 6463206"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/6463206"
