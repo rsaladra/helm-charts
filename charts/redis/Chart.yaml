@@ -41,8 +41,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Update charts/redis/values.yaml redis (#434)"
+        - kind: added
+          description: "[redis] add service support annotations"
           links:
-            - name: "Commit b833a77"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/b833a77"
+            - name: "PR #446"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/446"
