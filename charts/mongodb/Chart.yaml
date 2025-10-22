@@ -38,5 +38,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Chart updated"
+        - kind: added
+          description: "[mongodb] Fix no auth error in init script"
+          links:
+            - name: "PR #440"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/440"

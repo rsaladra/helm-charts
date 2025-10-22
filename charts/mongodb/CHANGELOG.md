@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.2 (2025-10-22)
+
+* [mongodb] Fix no auth error in init script ([#440](https://github.com/CloudPirates-io/helm-charts/pull/440))
 
 ## 0.5.1 (2025-10-15)
 
