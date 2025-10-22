@@ -51,8 +51,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "enhance stateful set with extra mounts (#420)"
+        - kind: added
+          description: "[universal]: Support extra secret templating"
           links:
-            - name: "Commit d0bae40"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/d0bae40"
+            - name: "PR #444"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/444"

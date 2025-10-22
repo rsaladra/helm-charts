@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.3 (2025-10-22)
+
+* [universal]: Support extra secret templating ([#444](https://github.com/CloudPirates-io/helm-charts/pull/444))
 
 ## 0.5.2 (2025-10-21)
 
