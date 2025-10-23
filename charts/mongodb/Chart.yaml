@@ -38,8 +38,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "add custom user creation at initialization (#153)"
+        - kind: added
+          description: "[universal] Update annotations, labels, podannotations and podlabel"
           links:
-            - name: "Commit 772d18f"
-              url: "https://github.com/dloewen2/helm-charts/commit/772d18f"
+            - name: "PR #454"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/454"

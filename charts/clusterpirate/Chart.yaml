@@ -39,18 +39,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Fix linting for values.yaml"
+        - kind: added
+          description: "[universal] Update annotations, labels, podannotations and podlabel"
           links:
-            - name: "Commit 504ac61"
-              url: "https://github.com/dloewen2/helm-charts/commit/504ac61"
-        - kind: changed
-          description: "Fix values.yaml / Chart.yaml linting issues"
-          links:
-            - name: "Commit 043c7e0"
-              url: "https://github.com/dloewen2/helm-charts/commit/043c7e0"
-        - kind: changed
-          description: "Add initial Changelogs to all Charts"
-          links:
-            - name: "Commit 68f10ca"
-              url: "https://github.com/dloewen2/helm-charts/commit/68f10ca"
+            - name: "PR #454"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/454"

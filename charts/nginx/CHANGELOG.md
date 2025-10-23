@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.1 (2025-10-23)
+
+* [universal] Update annotations, labels, podannotations and podlabel ([#454](https://github.com/CloudPirates-io/helm-charts/pull/454))
 
 ## 0.2.0 (2025-10-14)
 

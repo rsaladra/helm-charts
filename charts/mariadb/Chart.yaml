@@ -51,8 +51,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "make mariadb run on openshift (#176)"
+        - kind: added
+          description: "[universal] Update annotations, labels, podannotations and podlabel"
           links:
-            - name: "Commit e2c3afb"
-              url: "https://github.com/dloewen2/helm-charts/commit/e2c3afb"
+            - name: "PR #454"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/454"

@@ -40,13 +40,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Update CHANGELOG.md"
+        - kind: added
+          description: "[universal] Update annotations, labels, podannotations and podlabel"
           links:
-            - name: "Commit 55a987f"
-              url: "https://github.com/dloewen2/helm-charts/commit/55a987f"
-        - kind: changed
-          description: "set strategy to recreate in deployment"
-          links:
-            - name: "Commit 6e01f97"
-              url: "https://github.com/dloewen2/helm-charts/commit/6e01f97"
+            - name: "PR #454"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/454"
