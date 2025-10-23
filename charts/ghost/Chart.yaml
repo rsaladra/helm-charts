@@ -2,8 +2,8 @@ apiVersion: v2
 name: ghost
 description: A simple, powerful publishing platform that allows you to share your stories with the world.
 type: application
-version: 0.3.4
-appVersion: "6.5.0"
+version: 0.3.5
+appVersion: "6.4.0"
 keywords:
   - ghost
   - blogging
@@ -45,7 +45,17 @@ annotations:
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
         - kind: changed
-          description: "Update charts/ghost/values.yaml ghost to v6.5.0 (minor) (#450)"
+          description: "add artifacthub repo ID"
           links:
-            - name: "Commit 10e9958"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/10e9958"
+            - name: "Commit 665bf26"
+              url: "https://github.com/dloewen2/helm-charts/commit/665bf26"
+        - kind: changed
+          description: "add maintainer information"
+          links:
+            - name: "Commit 7eec72b"
+              url: "https://github.com/dloewen2/helm-charts/commit/7eec72b"
+        - kind: changed
+          description: "add ghost logo"
+          links:
+            - name: "Commit 6a4df33"
+              url: "https://github.com/dloewen2/helm-charts/commit/6a4df33"

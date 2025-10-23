@@ -2,8 +2,8 @@ apiVersion: v2
 name: valkey
 description: High performance in-memory data structure store, fork of Redis. Valkey is an open-source, high-performance key/value datastore that supports a variety of workloads such as caching, message queues, and can act as a primary database.
 type: application
-version: 0.7.0
-appVersion: "9.0.0"
+version: 0.7.1
+appVersion: "8.1.4"
 home: https://www.valkey.io
 sources:
   - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/valkey
@@ -43,7 +43,12 @@ annotations:
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
         - kind: changed
-          description: "[valkey/valkey] Update charts/valkey/values.yaml valkey/valkey to v9 (major) (#442)"
+          description: "Update CHANGELOG.md"
           links:
-            - name: "Commit 75276a8"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/75276a8"
+            - name: "Commit 3005f2f"
+              url: "https://github.com/dloewen2/helm-charts/commit/3005f2f"
+        - kind: changed
+          description: "Fix scheduling directives with disabled persistance"
+          links:
+            - name: "Commit 7485b37"
+              url: "https://github.com/dloewen2/helm-charts/commit/7485b37"

@@ -15,6 +15,11 @@ commonLabels: {}
 ## @param commonAnnotations Annotations to add to all deployed objects
 commonAnnotations: {}
 
+## @param podAnnotations Annotations to add to the pod created by the statefulset
+podAnnotations: {}
+## @param podLabels Labels to add to the pod created by the statefulset
+podLabels: {}
+
 ## @section MongoDB image parameters
 image:
   ## @param image.registry MongoDB image registry
@@ -34,6 +39,8 @@ service:
   type: ClusterIP
   ## @param service.port MongoDB service port
   port: 27017
+  ## @param serivce.annotations Annotations to add to the mongodb service
+  annotations: {}
 
 auth:
   ## @param auth.enabled Enable MongoDB authentication

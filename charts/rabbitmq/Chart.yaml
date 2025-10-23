@@ -2,7 +2,7 @@ apiVersion: v2
 name: rabbitmq
 description: A messaging broker that implements the Advanced Message Queuing Protocol (AMQP)
 type: application
-version: 0.5.4
+version: 0.5.5
 appVersion: "4.1.4"
 keywords:
   - rabbitmq
@@ -41,4 +41,12 @@ annotations:
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
         - kind: changed
-          description: "Chart updated"
+          description: "feat(rabbitmq): fix podLabels"
+          links:
+            - name: "Commit e5af639"
+              url: "https://github.com/dloewen2/helm-charts/commit/e5af639"
+        - kind: changed
+          description: "feat(rabbitmq): fix podLabels duplication"
+          links:
+            - name: "Commit ad3a30b"
+              url: "https://github.com/dloewen2/helm-charts/commit/ad3a30b"
