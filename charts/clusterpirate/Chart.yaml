@@ -39,8 +39,5 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[universal] Update annotations, labels, podannotations and podlabel"
-          links:
-            - name: "PR #454"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/454"
+        - kind: changed
+          description: "Chart updated"

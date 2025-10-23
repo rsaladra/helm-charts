@@ -1,8 +1,10 @@
 # Changelog
 
+
 ## 0.3.5 (2025-10-23)
 
-* [universal] Update annotations, labels, podannotations and podlabel ([#454](https://github.com/CloudPirates-io/helm-charts/pull/454))
+* chore: update CHANGELOG.md for merged changes ([844a243](https://github.com/CloudPirates-io/helm-charts/commit/844a243))
+* chore: update CHANGELOG.md for merged changes ([ad40303](https://github.com/CloudPirates-io/helm-charts/commit/ad40303))
 
 ## 0.3.4 (2025-10-23)
 
