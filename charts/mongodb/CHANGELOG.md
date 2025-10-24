@@ -1,8 +1,5 @@
 # Changelog
 
-## 0.5.5 (2025-10-24)
-
-* [mongodb] Allow to set custom command and args ([#457](https://github.com/CloudPirates-io/helm-charts/pull/457))
 
 ## 0.5.4 (2025-10-23)
 
