@@ -51,8 +51,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[keycloak/keycloak] Update charts/keycloak/values.yaml keycloak/keycloak to v26.4.2 (patch)"
+        - kind: changed
+          description: "[keycloak/keycloak] Update charts/keycloak/values.yaml keycloak/keycloak to v26.4.2 (patch) (#453)"
           links:
-            - name: "PR #453"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/453"
+            - name: "Commit 52a01c8"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/52a01c8"
