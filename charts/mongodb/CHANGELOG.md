@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.5.6 (2025-10-26)
+
+* [mongo] Update charts/mongodb/values.yaml mongo ([#460](https://github.com/CloudPirates-io/helm-charts/pull/460))
+
+## 0.5.5 (2025-10-24)
+
+* chore: update CHANGELOG.md for merged changes ([b2b84ce](https://github.com/CloudPirates-io/helm-charts/commit/b2b84ce))
+* chore: update CHANGELOG.md for merged changes ([b1f47df](https://github.com/CloudPirates-io/helm-charts/commit/b1f47df))
+* Allow to set custom command and args (#457) ([06d8f66](https://github.com/CloudPirates-io/helm-charts/commit/06d8f66))
+* chore: auto-generate values.schema.json for updated charts (#455) ([aec6840](https://github.com/CloudPirates-io/helm-charts/commit/aec6840))
+* chore: update CHANGELOG.md for merged changes ([f9c3ff0](https://github.com/CloudPirates-io/helm-charts/commit/f9c3ff0))
+* chore: update CHANGELOG.md for merged changes ([db2d800](https://github.com/CloudPirates-io/helm-charts/commit/db2d800))
 
 ## 0.5.4 (2025-10-23)
 
