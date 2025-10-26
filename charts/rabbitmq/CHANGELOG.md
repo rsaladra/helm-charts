@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 (2025-10-26)
+
+* chore: auto-generate values.schema.json ([#465](https://github.com/CloudPirates-io/helm-charts/pull/465))
+
+## 0.6.0 (2025-10-26)
+
+* Adding existing claim as a feature with PVC ([336c4fb](https://github.com/CloudPirates-io/helm-charts/commit/336c4fb))
+* chore: update CHANGELOG.md for merged changes ([f9c3ff0](https://github.com/CloudPirates-io/helm-charts/commit/f9c3ff0))
+* chore: update CHANGELOG.md for merged changes ([db2d800](https://github.com/CloudPirates-io/helm-charts/commit/db2d800))
 
 ## 0.5.5 (2025-10-23)
 

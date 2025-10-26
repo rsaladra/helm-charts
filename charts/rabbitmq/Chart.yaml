@@ -41,4 +41,7 @@ annotations:
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
         - kind: added
-          description: "Add support for existing PVC via persistence.existingClaim parameter"
+          description: "chore: auto-generate values.schema.json"
+          links:
+            - name: "PR #465"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/465"
