@@ -110,12 +110,20 @@ spec:
           securityContext: {{ include "cloudpirates.renderContainerSecurityContext" . | nindent 12 }}
           image: {{ include "rabbitmq.image" . | quote }}
           imagePullPolicy: {{ include "cloudpirates.imagePullPolicy" (dict "image" .Values.image) }}
-          {{- if .Values.customScripts.postStart.enabled }}
+          {{- if or .Values.customScripts.postStart.enabled .Values.customScripts.preStop.enabled }}
           lifecycle:
+            {{- if .Values.customScripts.postStart.enabled }}
             postStart:
               exec:
                 command:
                   {{- toYaml .Values.customScripts.postStart.command | nindent 18 }}
+            {{- end }}
+            {{- if .Values.customScripts.preStop.enabled }}
+            preStop:
+              exec:
+                command:
+                  {{- toYaml .Values.customScripts.preStop.command | nindent 18 }}
+            {{- end }}
           {{- end }}
           ports:
             - name: amqp
