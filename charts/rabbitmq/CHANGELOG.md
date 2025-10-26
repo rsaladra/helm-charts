@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.1 (2025-10-26)
+
+* chore: auto-generate values.schema.json ([#466](https://github.com/CloudPirates-io/helm-charts/pull/466))
+
+## 0.6.1 (2025-10-26)
+
+* Redis / Rabbitmq: add lifecyle hooks ([b253776](https://github.com/CloudPirates-io/helm-charts/commit/b253776))
+* chore: update CHANGELOG.md for merged changes ([5eca51e](https://github.com/CloudPirates-io/helm-charts/commit/5eca51e))
+* chore: update CHANGELOG.md for merged changes ([f0b5033](https://github.com/CloudPirates-io/helm-charts/commit/f0b5033))
+* chore: auto-generate values.schema.json (#465) ([217c03d](https://github.com/CloudPirates-io/helm-charts/commit/217c03d))
 
 ## 0.6.0 (2025-10-26)
 

@@ -40,8 +40,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Adding existing claim as a feature with PVC"
+        - kind: added
+          description: "chore: auto-generate values.schema.json"
           links:
-            - name: "Commit 336c4fb"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/336c4fb"
+            - name: "PR #466"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/466"
