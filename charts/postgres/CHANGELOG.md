@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.10.5 (2025-10-26)
+
+* [postgres] Update charts/postgres/values.yaml postgres ([#451](https://github.com/CloudPirates-io/helm-charts/pull/451))
 
 ## 0.10.4 (2025-10-23)
 
