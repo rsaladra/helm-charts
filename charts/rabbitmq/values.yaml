@@ -163,6 +163,8 @@ installPlugins: []
 persistence:
   ## @param persistence.enabled Enable persistent storage
   enabled: true
+  ## @param persistence.existingClaim Name of existing PVC to use (if empty, a new PVC will be created automatically)
+  existingClaim: ""
   ## @param persistence.storageClass Storage class to use for persistent volume
   storageClass: ""
   ## @param persistence.accessModes Persistent Volume access modes
