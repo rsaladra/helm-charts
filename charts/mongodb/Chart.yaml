@@ -38,8 +38,5 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "Update README.md"
-          links:
-            - name: "PR #468"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/468"
+        - kind: changed
+          description: "Chart updated"
