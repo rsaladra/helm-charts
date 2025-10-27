@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.8 (2025-10-27)
+
+* [keycloak] add mssql support ([#469](https://github.com/CloudPirates-io/helm-charts/pull/469))
 
 ## 0.6.7 (2025-10-26)
 
