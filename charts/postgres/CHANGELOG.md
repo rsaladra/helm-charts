@@ -1,8 +1,5 @@
 # Changelog
 
-## 0.10.6 (2025-10-27)
-
-* [postgres] Mount config map when existing configmap is provided ([#472](https://github.com/CloudPirates-io/helm-charts/pull/472))
 
 ## 0.10.5 (2025-10-26)
 
