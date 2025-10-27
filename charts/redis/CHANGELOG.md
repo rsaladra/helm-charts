@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.9.8 (2025-10-27)
+
+* [redis] fix service annotations ([#470](https://github.com/CloudPirates-io/helm-charts/pull/470))
 
 ## 0.9.7 (2025-10-26)
 
