@@ -42,8 +42,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[postgres] add options to set service load balancer ip and external traffic policy"
+        - kind: changed
+          description: "add options to set service load balancer ip and external traffic policy (#475)"
           links:
-            - name: "PR #475"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/475"
+            - name: "Commit a2db2ab"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/a2db2ab"
