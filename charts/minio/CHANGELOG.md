@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.4 (2025-10-27)
+
+* [minio] Remove securitycontext on empty obejct ([#474](https://github.com/CloudPirates-io/helm-charts/pull/474))
 
 ## 0.5.3 (2025-10-23)
 

@@ -40,5 +40,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Chart updated"
+        - kind: added
+          description: "[minio] Remove securitycontext on empty obejct"
+          links:
+            - name: "PR #474"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/474"
