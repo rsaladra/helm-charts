@@ -41,8 +41,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[redis] fix service annotations"
+        - kind: changed
+          description: "fix service annotations (#470)"
           links:
-            - name: "PR #470"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/470"
+            - name: "Commit 74d2a99"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/74d2a99"
