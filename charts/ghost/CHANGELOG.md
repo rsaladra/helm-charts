@@ -1,8 +1,10 @@
 # Changelog
 
+
 ## 0.4.0 (2025-10-28)
 
-* [universal] unify extraEnvVars in all charts ([#477](https://github.com/CloudPirates-io/helm-charts/pull/477))
+* chore: update CHANGELOG.md for merged changes ([a968aa7](https://github.com/CloudPirates-io/helm-charts/commit/a968aa7))
+* chore: update CHANGELOG.md for merged changes ([74ee453](https://github.com/CloudPirates-io/helm-charts/commit/74ee453))
 
 ## 0.3.6 (2025-10-25)
 
