@@ -40,8 +40,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[rabbitmq] Update charts/rabbitmq/values.yaml rabbitmq to v4.1.5 (patch)"
+        - kind: changed
+          description: "[etcd, rabbitmq, redis, zookeeper] add signature verification documentation to readme (#476)"
           links:
-            - name: "PR #479"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/479"
+            - name: "Commit 91c7310"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/91c7310"
