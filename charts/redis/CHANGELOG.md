@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.10.2 (2025-10-28)
+
+* [redis] Add support for extraPorts in Services and StatefulSet ([#485](https://github.com/CloudPirates-io/helm-charts/pull/485))
 
 ## 0.10.0 (2025-10-28)
 
