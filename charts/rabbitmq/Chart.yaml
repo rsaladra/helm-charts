@@ -40,8 +40,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Redis / Rabbitmq: add lifecyle hooks"
+        - kind: added
+          description: "[universal] unify extraEnvVars in all charts"
           links:
-            - name: "Commit b253776"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/b253776"
+            - name: "PR #477"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/477"
