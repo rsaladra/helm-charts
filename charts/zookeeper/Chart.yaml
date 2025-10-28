@@ -42,5 +42,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Chart updated"
+        - kind: added
+          description: "[etcd, rabbitmq, redis, zookeeper] add signature verification documentation to readme"
+          links:
+            - name: "PR #476"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/476"
