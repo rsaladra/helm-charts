@@ -41,5 +41,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Chart updated"
+        - kind: added
+          description: "chore: auto-generate values.schema.json"
+          links:
+            - name: "PR #481"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/481"
