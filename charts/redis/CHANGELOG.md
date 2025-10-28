@@ -1,8 +1,14 @@
 # Changelog
 
+
 ## 0.10.2 (2025-10-28)
 
-* [redis] Add support for extraPorts in Services and StatefulSet ([#485](https://github.com/CloudPirates-io/helm-charts/pull/485))
+* Add support for extraPorts in Services and StatefulSet (#485) ([1805522](https://github.com/CloudPirates-io/helm-charts/commit/1805522))
+* chore: update CHANGELOG.md for merged changes ([170dd6a](https://github.com/CloudPirates-io/helm-charts/commit/170dd6a))
+* chore: update CHANGELOG.md for merged changes ([9227d83](https://github.com/CloudPirates-io/helm-charts/commit/9227d83))
+* [etcd, rabbitmq, redis, zookeeper] add signature verification documentation to readme (#476) ([91c7310](https://github.com/CloudPirates-io/helm-charts/commit/91c7310))
+* chore: update CHANGELOG.md for merged changes ([8260788](https://github.com/CloudPirates-io/helm-charts/commit/8260788))
+* chore: update CHANGELOG.md for merged changes ([402f7bd](https://github.com/CloudPirates-io/helm-charts/commit/402f7bd))
 
 ## 0.10.0 (2025-10-28)
 

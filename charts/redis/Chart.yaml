@@ -41,8 +41,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[redis] Add support for extraPorts in Services and StatefulSet"
+        - kind: changed
+          description: "Add support for extraPorts in Services and StatefulSet (#485)"
           links:
-            - name: "PR #485"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/485"
+            - name: "Commit 1805522"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/1805522"
