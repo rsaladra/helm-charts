@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.11.1 (2025-10-29)
+
+* [redis] fix: metrics sidecar variable expansion ([#499](https://github.com/CloudPirates-io/helm-charts/pull/499))
 
 ## 0.11.0 (2025-10-29)
 
