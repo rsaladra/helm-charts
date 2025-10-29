@@ -3,7 +3,7 @@ name: rustfs
 description: (ALPHA) High-performance distributed object storage with S3-compatible API
 type: application
 version: 0.1.0
-appVersion: "latest"
+appVersion: "1.0.0"
 keywords:
   - rustfs
   - file-system
@@ -43,4 +43,7 @@ annotations:
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
         - kind: added
-          description: "Initial release of RustFS Helm chart"
+          description: "[rustfs] add RustFS chart (MinIO alternative)"
+          links:
+            - name: "PR #443"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/443"
