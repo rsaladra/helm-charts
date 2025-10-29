@@ -1,8 +1,11 @@
 # Changelog
 
+
 ## 0.3.1 (2025-10-29)
 
-* [nginx] Update charts/nginx/values.yaml nginx to v1.29.3 (patch) ([#490](https://github.com/CloudPirates-io/helm-charts/pull/490))
+* Update charts/nginx/values.yaml nginx to v1.29.3 (patch) (#490) ([a23c2db](https://github.com/CloudPirates-io/helm-charts/commit/a23c2db))
+* chore: update CHANGELOG.md for merged changes ([8260788](https://github.com/CloudPirates-io/helm-charts/commit/8260788))
+* chore: update CHANGELOG.md for merged changes ([402f7bd](https://github.com/CloudPirates-io/helm-charts/commit/402f7bd))
 
 ## 0.3.0 (2025-10-28)
 
