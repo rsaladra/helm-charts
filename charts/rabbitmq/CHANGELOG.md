@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.7.2 (2025-10-29)
+
+* [busybox] Update image to fba0711 ([#489](https://github.com/CloudPirates-io/helm-charts/pull/489))
 
 ## 0.7.1 (2025-10-28)
 
