@@ -1,8 +1,11 @@
 # Changelog
 
+
 ## 0.11.1 (2025-10-29)
 
-* [redis] fix: metrics sidecar variable expansion ([#499](https://github.com/CloudPirates-io/helm-charts/pull/499))
+* fix: metrics sidecar variable expansion (#499) ([af02f4a](https://github.com/CloudPirates-io/helm-charts/commit/af02f4a))
+* chore: update CHANGELOG.md for merged changes ([aec72a0](https://github.com/CloudPirates-io/helm-charts/commit/aec72a0))
+* chore: update CHANGELOG.md for merged changes ([5a8f954](https://github.com/CloudPirates-io/helm-charts/commit/5a8f954))
 
 ## 0.11.0 (2025-10-29)
 
