@@ -10660,6 +10660,58 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/redis-0.1.5/redis-0.1.5.tgz
     version: 0.1.5
+  rustfs:
+  - annotations:
+      artifacthub.io/category: storage
+      artifacthub.io/changes: |2
+            - kind: added
+              description: "Initial release of RustFS Helm chart"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/links: |
+        - name: RustFS
+          url: https://github.com/rustfs/rustfs
+        - name: Helm Chart
+          url: https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rustfs
+        - name: Maintainer CloudPirates
+          url: https://www.cloudpirates.io
+      artifacthub.io/signKey: |
+        fingerprint: 6917f1a88c122cbb1de5aa55457752135bdcf95a
+        url: https://raw.githubusercontent.com/CloudPirates-io/helm-charts/refs/heads/main/cosign.pub
+      license: Apache-2.0
+    apiVersion: v2
+    appVersion: latest
+    created: "2025-10-29T10:07:59.248283105Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 2.x.x
+    description: (ALPHA) High-performance distributed object storage with S3-compatible
+      API
+    digest: 0407ea85c8f79cac4ba9fe581fe0383ac5ab4926ed8ca2f2a1d2af0bd346c2ff
+    home: https://github.com/rustfs/rustfs
+    icon: https://a.storyblok.com/f/143071/513x513/246ebb8da4/rustfs-logo.svg
+    keywords:
+    - rustfs
+    - file-system
+    - s3
+    - storage
+    - cloud-native
+    - rust
+    maintainers:
+    - email: hello@cloudpirates.io
+      name: CloudPirates GmbH & Co. KG
+      url: https://www.cloudpirates.io
+    - email: gianni.carafa@srf.ch
+      name: Gianni Carafa
+      url: https://www.srf.ch
+    name: rustfs
+    sources:
+    - https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rustfs
+    - https://github.com/rustfs/rustfs
+    type: application
+    urls:
+    - https://github.com/CloudPirates-io/helm-charts/releases/download/rustfs-0.1.0/rustfs-0.1.0.tgz
+    version: 0.1.0
   timescaledb:
   - annotations:
       artifacthub.io/category: database
@@ -12105,4 +12157,4 @@ entries:
     urls:
     - https://github.com/CloudPirates-io/helm-charts/releases/download/zookeeper-0.1.0/zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-29T10:05:13.360546323Z"
+generated: "2025-10-29T10:07:59.248889386Z"
