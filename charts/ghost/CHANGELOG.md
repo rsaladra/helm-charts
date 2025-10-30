@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.1 (2025-10-30)
+
+* [ghost] Update charts/ghost/values.yaml ghost ([#502](https://github.com/CloudPirates-io/helm-charts/pull/502))
 
 ## 0.4.0 (2025-10-28)
 
