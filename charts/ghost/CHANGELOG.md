@@ -1,8 +1,11 @@
 # Changelog
 
+
 ## 0.4.1 (2025-10-30)
 
-* [ghost] Update charts/ghost/values.yaml ghost ([#502](https://github.com/CloudPirates-io/helm-charts/pull/502))
+* Update charts/ghost/values.yaml ghost (#502) ([5767f7f](https://github.com/CloudPirates-io/helm-charts/commit/5767f7f))
+* chore: update CHANGELOG.md for merged changes ([8260788](https://github.com/CloudPirates-io/helm-charts/commit/8260788))
+* chore: update CHANGELOG.md for merged changes ([402f7bd](https://github.com/CloudPirates-io/helm-charts/commit/402f7bd))
 
 ## 0.4.0 (2025-10-28)
 
