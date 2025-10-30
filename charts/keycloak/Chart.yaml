@@ -52,4 +52,7 @@ annotations:
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
         - kind: added
-          description: "feat: add emptyDir volumes for /opt/keycloak/themes and /opt/keycloak/providers to support custom themes and providers via initContainers"
+          description: "[keycloak] Provide empty mounts for themes and providers"
+          links:
+            - name: "PR #504"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/504"

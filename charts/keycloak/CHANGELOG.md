@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.0 (2025-10-30)
+
+* [keycloak] Provide empty mounts for themes and providers ([#504](https://github.com/CloudPirates-io/helm-charts/pull/504))
 
 ## 0.7.1 (2025-10-29)
 
