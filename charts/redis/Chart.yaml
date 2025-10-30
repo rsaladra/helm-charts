@@ -41,8 +41,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[redis] fix: extraEnvVars parameter in statefulset template"
+        - kind: changed
+          description: "fix: extraEnvVars parameter in statefulset template (#503)"
           links:
-            - name: "PR #503"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/503"
+            - name: "Commit b681b99"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/b681b99"
