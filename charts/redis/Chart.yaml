@@ -41,8 +41,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "fix: extraEnvVars parameter in statefulset template (#503)"
+        - kind: added
+          description: "[redis] Add support for Redis Cluster"
           links:
-            - name: "Commit b681b99"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/b681b99"
+            - name: "PR #507"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/507"
