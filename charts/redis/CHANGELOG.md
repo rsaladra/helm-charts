@@ -1,8 +1,11 @@
 # Changelog
 
+
 ## 0.12.0 (2025-10-30)
 
-* [redis] Add support for Redis Cluster ([#507](https://github.com/CloudPirates-io/helm-charts/pull/507))
+* Add support for Redis Cluster (#507) ([c1e9fa8](https://github.com/CloudPirates-io/helm-charts/commit/c1e9fa8))
+* chore: update CHANGELOG.md for merged changes ([640b0f6](https://github.com/CloudPirates-io/helm-charts/commit/640b0f6))
+* chore: update CHANGELOG.md for merged changes ([bae5763](https://github.com/CloudPirates-io/helm-charts/commit/bae5763))
 
 ## 0.11.2 (2025-10-30)
 

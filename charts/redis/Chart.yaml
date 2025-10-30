@@ -41,8 +41,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[redis] Add support for Redis Cluster"
+        - kind: changed
+          description: "Add support for Redis Cluster (#507)"
           links:
-            - name: "PR #507"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/507"
+            - name: "Commit c1e9fa8"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/c1e9fa8"
