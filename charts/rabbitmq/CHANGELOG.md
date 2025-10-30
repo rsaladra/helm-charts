@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.7.5 (2025-10-30)
+
+* [rabbitmq] Update charts/rabbitmq/values.yaml rabbitmq ([#509](https://github.com/CloudPirates-io/helm-charts/pull/509))
 
 ## 0.7.4 (2025-10-30)
 
