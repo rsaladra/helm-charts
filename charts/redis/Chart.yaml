@@ -41,8 +41,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "fix: metrics sidecar variable expansion (#499)"
+        - kind: added
+          description: "[redis] fix: extraEnvVars parameter in statefulset template"
           links:
-            - name: "Commit af02f4a"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/af02f4a"
+            - name: "PR #503"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/503"

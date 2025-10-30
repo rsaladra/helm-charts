@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.11.2 (2025-10-30)
+
+* [redis] fix: extraEnvVars parameter in statefulset template ([#503](https://github.com/CloudPirates-io/helm-charts/pull/503))
 
 ## 0.11.1 (2025-10-29)
 
