@@ -40,8 +40,5 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[busybox] Update image to e3652a0"
-          links:
-            - name: "PR #497"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/497"
+        - kind: changed
+          description: "Chart updated"
