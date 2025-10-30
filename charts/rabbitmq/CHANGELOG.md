@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.7.4 (2025-10-30)
+
+* [busybox] Update image to e3652a0 ([#497](https://github.com/CloudPirates-io/helm-charts/pull/497))
 
 ## 0.7.3 (2025-10-29)
 

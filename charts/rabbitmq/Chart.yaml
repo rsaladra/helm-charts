@@ -40,8 +40,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: changed
-          description: "Update charts/rabbitmq/values.yaml rabbitmq to v4.2.0 (minor) (#480)"
+        - kind: added
+          description: "[busybox] Update image to e3652a0"
           links:
-            - name: "Commit dcef8f3"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/dcef8f3"
+            - name: "PR #497"
+              url: "https://github.com/CloudPirates-io/helm-charts/pull/497"
