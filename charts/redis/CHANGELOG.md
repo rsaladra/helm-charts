@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.12.1 (2025-10-31)
+
+* [redis] Fix probes commands ([#511](https://github.com/CloudPirates-io/helm-charts/pull/511))
 
 ## 0.12.0 (2025-10-30)
 
