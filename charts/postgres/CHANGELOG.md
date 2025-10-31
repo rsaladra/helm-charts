@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.11.1 (2025-10-31)
+
+* [postgres]: fix nesting for auth.username & auth.secretKeys.passwordKey ([#513](https://github.com/CloudPirates-io/helm-charts/pull/513))
 
 ## 0.11.0 (2025-10-28)
 
