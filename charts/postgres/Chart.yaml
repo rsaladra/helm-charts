@@ -42,8 +42,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[postgres]: fix nesting for auth.username & auth.secretKeys.passwordKey"
+        - kind: changed
+          description: "[postgres]: fix nesting for auth.username & auth.secretKeys.passwordKey (#513)"
           links:
-            - name: "PR #513"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/513"
+            - name: "Commit 7692045"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/7692045"
