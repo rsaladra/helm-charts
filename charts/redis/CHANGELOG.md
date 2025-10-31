@@ -1,8 +1,11 @@
 # Changelog
 
+
 ## 0.12.1 (2025-10-31)
 
-* [redis] Fix probes commands ([#511](https://github.com/CloudPirates-io/helm-charts/pull/511))
+* Fix probes commands (#511) ([0ac529f](https://github.com/CloudPirates-io/helm-charts/commit/0ac529f))
+* chore: update CHANGELOG.md for merged changes ([3c4c441](https://github.com/CloudPirates-io/helm-charts/commit/3c4c441))
+* chore: update CHANGELOG.md for merged changes ([fb351f7](https://github.com/CloudPirates-io/helm-charts/commit/fb351f7))
 
 ## 0.12.0 (2025-10-30)
 

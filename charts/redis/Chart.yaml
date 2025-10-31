@@ -41,8 +41,8 @@ annotations:
     - name: Maintainer CloudPirates
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
-        - kind: added
-          description: "[redis] Fix probes commands"
+        - kind: changed
+          description: "Fix probes commands (#511)"
           links:
-            - name: "PR #511"
-              url: "https://github.com/CloudPirates-io/helm-charts/pull/511"
+            - name: "Commit 0ac529f"
+              url: "https://github.com/CloudPirates-io/helm-charts/commit/0ac529f"
