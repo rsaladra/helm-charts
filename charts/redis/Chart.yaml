@@ -42,7 +42,4 @@ annotations:
       url: https://www.cloudpirates.io
   artifacthub.io/changes: |2
         - kind: changed
-          description: "Fix probes commands (#511)"
-          links:
-            - name: "Commit 0ac529f"
-              url: "https://github.com/CloudPirates-io/helm-charts/commit/0ac529f"
+          description: "Chart updated"
